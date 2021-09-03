@@ -1,0 +1,165 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+
+<script src='/js/spectrum.js'></script>
+<link rel='stylesheet' href='/css/spectrum.css' />
+<link rel="stylesheet" type="text/css" href="https://services.postcodeanywhere.co.uk/css/captureplus-2.30.min.css?key=tb21-zd55-am83-mr35" />
+<script type="text/javascript" src="https://services.postcodeanywhere.co.uk/js/captureplus-2.30.min.js?key=tb21-zd55-am83-mr35"></script>
+
+
+{% if pg != 'options' %}
+
+{% endif %}
+
+					<ul class="nav nav-pills" role="menubar">
+						<li class="nav-item" ><a class="nav-link {{ pg == 'basic' ? 'active':''}}" href='/admin/client/edit/basic/{{id}}'>(1) Basic Info</a></li>
+						<li class="nav-item" ><a class="nav-link {{ pg == 'labelling' ? 'active':''}}" href="/admin/client/edit/labelling/{{id}}">(2) White Labelling</a></li>
+						<li class="nav-item" ><a class="nav-link {{ pg == 'options' ? 'active':''}}" href="/admin/client/edit/options/{{id}}">(3) System Options</a></li>
+						<li class="nav-item" ><a class="nav-link {{ pg == 'credits' ? 'active':''}}" href="/admin/client/edit/credits/{{id}}">(4) Credits</a></li>
+						<li class="nav-item" ><a class="nav-link {{ pg == 'activate' ? 'active':''}}" href="/admin/client/edit/activate/{{id}}">(5) Activate</a></li>
+						<li class="nav-item" ><a class="nav-link {{ pg == 'usage' ? 'active':''}}" href="/admin/client/edit/usage/{{id}}">Usage Report</a></li>
+					</ul>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card card-block bg-faded">
+						<div class="settings">
+							<div class="col-md-12">
+								<h4>Client Edit &raquo; {{ clientName }} &raquo; {{ pg|capitalize }}</h4>
+							</div>
+							<div class="col-md-12">
+								<div style="clear:both; margin-top:30px">
+
+									{% if app.session.flashBag.has('success') %}
+										<div id="flashmsg" class="alert alert-success">
+											{% for msg in app.session.flashBag.get('success') %}
+												{{ msg }}
+											{% endfor %}
+										</div>
+									{% endif %}
+
+                                   
+									{% if pg == 'activate' %}
+										<table style='margin:0 0 20px 0'>
+											<tr><td>Whitelabelling set up</td><td>{{ data['whitelabel'] }}</td></tr>
+											<tr><td style='padding-right:20px'>One of Checkabl / Personabl / Testabl selected</td><td>{{ data['options'] }}</td></tr>
+											<tr><td>Previously activated</td><td>{{ data['activated'] }}</td></tr>
+											<tr><td>Previously logged on</td><td>{{ data['loggedon'] }}</td></tr>
+										</table>
+										<div style='margin-bottom:20px'><small><b>Please Note:</b> If re-activating a previously-activated account, the user's password will be changed, and a new activation email sent to them.</small>
+										</div>
+									{% endif %}	
+
+								
+									{% if pg == 'credits' %}
+										<table style='margin:0 0 20px 0'>
+											<tr><td style='padding-right:20px'>Credits Issued</td><td>{{ data['credits'] }}</td></tr>
+											<tr><td>Consumed</td><td>{{ data['consumed'] }}</td></tr>
+											<tr><td>Remaining</td><td>{{ data['remaining'] }}</td></tr>
+										</table>
+									{% endif %}	
+									
+									{{ form_start(form) }}
+									{{ form_widget(form) }}
+									{{ form_end(form) }}
+									
+									{% if pg == 'options' %} {% set top = '-60px' %} {% else %} {% set top = '-35px' %} {% endif %}
+									
+									
+									<a href="/admin/client/list" class="btn btn-black btn-std" style="position:relative;top:{{top}}; left:260px">Return to Client List</a>
+									{% if pg == 'labelling' %}
+									<a href="javascript:applyDefaults()" class="btn btn-black btn-std" id="btn-apply-defaults" style="position:relative;top:-35px; left:-30px">Apply Defaults</a>
+									{% endif %}	
+								</div>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+
+
+<style type='text/css'>
+div.pcdropdown {
+    position:absolute; width:300px; height:300px; border-radius:3px; border:1px solid #aaa;
+    z-index:10;background-color:#f4f4f4; display:none;
+}
+label.control-label.required { display: block; }
+#client_edit_basic_postcode { width: 12em; display:inline-block; margin-right: 5px; }
+select.pcode { height:2em; font-size:.85em; background-color: #f5f5f5; }
+</style>
+
+
+	<script src='/js/getpostcode.js'></script>
+	<script>
+	var pg = '{{pg}}';
+	var values = [{{values}}];
+	var values2 = [{{values2}}];
+
+	$(document).ready(function() 
+	{
+		$('#client_edit_whitelabel_headerBackgroundColour').spectrum({showInitial:true, showInput:true, preferredFormat: "hex", })
+		$('#client_edit_whitelabel_footerBackgroundColour').spectrum({showInitial:true, showInput:true, preferredFormat: "hex", })
+
+		
+		$('#client_edit_basic_postcode').postcodelookup('pcode', ['client_edit_basic_line1','client_edit_basic_line2','client_edit_basic_town','client_edit_basic_county']);
+
+
+		if(pg=='skills')
+		{
+			for(var i=0; i<values.length; i++) {
+				$('#client_edit_skills_skills_'+values[i]).prop('checked', true);
+			}
+		}
+		if(pg=='tests')
+		{
+			for(var i=0; i<values.length; i++) {
+				$('#client_edit_tests_tests_'+values[i]).prop('checked', true);
+			}
+			for(var i=0; i<values2.length; i++) {
+				$('#client_edit_tests_exceltests_'+values2[i]).prop('checked', true);
+			}
+		}
+
+		if(pg=='labelling')
+		{
+			var domain = "khireabl.erigan.co.uk";
+			var bgcolor = "#FFF";
+			var x = '<div class="form-group row"><label class="col-form-label col-sm-3" for="client_edit_whitelabel_logo">Current Logo</label><div class="col-sm-5"><img src="/images/' + domain + '_logo.png" style="padding:5px;background-color:' + bgcolor + '" alt=""/></div></div>';
+			$("div.form-group:nth-of-type(5)").after(x);
+		}
+
+
+		//  Fix any fields that have date pickers
+		$('.datepicker').datepicker({
+			dateFormat: 'yy-mm-dd',
+			changeMonth: true,
+			changeYear: true
+		});
+
+		$('#client_edit_usage_startDate').addClass('datepicker');
+		$('#client_edit_usage_endDate').addClass('datepicker');
+		$('#client_edit_usage_startDate').datepicker();
+		$('#client_edit_usage_endDate').datepicker();
+
+		// Output any flash messages for 3 seconds
+		$('#flashmsg').delay(3000).fadeOut(300);
+	});
+	
+	function applyDefaults()
+	{
+		var x = confirm('This will overwrite any values entered with deafult values - are you sure?');
+		if(x==false) return;
+		$('#client_edit_whitelabel_domain1').val('demo-companyname.koine.com');
+		$('#client_edit_whitelabel_companyName').val('Demo Company');
+		$('#client_edit_whitelabel_footerName').val('&copy; 2017 Demo Company');
+		$('#client_edit_whitelabel_contactNumber').val('0800 123 456');
+		$('#client_edit_whitelabel_companyEmail').val('info@democompany.com');
+		$('#client_edit_whitelabel_headerBackgroundColour').val('#415260');
+		$('#client_edit_whitelabel_footerBackgroundColour').val('#415260');
+	}
+	</script>
+	
+
+{% endblock %}

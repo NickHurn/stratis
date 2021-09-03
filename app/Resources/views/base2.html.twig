@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="generator" content="Jekyll v3.8.5">
+        <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+        <title>{% block title %}Koine Money Ltd{% endblock %}</title>
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('images/faviconblue.png') }}" />
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Custom styles for this template -->
+
+        <link rel="stylesheet" href="https://use.typekit.net/xpn8loy.css">
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <link href="{{ asset('css/components-font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
+        <link rel="stylesheet" href="/css/percircle.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="{{ asset('css/base2Styles.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/koineStyles.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/hireabl.css') }}">
+
+
+        {% block customStylesheets %}
+        {% endblock %}
+    </head>
+    <body class="d-flex flex-column h-100">
+        <!-- Begin page content -->
+        <main role="main" class="flex-shrink-0">
+            <div class="base2Nav navbar navbar-expand-lg p-0 navbar-light bg-blue ">
+                <div class="container-fluid">
+                    <div class="navbar-header logo">
+                        <a href="/" class="navbar-brand pl-3 " ><img src="{{ asset('images/web_logo_white_retina.png') }}" alt="Koine Finance Ltd"></a>
+                        <div class="col-md-12 white">{{  custom_css.whitelabel.companyName }}</div>
+                    </div>
+                    <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav nav">
+                            <li><a class="nav-link navText" href="{{ webPath }}">Home</a></li>
+                            <li><a class="nav-link navText" href="{{ webPath }}/whatwedo">What we do</a></li>
+                            <li><a class="nav-link navText" href="{{ webPath }}/whoweserve">Who we serve</a></li>
+                            <li><a class="nav-link navText" href="{{ webPath }}/whykoine">Why koine</a></li>
+{#                            <li><a class="nav-link navText" href="{{ domain }}/partnerships">Partnerships</a></li>#}
+                            <li><a class="nav-link navText" href="{{ webPath }}/team">Team</a></li>
+                            <li><a class="nav-link navText" href="{{ webPath }}/news">News</a></li>
+                            <li><a class="nav-link navText" href="{{ webPath }}/contact">Contact</a></li>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <li><a class="nav-link navText"  href="{{ path('logout') }}">Logout</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% block body %}{% endblock %}
+        </main>
+
+
+        <footer class="footer mt-auto py-3 border-top border-light border-2">
+            <div class="container">
+                <div class="row font-08">
+                    <div class="col-sm-8 col-6">
+                        <div class="row ">
+                            <div class="col-sm-6 col-12">
+                                <div class="col-12 pb-2 ">
+                                    <a href="#" class="footerLink">
+                                        <span class=""><img src="{{ asset('images/web_business_sales_footer.png') }}" alt="Contact"></span>
+                                        <span class=""> Business & Sales</span>
+                                    </a>
+                                </div>
+                                <div class="col-12 pb-2">
+                                    <a href="#" class="footerLink">
+                                        <span class=""><img src="{{ asset('images/pressicon.png') }}" alt="Contact"></span>
+                                        <span class="">Press & Media</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-12">
+                                <div class="col-12 pb-2">
+                                    <a href="#" class="footerLink">
+                                        <span class=""><img src="{{ asset('images/web_footer_linkedin.png') }}" alt="Contact"> </span>
+                                        <span class="">follow us on Linkedin</span>
+                                    </a>
+                                </div>
+                                <div class="col-12 pb-2">
+                                    <a href="#" class="footerLink">
+                                        <span class=""><img src="{{ asset('images/messageicon.png') }}" alt="Contact"> </span>
+                                        <span class="">Opt in for Email</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-6">
+                        <div class="row ">
+                            <div class="col-12 text-right">
+                                <div class="col-12 pb-2">
+                                    <span class="">&#169; Koine Money Ltd</span>
+                                </div>
+                                <div class="col-12 pb-2">
+                                    <span class=""><a href="{{ asset('policies/cookie/Koine Cookie Policy v3 12042019.pdf') }}" target="_blank" class="text-decoration-none text-white">Cookie Policy</a> </span>
+                                </div>
+                                <div class="col-12 pb-2">
+                                    <span class=""><a href="{{ asset('policies/privacy/Koine Privacy Policy v4 24042019.pdf') }}" target="_blank" class="text-decoration-none text-white">Privacy Policy</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12 font-06 text-center">
+                        <p>Koine Money Ltd is an EMD Agent of PayrNet Limited, an Electronic Money Institution authorised by the Financial Conduct Authority under the Electronic Money Regulations 2011 (FCA reference number: 900594).  Koine's FCA reference number is: 902023.  Registered UK Office: 27 Old Gloucester Street, London, United Kingdom, WC1N 3AX. Company Registration Number: 10962352.</p>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+
+    {% block javascripts %}
+        <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script src="/js/bootstrap.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="/js/global.js"></script>
+        <script type="text/javascript" src="/js/percircle.js"></script>
+        <script type='text/javascript' src='https://api.addressy.com/js/address-3.50.min.js?ver=4.7.3'></script>
+        <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    {% endblock %}
+    {% block customJavascripts %}
+
+    {% endblock %}
+    </body>
+</html>
+
+

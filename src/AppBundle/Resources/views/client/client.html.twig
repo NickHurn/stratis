@@ -1,0 +1,62 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+            <div class="col-lg-12">
+                <div class="tab-content">
+                    <div class="settings">
+                        <article>
+                            <div class="col-xs-12 margin-vertically">
+                                <div class="row">
+                                    <h4>Add a new client to the system</h4>
+                                </div>
+								<div class="note"  style="margin-left:-14px">
+									Enter the following details to create a basic client record. Then 
+									navigate through each of the tabs above and complete section. The 
+									client will receive an activation email once you complete the 
+									activation tab.
+								</div>
+                            </div>
+                        </article>
+                        <article>
+                            <div class="col-md-12 margin-vertically">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+
+                                            <form action="" method="post" novalidate>
+												{{ form_widget(form) }}
+
+                                                <div class="form-group">
+                                                    <input type="submit" name="submit" value="submit" class="btn btn-black" />
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+
+<style type='text/css'>
+div.pcdropdown {
+    position:absolute; width:300px; height:300px; border-radius:3px; border:1px solid #aaa;
+    z-index:10;background-color:#f4f4f4; display:none;
+}
+label.control-label.required { display: block; }
+#create_client_user_postcode { width: 12em; display:inline-block; margin-right: 5px; }
+select.pcode { height:2em; font-size:.85em; background-color: #f5f5f5; }
+</style>
+
+<script src='/js/getpostcode.js'></script>
+<script>
+$('#create_client_user_postcode').postcodelookup('pcode', ['create_client_user_address1','create_client_user_address2','create_client_user_town','create_client_user_county']);
+</script>
+
+
+
+{% endblock %}

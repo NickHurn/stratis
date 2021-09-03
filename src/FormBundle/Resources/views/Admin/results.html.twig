@@ -1,0 +1,67 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+        <div class="col-lg-12">
+            <div class="tab-content">
+                <div class="settings">
+                    <article>
+                        <div class="col-xs-12 margin-vertically">
+                            <div class="row col-xs-12">
+                                <h4>View Form Results</h4>
+                            </div>
+                            <div class="row col-xs-12 col-sm-8 col-md-6">
+                                {{ form_start(form) }}
+                                {{ form_row(form.formType) }}
+                                {{ form_row(form.job) }}
+                                {{ form_row(form.EditForm, {label:'Load Results'}  ) }}
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </article>
+
+                    {% if show %}
+
+                        <table class="formResults">
+                            <thead>
+                            <tr>
+                                {% for field in headers %}
+                                    <th>
+                                        {{ field }}
+                                    </th>
+                                {% endfor %}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for d in data %}
+                                <tr>
+                                {% for field in headers %}
+                                        <th>
+                                            {% if attribute(d, field) is defined %}
+                                                <span class="{% if attribute(d, field).filtered == 1 %}filtered{% endif %}">{{ attribute(d, field).value }}</span>
+                                            {% endif %}
+                                        </th>
+                                {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function() {
+            $('.formResults').dataTable({
+                "pageLength": 50
+            });
+        } );
+    </script>
+
+{% endblock %}

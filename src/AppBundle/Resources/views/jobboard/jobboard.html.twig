@@ -1,0 +1,103 @@
+{% extends 'base2.html.twig' %}
+{% block title %}Available Jobs at Koine {% endblock %}
+{% block body %}
+	<div class="row ml-0 mr-0 mt-4 mb-4 ">
+		<div class="col-xl-8 offset-xl-2 mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2 ">
+			<div class="row ml-auto mr-auto">
+				<div class="jd col-sm-12 mb-3 font-blue">
+                    <h3 class="font-blue">Working at Koine</h3>
+                    <p>Koine is an innovative company working on digital assets, crypto-currency and block-chain.  In this fast moving environment we are looking for the best people to assist us to keep moving through this continuously evolving world and maintain our standing at the forefront of the industry. FCA regulated since 2019 for the issuance of electronic money (EMI Licence), Koine is growing at a fast rate and we are looking for talented individuals to join us on our journey.</p>
+                    <p>We maintain a fun and entrepreneurial atmosphere in our working environment, encouraging healthy debate and a collegiate atmosphere.</p>
+                    <p>With a shared set of values and ethics our staff work together to produce industry leading tools and services in the custody and settlement of digital and fiat assets.  All our staff are at the top of their field and bring their unique experience and insights to the business.</p>
+                    <p> We are open to hearing from people with experience across different industries who have an interest and experience to bring to the company that can help us keep moving forward.</p>
+                    <p>We are looking at expansion opportunities into Europe, the Middle East and the United States.</p>
+                    <p>Click “Apply Now” on one of the roles below if you think we should be working with you, or alternatively send your CV to
+                        <a href="mailto:careers@koine.com">careers@koine.com</a> telling us why you think we should hire you!</p>
+
+				</div>
+				<div class="jd col-sm-12 mb-3">
+					<h3>Roles Currently Available</h3>
+					{% if jobs %}
+						<div class="row mt-2">
+							{% for job in jobs %}
+
+								<div class="card col-md-5 offset-md-1 mb-3  pl-0 pr-0" >
+
+									<div class="card-header bg-blue">
+										<h3 class="card-title"><a class="text-white" href="{{urlprefix}}{{job.uniqueId}}">{{ job.title }}</a></h3>
+										<small class="text-white"><i>Date Added: {{ job.dateAdded }}</i></small>
+									</div>
+									<div class="card-body">
+										<div class="card-text">
+											<div class="col-sm-12"><b>Location:</b> {{job.county}}</div>
+											<div class="col-sm-12"><b>Start Date:</b> {{job.startDate}}</div>
+											<div class="col-sm-12 mt-2"><b>Details:</b><br />
+												<article class="standfirst{{job.id}}" >{{ job.standfirst }}</article>
+											</div>
+											<div class="col-sm-12 mt-2"><b>Description:</b><br />
+												<article class="jobDesc2{{job.id}} jobDesc2" >{{ job.desc2|raw }}</article>
+											</div>
+											<div class="col-sm-12"><b>Salary:</b> {{job.salary}}</div>
+											<div class="col-sm-12  mb-3">
+												<a data-id="{{job.id}}" id="more{{ job.id }}" class="more"><i class="fa fa-plus-square"></i> more</a>
+											</div>
+											<div class="col-sm-12  mb-3">
+												<a data-id="{{job.id}}" id="less{{ job.id }}" class="less jobLessButton"><i class="fa fa-minus-square"></i> less</a>
+											</div>
+										</div>
+										<div class="col-sm-12  mb-3">
+											<a class="btn btn-coBlue btn-sm text-white"  href="{{urlprefix}}{{job.uniqueId}}">Apply Now</a>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					{% else %}
+						<h3>Sorry, we have no jobs currently available</h3>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block customJavascripts %}
+	<script>
+		$(".more").on( "click", function() {
+			var id=$(this).data('id');
+			$(".jobDesc1"+id).hide();
+			$(".jobDesc2"+id).show();
+			$("#less"+id).show();
+			$("#more"+id).hide();
+		});
+		$(".less").on( "click", function() {
+			var id=$(this).data('id');
+			$(".jobDesc2"+id).hide();
+			$(".jobDesc1"+id).show();
+			$("#less"+id).hide();
+			$("#more"+id).show();
+		});
+		function more(id)
+		{
+			var txt = $('#L'+id).html();
+			if(txt==='<i class="fa fa-plus-square"></i> more')
+			{
+				$('#'+id).css('display', 'inline');
+				$(".jobDesc1").hide();
+				$('#L'+id).html('<i class="fa fa-minus-square"></i> less');
+			}
+			else
+			{
+				$('#'+id).css('display', 'none');
+				$(".jobDesc2").hide();
+				$(".jobDesc1").show();
+				$('#L'+id).html('<i class="fa fa-plus-square"></i> more');
+			}
+		}
+		$(".saveButton").on( "click", function() {
+			$(".saveButton").disabled(true);
+			$(".saveButton").html('Submitting');
+
+		});
+	</script>
+{% endblock %}

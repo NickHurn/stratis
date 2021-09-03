@@ -1,0 +1,222 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+
+
+<div class="container ml-auto mr-auto mt-4 mb-4 ">
+	<div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+		<div class="row ml-auto mr-auto">
+			<div class="jd col-sm-12">
+				<div class="page-title">
+					<div class="title checkabl"><h2>Disclosure</h2></div>
+				</div>
+
+				<div class="col-md-12">
+					<div class="row">
+						{% if errors is not empty %}
+							<div class="alert alert-danger">
+								<ul class="list-unstyled">
+									<li><span class="glyphicon glyphicon-exclamation-sign"></span> <b>Please correct the following error(s):</b><br/>&nbsp;</li>
+									{% for error in errors %}
+										<li>{{ error }}</li>
+									{% endfor %}
+								</ul>
+							</div>
+						{% endif %}
+						{{ form_start(form) }}
+							{{ form_row(form.Title) }}
+							{{ form_row(form.Firstname) }}
+							{{ form_row(form.Middlename1) }}
+							{{ form_row(form.Middlename2) }}
+							{{ form_row(form.Middlename3) }}
+							{{ form_row(form.Lastname) }}
+							<div id='marriedNameBlock'>
+								{{ form_row(form.BirthSurname) }}
+								{{ form_row(form.BirthSurnameUntil) }}
+							</div>
+							<fieldset>
+								<legend>Previous Name(s)</legend>
+								<ul id='prevnames' style='list-style-image:url("/images/yellowbullet.png")' data-prototype='{{ form_widget(form.Names.vars.prototype)|e('html_attr') }}'>
+									{% for nam in form.Names %}
+										<li>
+											{{ form_row(nam.Name) }}
+											{{ form_row(nam.Type) }}
+											{{ form_row(nam.StartDate) }}
+											{{ form_row(nam.EndDate) }}
+										</li>
+									{% else %}
+										<li><small>If you have been known by other forenames and/or surnames, please add them here</small></li>
+									{% endfor %}
+								</ul>
+								<a href="#" id="add-another-name">Add another Name</a><br/><br/>
+							</fieldset>
+							{{ form_row(form.BirthDate) }}
+							{{ form_row(form.BirthTown) }}
+							{{ form_row(form.BirthCounty) }}
+							{{ form_row(form.BirthCountry) }}
+							{{ form_row(form.Nationality) }}
+							{{ form_row(form.MothersMaidenName) }}
+							{{ form_row(form.PhoneNumber) }}
+							{{ form_row(form.AddressPostcode) }}
+							{{ form_row(form.AddressLine1) }}
+							{{ form_row(form.AddressLine2) }}
+							{{ form_row(form.AddressTownCity) }}
+							{{ form_row(form.AddressCounty) }}
+							{{ form_row(form.AddressCountry) }}
+							{{ form_row(form.AddressStartDate) }}
+							<fieldset>
+								<legend>Previous Address(es)</legend>
+								<ul id='prevaddrs' class='dbsform' data-prototype='{{ form_widget(form.Addresses.vars.prototype)|e('html_attr') }}'>
+									{% for addr in form.Addresses %}
+										<li>
+											{{ form_row(addr.Line1) }}
+											{{ form_row(addr.Line2) }}
+											{{ form_row(addr.TownCity) }}
+											{{ form_row(addr.County) }}
+											{{ form_row(addr.Postcode) }}
+											{{ form_row(addr.Country) }}
+											{{ form_row(addr.StartOn) }}
+											{{ form_row(addr.EndOn) }}
+										</li>
+									{% else %}
+										<li><small>Your address history for five years is required. Please add prior addresses here if required.</small></li>
+									{% endfor %}
+								</ul>
+								<a href="#" id="add-another-address">Add another Address</a><br/><br/>
+							</fieldset>
+							{{ form_row(form.hasConvictions) }}
+							{{ form_row(form.NINumber) }}
+							{{ form_row(form.DLNumber) }}
+							{{ form_row(form.DLCountry) }}
+							{{ form_row(form.PassportNumber) }}
+							{{ form_row(form.PassportCountry) }}
+							{{ form_row(form.IDCardNumber) }}
+							{{ form_row(form.IDCardCountry) }}
+							{{ form_row(form.ApplicantDeclaration) }}
+							{{ form_row(form.Submit) }}
+						{{ form_end(form) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+
+{% block customJavascripts %}
+    <script type="text/javascript">
+        // keep track of how many name/address fields have been rendered
+        var nameCount = '{{ form.Names|length }}';
+        var addrCount = '{{ form.Addresses|length }}';
+
+		function fixDatePickers()
+		{
+			// configure the bootstrap datepicker
+            $('.datepicker').datepicker({
+				dateFormat: 'yy-mm-dd',
+				yearRange: "-80:+0",
+				changeMonth: true,
+				changeYear: true,
+            });
+		}
+		
+		
+		function checkBirthSurname()
+		{
+			var t = $('#dbs_apply_Title').val();
+			var married_titles = ['Mrs','Ms','Duchess','Lady','Sister','Baroness'];
+			if(married_titles.indexOf(t)>=0) {
+				$('#marriedNameBlock').show();
+			} else {
+				$('#marriedNameBlock').hide();
+			}
+		}
+		
+		
+        $(document).ready(function()
+		{
+			//  Title change handler
+            $('#dbs_apply_Title').click(function(e)
+			{
+				checkBirthSurname();
+			});
+			checkBirthSurname();
+			
+			// Add another name handler
+            $('#add-another-name').click(function(e)
+			{
+                e.preventDefault();
+				var nameList = $('ul#prevnames');
+
+                // grab the prototype template
+                var newWidget = nameList.attr('data-prototype');
+				newWidget = newWidget.replace(/__name__label__/g, 'Previous Name ' + (parseInt(nameCount)+1));
+				newWidget = newWidget.replace(/__name__/g, nameCount);
+                nameCount++;
+
+                // create a new list element and add it to the list
+                var newLi = $('<li></li>').html(newWidget);
+                newLi.appendTo(nameList);
+				fixDatePickers();
+            });
+					
+            // Add another address handler
+			$('#add-another-address').click(function(e)
+			{
+                e.preventDefault();
+
+                var addrList = $('ul#prevaddrs');
+
+                // grab the prototype template
+                var newWidget = addrList.attr('data-prototype');
+				newWidget = newWidget.replace(/__name__label__/g, 'Previous Address ' + (parseInt(addrCount)+1));
+				newWidget = newWidget.replace(/__name__/g, addrCount);
+                addrCount++;
+
+                // create a new list element and add it to the list
+                var newLi = $('<li></li>').html(newWidget);
+                newLi.appendTo(addrList);
+				fixDatePickers();
+            });
+			
+			// Fix up previous name labels
+			$("#dbs_apply_Names").find("label.control-label.required").each(function (index,value)
+			{
+				var x = $(value).html();
+				if($.isNumeric(x)) {
+					var y=parseInt(x)+1;
+					$(value).html("Previous Name "+y);
+				}
+			});
+
+			// Fix up previous address labels
+			$("#dbs_apply_Addresses").find("label.control-label.required").each(function (index,value)
+			{
+				var x = $(value).html();
+				if($.isNumeric(x)) {
+					var y=parseInt(x)+1;
+					$(value).html("Previous Address "+y);
+				}
+			});
+
+			fixDatePickers();
+			
+        });
+		
+		function addTagFormDeleteLink($tagFormLi)
+		{
+		    var $removeFormA = $('<a href="#">delete this tag</a>');
+			$tagFormLi.append($removeFormA);
+
+		    $removeFormA.on('click', function(e) {
+		        e.preventDefault();
+		        $tagFormLi.remove();
+			});
+		}
+
+
+    </script>
+{% endblock %}
+

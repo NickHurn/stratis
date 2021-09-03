@@ -1,0 +1,109 @@
+{% extends 'base2.html.twig' %}
+{% block customStylesheets %}
+	<style>
+		.announce { font-size: 18px; margin: 20px 0; }
+		table.gbgtable { width: 400px; text-align:left; margin: 30px 0; float: left; }
+		table.gbgtable td { padding: 4px 10px; border: border-collapse; border: 1px solid #ccc; text-align: left; }
+	</style>
+{% endblock %}
+{% block body %}
+
+<div class="container ml-auto mr-auto mt-4 mb-4 ">
+	<div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+		<div class="row ml-auto mr-auto">
+			<div class="jd col-sm-12">
+				<div class='title checkabl'>
+					<h2>Checkabl &raquo; Upload Passport</h2>
+				</div>
+				<br clear='all'/>
+				<div class="col-lg-12">
+					<div class="settings">
+						<div class="row ">
+							{% if message %}
+								<div class="col-12 bg-warning rounded-8 pt-2 pb-2">
+									<strong>{{ message }}</strong>
+								</div>
+							{% endif %}
+							{% if photo %}
+								<div class="note">Your passport image has been uploaded.</div>
+								<img src='{{photo}}' width='400' style='display:inline-block;text-align:left'/><br/>
+								<table class='gbgtable'>
+									<tr><td>Forename</td><td>{{pd.firstname}}</td></tr>
+									<tr><td>Surname</td><td>{{pd.surname}}</td></tr>
+									<tr><td>Document Number</td><td>{{pd.documentNumber}}</td></tr>
+									<tr><td>Authenticity</td><td>{{pd.authenticity}}</td></tr>
+								</table>
+								<br clear='all'/>
+								<button type="button" class="btn btn-black appBtn-black appBtn" style='margin:30px 0' onclick="location.href='/checkabl/{{jobcode}}'">Go Back</button>
+							{% endif %}
+								{% if not photo %}
+								<div class="note">Please upload a photo of your passport. Files must be maximum of 3MB in size.</div>
+								<div id="hideblock">
+									<form method="post" id="frm" name="frm" enctype="multipart/form-data">
+										<input type="file" name="img" class="btn btn-black appBtn-black appBtn">
+										<input type="hidden" name="jobid" value="{{jobcode}}"/>
+										<input type="hidden" name="raw" id="raw" value=""/>
+										<div style='margin-top:30px'>
+											<input type="submit" id="sbm" class="btn btn-black appBtn appBtn-black" value="Upload"/>
+										</div>
+									</form>
+									<div style="margin-bottom:30px">
+										<div id='upl_btns' style='display:none'>>
+											<button type="button" id="uploadimg" onclick="upload()" class="btn btn-black ">Upload Photo</button>
+										</div>
+									</div>
+								</div>
+							{% endif %}
+							<img src='/images/ajax-loader2.gif' style='margin-top:50px; display:none' id='ajaxspinner'/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block customJavascripts %}
+
+	<script src='/js/photo.js'></script>
+
+	<script>
+		function upload()
+		{
+			$('#uploadimg').click(function() {
+				$('#upl_btns').hide();
+				$(document.body).css({'cursor' : 'wait'});
+				setTimeout(function(){ upload2(); }, 200);
+			});
+		}
+
+		function upload2()
+		{
+			var dataUrl = canvas.toDataURL();
+			$('#raw').val(dataUrl);
+			$("#frm").submit();
+
+		}
+
+		$('#sbm').click(function() {
+			$('#hideblock').css('display','none');
+			$('#ajaxspinner').css('display','inline');
+			setTimeout(function(){ $('#frm').submit(); }, 300);
+			return false;
+		});
+
+		$( document ).ready(function() {
+			startup();
+		});
+
+
+	</script>
+{% endblock %}
+
+
+
+
+
+
+
+

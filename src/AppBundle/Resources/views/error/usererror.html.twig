@@ -1,0 +1,22 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+<div class="container ml-auto mr-auto mt-4 mb-4 ">
+	<div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+		<div class="row ml-auto mr-auto">
+			<div class="jd col-sm-12">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<h1>{{title}}</h1>
+					{{msg}}
+					<div style='margin:20px 0 50px'>
+					Please press the BACK button to return the to screen prior to this error. All errors are automatically recorded and
+					should be rectified automatically, but should the problem occur or you require a more immediate solution, please
+					contact us using the information on screen.
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

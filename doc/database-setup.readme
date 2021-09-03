@@ -1,0 +1,10 @@
+Initial Database Setup and Clearing
+-----------------------------------
+
+The SQL script minimal_start_db.sql contains the commands to build an initial database. Note that this script assumes the website domain name is hireabl.co.uk. You chan change this by ediitng the css_schemes table.
+
+To clear out / reset a hireabl instance, run the SQL commands in the file dbclear.sql. This will truncate all the data tables and create one basic master user (ie same as the minimal daatbase).
+
+The admin user on a fresh database is admin@dev.dev and the password is: password.
+
+

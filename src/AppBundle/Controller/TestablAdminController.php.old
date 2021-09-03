@@ -1,0 +1,135 @@
+<?php
+
+namespace AppBundle\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Entity\Repository;
+use Doctrine\ORM\Entity;
+use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\ClassmarkerLinks;
+use AppBundle\Entity\ClassmarkerLinksRepository;
+use AppBundle\Entity\Forms;
+
+
+class TestablAdminController extends Controller
+{
+	/**
+	 * @Security("has_role('ROLE_CLIENT')")
+     * @Route("/testabladmin/tests", name="testabladmin_testlist")
+	 * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function testlistAction(Request $request)
+    {
+		$user = $this->getUser();
+		$employer_id = $user->getEmployerId();
+		$em = $this->getDoctrine()->getManager();
+
+		if($_POST)
+		{
+			$em->getRepository('AppBundle:Forms')->saveAssignedJobs($employer_id, $form_id, $_POST);
+			return $this->redirect('/testabladmin/assign');
+		}
+		
+		$form = $em->getRepository('AppBundle:Forms')->findOneBy(["id"=>$form_id]);
+		$form_name = $form->getFormName();
+		$jobs = $em->getRepository('AppBundle:Forms')->getJobListForForm($employer_id, $form_id);
+	
+		return $this->render('@App/testabladmin/assign.html.twig', array(
+			'jobs'		=> $jobs,
+			'form_name'	=> $form_name,
+		));
+    }
+
+	
+	
+	/**
+	 * @Security("has_role('ROLE_CLIENT')")
+     * @Route("/testabladmin/edittest/{form_id}", name="testabladmin_edittest")
+	 * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function edittestAction(Request $request)
+    {
+		$form_id = $request->get('form_id');
+		$user = $this->getUser();
+		$user_id = $user->getid();
+		$employer_id = $user->getEmployerId();
+		if(NULL == $employer_id) return $this->redirect('/logout');
+		// TODO: verify this form is owned by this employer
+		
+		$em = $this->getDoctrine()->getManager();
+		$form = $em->getRepository('AppBundle:Forms')->findOneBy(['id'=>$form_id]);
+		
+		return $this->render('@App/testabladmin/edittest.html.twig', array(
+			'title' => $form->getFormName(),
+			'formid' => $form->getId(),
+		));
+    }
+
+	
+
+	/**
+	 * @Security("has_role('ROLE_CLIENT')")
+     * @Route("/testabladmin/editpool/{pool_id}", name="testabladmin_editpool")
+	 * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editpoolAction(Request $request)
+    {
+		$pool_id = $request->get('pool_id');
+		$user = $this->getUser();
+		$user_id = $user->getid();
+		$employer_id = $user->getEmployerId();
+		if(NULL == $employer_id) return $this->redirect('/logout');
+		// TODO: verify this form is owned by this employer
+		
+		$em = $this->getDoctrine()->getManager();
+		$pool = $em->getRepository('AppBundle:Pools')->findOneBy(['id'=>$pool_id]);
+		return $this->render('@App/testabladmin/editpool.html.twig', array(
+			'title' => $pool->getPoolName(),
+			'poolid' => $pool_id,
+		));
+    }
+
+
+	/**
+	 * @Security("has_role('ROLE_CLIENT')")
+     * @Route("/testabladmin/editinfo/{testid}", name="testabladmin_editinfo")
+	 * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editinfoAction(Request $request)
+    {
+		$testid = $request->get('testid');
+		$user = $this->getUser();
+		$user_id = $user->getid();
+		$employer_id = $user->getEmployerId();
+		if(NULL == $employer_id) return $this->redirect('/logout');
+		// TODO: verify this form is owned by this employer
+		
+		$em = $this->getDoctrine()->getManager();
+		$test = $em->getRepository('AppBundle:Forms')->findOneBy(['id'=>$testid, 'employerId'=>$employer_id]);
+		return $this->render('@App/testabladmin/editinfo.html.twig', array(
+			'test' => $test,
+		));
+    }
+
+	
+	/**
+	 * @Security("has_role('ROLE_CLIENT')")
+     * @Route("/testabladmin/viewanswers/{id}", name="testabladmin_viewanswers")
+	 * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function viewanswersAction(Request $request)
+    {
+		return $this->render('@App/testabladmin/viewanswers.html.twig', array(
+			'jobs' => array(
+				array('id'=>1,'app'=>'Charlsetta Erm', 'test'=>'PHP Programming', 'score'=>'75%', 'passScore'=>70),
+				array('id'=>2,'app'=>'Charlsetta Erm', 'test'=>'Java Programming', 'score'=>'15%', 'passScore'=>65),
+				),
+		));
+    }
+
+	
+	
+}

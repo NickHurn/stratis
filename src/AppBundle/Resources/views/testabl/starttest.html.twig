@@ -1,0 +1,231 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+
+	
+<style>
+div#qdiv { min-height:500px; font-size: 18px; line-height:1.2em; }
+div#qdiv input { padding:5px; }
+div#qdiv h2 { font-family:'NeueHaasGroteskDisp Pro Md'; font-size:28px; }
+#photo { position:absolute; top:0; left:0; width:240px;height:180px; }
+#video { display:block; }
+#canvas { display:none; }
+#output { display:none; }
+</style>
+
+
+<div class="col-md-12">
+
+	<div class='col-md-4 pull-right' id='rightcolumn'>
+		<div style='position:relative; width:240px; height:180px;margin-bottom:10px;'>  
+			<div id="camera">
+				<video id="video">Video stream not available.</video>
+			</div>
+			<canvas id="canvas" style="display:none;width:240px;height:180px">
+			</canvas>
+			<div id="output">
+				<img id="photo" style="width:240px" alt="The capture will appear in this box."> 
+			</div>
+		</div>
+
+		<div id='take_btns' style='width:240px; display:none'>
+		<button id="startbutton" class="btn btn-default btn-black"  onclick="takepicture()">Take photo</button> 
+		</div>
+		<div id='upl_btns' style='width:240px; display:none'>
+			<button id="retake" class="btn btn-default btn-black">Re-Take photo</button> 
+			<button id="uploadimg" class="btn btn-default btn-black" onclick="upload_picture()">Upload Photo</button> 
+		</div>
+
+		<div id='divtimer' style='display:none; width:240px; margin-top:70px;'>
+			Time Remaining:<br/>
+			<span id='timerem'>--:--</span>
+		</div>
+
+	</div>
+
+	<div class='col-md-8' id='qdiv'>
+		<h2>Candidate Test: {{title}}</h2>
+		<p>
+		You are about to take this test. It comprises of {{questionCount}} questions.
+		</p><p>
+		The questions are individually timed. You should allow approximately {{time}} minutes to complete the test.
+		</p><p>
+		The test must be completed in one sitting.
+		</p><p>
+
+		<b>IMPORTANT:</b> You will be required to provide webcam images at random times during this test, for
+		identity verification purposes. If your webcam is working, you should see an an image
+		of yourself displayed on the right side of this page.
+		</p><p>
+			If your webcam does <b>not</b> work, you might need to use a different web browser or
+		another computer to complete this test.
+		</p><p>
+			<a class='btn btn-black btn-lg' onclick='starttest({{testid}})'>Start Test</a>
+		</p>
+	</div>
+
+	
+</div>
+	
+
+<script src='/js/photo.js'></script>
+	
+<script>
+var cdtimer;
+var qresponse;
+var video_q = 0;
+var video_cap_done = 0;
+var seq = 1;
+var id;
+var ans_tmp;
+
+
+
+function processNQ(msg)
+{
+	var x = JSON.parse(msg);
+	if(x.STATUS=="OK" || x.STATUS=="END" )
+	{
+		$('#qdiv').html(x.HTML);
+	}
+	else
+	{
+		console.log(msg);
+		alert("Sorry, an error occured with this test, please try again later");
+	}
+}
+
+
+function nextquestion(ans_id)
+{
+	if(cdtimer) clearTimeout(cdtimer);
+	if(ans_id) {
+		var ans = ans_id;
+	} else {
+		var ans = $('#ans').val();
+	}
+	
+	if(seq == video_q && video_cap_done == 0)
+	{
+		video_cap_done = 1;
+		ans_tmp = ans;
+		takePicture();
+		return;
+	}
+
+	seq++;
+	$.ajax({
+		type: "POST",
+		url: "/testabl/test/"+id+"/nextquestion/"+seq+"/"+ans
+	}).done(function(msg) {
+		processNQ(msg);
+	});
+	
+}
+
+
+function starttest(myid)
+{
+	id = myid;
+	$.ajax({
+		type: "POST",
+		url: "/testabl/test/"+id+"/nextquestion/1/NA"
+	}).done(function(msg) {
+		video_q = Math.round(Math.random(3))+1;
+		processNQ(msg);
+	});
+}
+
+
+
+function decreaseTimer()
+{
+	var s = $('#timerem').html();
+	s--;
+	$('#timerem').html(s);
+	if(s>0)
+		cdtimer = setTimeout(function(){ decreaseTimer() }, 1000);
+	else
+	{
+		nextquestion();
+	}
+}
+
+
+function answerQuestion_NOOOOO()
+{
+	// get answer from input field
+	var answer=document.getElementById('answer').value;
+	getNextQuestion(answer);
+}
+
+
+function getNextQuestion_NOOOOO(answer)
+{
+	clearTimeout(cdtimer);
+	$.ajax({
+		type: "POST",
+		url: "getnextquestion.php",
+		data: { 'answer': answer, 'testid':{{testid}} }
+	}).done(function(msg) {
+		if(cdtimer) clearTimeout(cdtimer);
+		console.log(msg);
+		qresponse = JSON.parse(msg);
+		$('#divtimer').hide();
+		getCamOrShowQuestion();
+	});
+}
+
+
+function takePicture()
+{
+	$('#take_btns').show();
+	$('#qdiv').html('<p></p>Please take a photo using the controls on the right');
+}
+
+function upload_picture()
+{
+	$('#take_btns').hide();
+	$('#upl_btns').hide();
+	$('#camera').show();
+	$('#output').hide();
+	setTimeout(function(){ nextquestion(ans_tmp); }, 1000);
+}
+
+	
+function showQuestion()
+{
+	$('#qdiv').html(qresponse.html);
+	if(qresponse.secs>0)
+	{
+		$('#divtimer').show();
+		$('#timerem').html(qresponse.secs);
+		cdtimer = setTimeout(function(){ decreaseTimer() }, 1000);
+	}
+}
+
+
+function uploadimg()
+{
+	$('#take_btns').show();
+}
+	
+
+function set(n)
+{
+	document.getElementById('answer').value = n;
+}
+
+
+
+$(function() { 
+	startup();
+});
+
+</script>
+
+
+{% endblock %}
+

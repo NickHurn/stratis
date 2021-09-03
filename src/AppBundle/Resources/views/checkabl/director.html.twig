@@ -1,0 +1,79 @@
+{% extends 'base2.html.twig' %}
+{% block customStylesheets %}
+    <style>
+        .announce {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+		
+        table.gbgtable {
+            width: 400px;
+            text-align: left;
+            margin: 30px 0;
+            float: left;
+        }
+
+        table.gbgtable td {
+            padding: 4px 10px;
+            border: border-collapse;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+	<div class="container ml-auto mr-auto mt-4 mb-4 ">
+		<div class="col-xl-12 mt-5 col-lg-12 col-md-12 ">
+			<div class="row ml-auto mr-auto">
+				<div class="jd col-sm-12">
+
+					<div class="row">
+                    <div class='title checkabl'>
+                        <h2>Checkabl &raquo; Directorships</h2>
+                    </div>
+                    <br clear='all'/>
+						<div class="col-lg-12">
+							<div class="settings">
+								<div class="row ">
+									<div class="col-md-6">
+										<div class="note">
+											If you have more than one given name, please enter them here.
+										</div>
+										<form method="post">
+											<input type="hidden" name="part1" value="1"/>
+											<label>Forenam(s)</label><br/>
+											<input type="text" class="form-control" name="firstname" value="{{ firstname }}" placeholder="Forenames (First name and middle names)"/><br/>
+											<label>Surname</label><br/>
+											<input type="text" class="form-control" name="surname" value="{{ surname }}" placeholder="Surname"/><br/>
+											<input type="submit" value="Accept" class="btn btn-default btn-black"/>
+										</form>
+									</div>
+								</div>
+								<div class="row">
+								{% if list %}
+									<div class="row ">
+										<div class="col-12">
+											<form method="post">
+												<input type="hidden" name="part2" value="2"/>
+												<div style='margin-left:15px; margin-top:40px'>
+													<b>Please tick any entries which denote you, before pressing Submit.</b>
+													<p>
+														{% for l in list %}
+															<input type='checkbox'
+																   name='chk{{ l.id }}'> {{ l.title }} - {{ l.address }} ({{ l.appointment_count }} appointments)
+															<br/>
+														{% endfor %}
+														<input type="submit" value="Submit"
+															   class="btn btn-default btn-black"/>
+												</div>
+											</form>
+										</div>
+									</div>
+								{% endif %}
+							</div>
+						</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

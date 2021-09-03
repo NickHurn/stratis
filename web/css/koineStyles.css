@@ -1,0 +1,427 @@
+@font-face {
+    font-family: 'koinefinance';
+    font-style: normal;
+    src: url('../fonts/CeraPro-Light.otf');
+    src: local('koinefinance'), url('../fonts/CeraPro-Light.otf') format('embedded-opentype'), url('../fonts/CeraPro-Light.ttf') format('woff');
+
+}
+@font-face {
+    font-family: 'koinefinanceDomain';
+    font-style: normal;
+    src: url('../fonts/domaine_text_light.otf');
+    src: local('koinefinanceDomain'), url('../fonts/domaine_text_light.otf') format('embedded-opentype');
+
+}
+.koinefinance{font-family: 'koinefinance' !important;}
+body{
+    font-family: 'koinefinance';
+}
+
+h1, h2, h3, h5, h6, h4  {
+    font-family: 'koinefinanceDomain';
+}
+.font-tenez{
+    font-family: 'tenez'!important;
+}
+body{
+    overflow-y: scroll;
+    padding: 0;
+    margin:0;
+}
+body.modal-open {
+    padding-right: 0 !important;
+    overflow: scroll;
+}
+.cookieModalContent{
+    width:90%
+}
+.cookieModalHeader img{
+    width:90%
+}
+.bg-blue{
+    background-color:#211747;
+}
+.btn-coBlue{
+    background-color:#211747;
+}
+.font-blue{
+    color:#211747;
+}
+.navText {
+    color:#211747;
+    font-weight: bold;
+}
+.navStrap{
+    color:#FFFFFF;
+    font-weight: bold;
+}
+
+.op6{
+    opacity: 0.6;
+}
+
+@media screen and  (min-width: 1801px) {
+    .footer{
+        color: #fff;
+        background-color:#211747 ;
+        padding:5px 0 5px 0;
+
+    }
+    .footer1{
+
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+    .footer2{
+        font-size: 0.7rem;
+        text-align: center;
+
+    }
+    .footer2Seperator{
+        padding:0 5px 0 5px;
+    }
+    .footerLink img{
+        width: 20px;
+    }
+    .footerLink{
+        text-decoration: none;
+        color: white;
+    }
+    .footerLink:hover{
+        text-decoration: none;
+        color: white;
+    }
+    .koineCopyright{
+        padding-left: 5px;
+    }
+
+    .pageContent img {
+        width: 100%;
+    }
+    .pageContent{
+        position: relative;
+    }
+}
+@media screen and  (max-width: 1800px) {
+    .footer{
+        color: #fff;
+        background-color:#211747 ;
+        padding:5px 0 5px 0;
+
+    }
+    .footer1{
+
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+    .footer2{
+        font-size: 0.7rem;
+        text-align: center;
+
+    }
+    .footer2Seperator{
+        padding:0 5px 0 5px;
+    }
+    .footerLink img{
+        width: 20px;
+    }
+    .footerLink{
+        text-decoration: none;
+        color: white;
+    }
+    .footerLink:hover{
+        text-decoration: none;
+        color: white;
+    }
+    .koineCopyright{
+        padding-left: 5px;
+    }
+
+    .pageContent img {
+        width: 100%;
+    }
+    .pageContent{
+        position: relative;
+    }
+}
+@media screen and  (max-width: 1600px) {
+    .footer{
+        color: #fff;
+        background-color:#211747 ;
+
+
+    }
+    .footer1{
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+    .footer2{
+        font-size: 0.7rem;
+        text-align: center;
+
+    }
+    .footer2Seperator{
+        padding:0 5px 0 5px;
+    }
+    .footerLink img{
+        width: 20px;
+    }
+    .footerLink{
+        text-decoration: none;
+        color: white;
+    }
+    .footerLink:hover{
+        text-decoration: none;
+        color: white;
+    }
+    .koineCopyright{
+        padding-left: 5px;
+    }
+
+    .pageContent img {
+        width: 100%;
+    }
+    .pageContent{
+        position: relative;
+    }
+    .navText {
+        font-size: 0.99rem;
+    }
+}
+@media screen and  (max-width: 1200px) {
+
+}
+@media (max-width: 991px) {
+
+
+    .footer{
+        color: #fff;
+        background-color:#211747 ;
+        padding:20px 0 10px 0;
+
+    }
+    .footer1{
+
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+    .footer2{
+        font-size: 0.7rem;
+        text-align: center;
+
+    }
+    .footer2Seperator{
+        padding:0 5px 0 5px;
+    }
+    .footerLink img{
+        width: 12px;
+    }
+    .footerLink{
+        text-decoration: none;
+        color: white;
+    }
+    .footerLink:hover{
+        text-decoration: none;
+        color: white;
+    }
+    .koineCopyright{
+        padding-left: 5px;
+    }
+
+    .pageContent img {
+        width: 100%;
+    }
+    .pageContent{
+        position: relative;
+    }
+
+
+}
+@media screen and  (max-width: 768px) {
+    .footer{
+        color: #fff;
+        background-color:#211747 ;
+        padding:20px 0 10px 0;
+
+    }
+    .footer1{
+
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+    .footer2{
+        font-size: 0.7rem;
+        text-align: center;
+
+    }
+    .footer2Seperator{
+        padding:0 5px 0 5px;
+    }
+    .footerLink img{
+        width: 15px;
+    }
+    .footerLink{
+        text-decoration: none;
+        color: white;
+    }
+    .footerLink:hover{
+        text-decoration: none;
+        color: white;
+    }
+    .koineCopyright{
+        padding-left: 5px;
+    }
+
+    .pageContent img {
+        width: 100%;
+    }
+    .pageContent{
+        position: relative;
+    }
+}
+@media (max-width: 575px) {
+    .footer{
+        color: #fff;
+        background-color:#211747 ;
+        padding:20px 0 10px 0;
+
+    }
+    .footer1{
+
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+    .footer2{
+        font-size: 0.7rem;
+        text-align: center;
+
+    }
+    .footer2Seperator{
+        padding:0 5px 0 5px;
+    }
+    .footerLink img{
+        width: 5%;
+    }
+    .footerLink{
+        text-decoration: none;
+        color: white;
+    }
+    .footerLink:hover{
+        text-decoration: none;
+        color: white;
+    }
+    .koineCopyright{
+        padding-left: 5px;
+    }
+
+    .pageContent img {
+        width: 100%;
+    }
+    .pageContent{
+        position: relative;
+    }
+}
+
+
+
+.rounded-8 {
+    border-radius: 8px;
+}
+
+
+.bg-grey{
+    background: silver;
+}
+.mb--100{
+    margin-bottom: -100px;
+}
+.mb--30{
+    margin-bottom: -30px;
+}
+
+
+.font-09{
+    font-size: 0.9rem;
+}
+.font-08{
+    font-size: 0.8rem;
+}
+.font-07{
+    font-size: 0.7rem;
+}
+.font-06{
+    font-size: 0.6rem;
+}
+.pt-50pc{
+    margin-top: 50%;
+}
+
+
+/* Dropdown Button */
+.dropbtn {
+
+
+    border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 0 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+.nav-link {
+    display: block;
+    padding: 0;
+}
+.dropbtn.nav li {
+
+     line-height: 1.0em;
+}
+.mh-350{
+    min-height: 350px;
+}
+.jobDesc2 {
+    display: none;
+}
+.jobLessButton {
+    display: none;
+}
+.lh15{
+    line-height: 1.5em;
+}
+.base2Nav a:hover {
+    background-color: #211747;
+}
+.nav li {
+    height: 100px;
+    line-height: 6.0em;
+}
+
+.help-block{
+    color: red;
+}

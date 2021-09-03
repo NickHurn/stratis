@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ job.title }} - Jobs at {{companyName}}{% endblock %}
+
+{% block body %}
+	<div class="col-lg-12">
+		<div class="tab-content">
+			<div class="settings">
+				<article>
+					<div class="col-md-12 margin-vertically">
+						<div class="row">
+							<div class="col-md-8">
+								<h2><a href="{{urlprefix}}{{job.uniqueId}}">{{ job.title }}</a></h2>
+								{{ job.description|raw }}
+								<div>
+								<b>Location:</b> {{job.county}} &nbsp; &nbsp; <b>Salary:</b> {{job.salary}} &nbsp; &nbsp;
+								<b>Start Date:</b> {{job.startDate}} &nbsp; &nbsp;
+								<a class="btn btn-black btn-xs" style='font-size:11px' href="{{urlprefix}}{{job.uniqueId}}">Apply Now</a><br/>
+								<small><i style='color:#337ab7'>Date Added: {{ job.dateAdded }}</i></small>
+								</div>
+							</div>
+						</div>
+					</div>
+				</article>
+			</div>
+		</div>
+	</div>
+{% endblock %}

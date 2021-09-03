@@ -1,0 +1,382 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+
+{% block body %}
+    <div class="col-lg-12">
+        <div class="tab-content">
+            <div class="settings">
+                <article>
+                    <div class="col-xs-12 margin-vertically">
+                        <div class="row col-xs-12">
+                            <h4>{{ user.name }}
+
+                            </h4>
+                        </div>
+                    </div>
+                </article>
+
+                <article>
+                    {{ include('@App/applicant/applicantDetailsActions.html.twig') }}
+                    <div class="col-md-12">
+                        {% if appMessage %}
+                            <div class="col-md-12 appMessage bg-success">
+                                <strong>{{ appMessage }}</strong>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <br/>
+                    <div class="col-md-12">
+                        <div class="card card-block bg-faded">
+                            <legend>Status</legend>
+                            <div class="col-md-6 no-left">
+                                <p>
+                                    Status: {% if userJob.accepted == 1 %} Accepted {% elseif userJob.rejected == 1 %} Rejected {% elseif userJob.offered %} Offered {% else %} In Progress {% endif %}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{% if watched %} Being Watched {% endif %}</p>
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card card-block bg-faded">
+                            <legend>Role Applied For</legend>
+                            <div class="">
+                                {{ job.title }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card card-block bg-faded">
+                            <legend>Rating</legend>
+                            <div class="">
+                                {% if rating %}
+                                    <div class=""><p><strong> Average Rating:</strong> {{ avgRrating|round(1) }}
+                                            - {{ rating.rating.ratingDescription }} (rating: {{ avgRrating|round(1) }}/5
+                                            - {{ rating.rating.ratingCount }} {% if rating.rating.ratingCount > 1 %}ratings {% else %} rating{% endif %}
+                                            ).</p></div>
+                                    <div class=""><p> ({{ rating.rating.sharedCount }} requests for rating
+                                            sent, {{ rating.rating.ratingCount }} completed ) </p></div>
+                                    <div class="">
+                                        <p>
+                                            <strong> Rating Notes:</strong>
+                                            {% if rating.rating.notes %}
+                                                <a href="#applicantModal" class="shareApplicantNotes">
+                                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                                </a>
+                                            {% else %}
+                                                No Notes entered
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    {% if rating.rating.notes %}
+                                        <div class="applicantDetailsApplicantNotes">
+                                            {% for n in rating.rating.notes %}
+                                                <div class="notesDiv">{{ n.email }} - {{ n.note }}</div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                {% else %}
+                                    This applicant has not been rated yet.
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 ">
+                        <div class="col-md-12 card card-block bg-faded">
+                            <legend>Applicant Progress</legend>
+                            <div class="col-md-6">
+                                <ul class="barprocess" style="font-family:Helvetica Neue, Helvetica, Arial, sans-serif">
+                                    <li>
+                                        <div id="orangecircle" data-percent="{{ checkablProgress }}"
+                                             class="yellow percircle animate"></div>
+                                    </li>
+                                    <li>
+                                        <div id="bluecircle" data-percent="{{ testablProgress }}"
+                                             class="blue percircle animate"></div>
+                                    </li>
+                                    <li>
+                                        <div id="greencircle" data-percent="{{ personablProgress }}"
+                                             class="green percircle animate"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="statusShare col-md-6">
+                                <ul>
+                                    <li>Checkabl</li>
+                                    <li>Testabl</li>
+                                    <li>Personabl</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12 ">
+                        <div class="col-md-12 card card-block bg-faded checkWell">
+                            <legend>Visual Identity Checks</legend>
+                            <div class="col-md-12">
+                                {% if visualid_pass is empty %} {% set visualid_pass = '/images/tony-noimage.jpg' %} {% endif %}
+                                {% if visualid_driv is empty %} {% set visualid_driv = '/images/tony-noimage.jpg' %} {% endif %}
+                                {% if visualid_webcam is empty %} {% set visualid_webcam = '/images/tony-noimage.jpg' %} {% endif %}
+                                {% if testabl1 is empty %} {% set testabl1 = '/images/tony-noimage.jpg' %} {% endif %}
+                                {% if testabl2 is empty %} {% set testabl2 = '/images/tony-noimage.jpg' %} {% endif %}
+
+                                <div style='float:left; margin-right:20px'>
+                                    <img src='{{ visualid_pass }}'
+                                         style='width:160px;height:120px;border:1px solid black'/>
+                                    <br/>Passport
+                                </div>
+
+                                <div style='float:left; margin-right:20px'>
+                                    <img src='{{ visualid_driv }}'
+                                         style='width:160px;height:120px;border:1px solid black'/>
+                                    <br/>Driving
+                                </div>
+
+                                <div style='float:left; margin-right:20px'>
+                                    <img src='{{ visualid_webcam }}'
+                                         style='width:160px;height:120px;border:1px solid black'/>
+                                    <br/>Checkabl: <span class='label'></span>
+                                </div>
+
+                                <div style='float:left; margin-right:20px'>
+                                    <img src='{{ testabl1 }}' style='width:160px;height:120px;border:1px solid black'/>
+                                    <br/>Testabl 1: <span class='label'></span>
+                                </div>
+
+                                <div style='float:left; margin-right:20px'>
+                                    <img src='{{ testabl2 }}' style='width:160px;height:120px;border:1px solid black'/>
+                                    <br/>Testabl 2: <span class='label'></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 ">
+                        <div class="card card-block bg-faded checkWell">
+                            <legend>Checks</legend>
+                            <div class="">
+                                <div class=""><p><strong>Email Check:</strong> {{ emailCheck }}</p></div>
+                                <div class=""><p><strong>SMS Check:</strong> {{ smsCheck }}</p></div>
+                                {% if kycStatus %}
+                                    <div class=""><p><strong>KYC / AML Check:</strong> ({{ kycStatus.checkType }}
+                                            ) {{ kycStatus.status }} </p></div>
+                                {% endif %}
+
+                                {% if disclosures %}
+                                    <div class=""><p><strong>DBS Check:</strong> ({{ disclosures.checkType }}
+                                            ) {{ disclosures.status }}</p></div>
+                                {% endif %}
+
+                                {% if qualificationChecks %}
+                                    <div class=""><p><strong>Qualification
+                                                Checks:</strong> {{ qualificationChecks.status }} </p></div>
+                                {% endif %}
+
+                                <div class=""><p><strong>Reference Requested:</strong> {{ references }}</p></div>
+
+                                <div class="">
+                                    <p>
+                                        <strong>Interview Requested:</strong>
+                                        {{ interviewStatus }}
+                                    </p>
+                                    {% if interview %}
+                                        <ul>
+                                            <li>{{ interview.interviewDate|date('H:i:s d-m-Y') }}
+                                                - {{ interview.location }} - {% if interview.accepted %} <span
+                                                        class="applicantAccept">Accepted</span> {% else %} <span
+                                                        class="applicantOutstanding">Pending</span> {% endif %}
+                                        </ul>
+                                        <a href="/interview/index/jobid/{{ job.uniqueid }}/id/{{ user.id }}"
+                                           role="button" class="btn btn-black resetFilter">Detail </a></li>
+                                    {% endif %}
+                                </div>
+                                {% if preScreen %}
+                                    <div class=""><p><strong>Pre-Screen Checks:</strong>
+                                            {% if preScreen == -1 %}
+                                            Not Requested</p>
+                                        {% elseif preScreen == 2 %}
+                                            Not Completed</p>
+                                        {% else %}
+                                            {% if preScreen == 1 %}
+                                                <span class="passText">Pass ({{ preScreenScore }}%)</span>
+                                            {% else %}
+                                                <span class="failText">Fail ({{ preScreenScore }}%)</span>
+                                            {% endif %}
+                                            <a href="{{ path('prescreenadmin_answers', {'completedId': psFormId, 'applicantId':user.id}) }}">View
+                                                Results</a>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 ">
+                        <div class="card card-block bg-faded checkWell">
+                            <div class=" testabl">
+                                <legend>Employment History</legend>
+                            </div>
+                            {% if employmentHistory %}
+                                {% for eh in employmentHistory %}
+                                    <div class="">
+                                        <div class="">
+                                            <strong> Job Title:</strong> {{ eh.title }}
+                                        </div>
+                                        <div class="">
+                                            <strong> Dates:</strong> {{ eh.startdate|date('d-m-Y') }}
+                                            - {{ eh.enddate|date('d-m-Y') }}
+                                        </div>
+                                        <div class=" employment-history">
+                                            <strong> Job Title:</strong> {{ eh.description }}
+                                        </div>
+                                        <div class="">
+                                            <hr/>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            {% endif %}
+                            <div class=" testabl">
+                                <legend>Education History</legend>
+                            </div>
+                            {% if employmentHistory %}
+                                {% for edh in educationHistory %}
+                                    <div class="">
+                                        <div class="">
+                                            <strong> Establishment:</strong> {{ edh.establishment }}
+                                        </div>
+                                        <div class="c">
+                                            <strong> Course:</strong> {{ edh.courseTitle }}
+
+                                        </div>
+                                        <div class=" employment-history">
+                                            <strong> Dates:</strong> {{ edh.startdate|date('d-m-Y') }}
+                                            - {{ edh.enddate|date('d-m-Y') }}
+                                        </div>
+                                        <div class="">
+                                            <hr/>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% if job.testabl %}
+
+                        <div class="col-md-12">
+                            <div class="card card-block bg-faded testWell col-md-12">
+                                <legend>Test Results</legend>
+                                <table class="dataTable noleft">
+                                    <tr>
+                                        <th class="ui-corner-tl ui-state-default">Form Name</th>
+                                        <th class="ui-state-default">Score</th>
+                                        <th class="ui-state-default">Pass Score</th>
+                                        <th class="ui-corner-tr ui-state-default">Max Score</th>
+                                    </tr>
+                                    {% if testsCompleted %}
+                                        {% for fc in testsCompleted %}
+                                            <tr>
+                                                <td>{{ fc.formName }}</td>
+                                                <td>{{ fc.score }}</td>
+                                                <td>{{ fc.passScore }}</td>
+                                                <td>{{ fc.maxScore }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="4" style="padding:20px">No tests completed</td>
+                                        </tr>
+                                    {% endif %}
+                                </table>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {{ include('@App/applicant/applicantDetailsActions.html.twig') }}
+                </article>
+            </div>
+        </div>
+    </div>
+    <div id="applicantModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body ">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block customJavascripts %}
+    <script src="{{ asset('js/applicantActions.js') }}  "></script>
+    <script type="text/javascript">
+        jQuery(function () {
+            jQuery("[id$='circle']").percircle();
+            jQuery("#clock").percircle({
+                perclock: true
+            });
+            jQuery("#custom").percircle({
+                text: "custom",
+                percent: 27
+            });
+        });
+
+        $(document).on('click', '.rejectApplicantButton', function(){
+            var userId = $(this).data('id');
+            var jobId = $(this).data('jobid');
+
+            var request = $.ajax({
+                url: '/applicant/rejectapplicant',
+                type: 'GET',
+                data: {jobid: jobId, userId: userId}
+            });
+            request.done(function (data) {
+                $('.modal-title').html(data.title);
+                $('.modal-body').html(data.body);
+                $("#applicantModal").modal('show');
+            });
+        });
+
+        $(document).on('click', '.acceptApplicantButton', function(){
+            var userId = $(this).data('id');
+            var jobId = $(this).data('jobid');
+
+            var request = $.ajax({
+                url: '/applicant/acceptapplicant',
+                type: 'GET',
+                data: {jobid: jobId, userId: userId}
+            });
+            request.done(function (data) {
+                $('.modal-title').html(data.title);
+                $('.modal-body').html(data.body);
+                $("#applicantModal").modal('show');
+            });
+        });
+
+        $(document).on('click', '.shareApplicantButton', function(){
+            var userId = $(this).data('id');
+            var jobId = $(this).data('jobid');
+            var employeeId = $(this).data('employeeid');
+
+            var request = $.ajax({
+                url: '/applicant/sharemodalview',
+                type: 'GET',
+                data: {jobid: jobId, userId: userId, employeeId: employeeId}
+            });
+            request.done(function (data) {
+                $('.modal-title').html(data.title);
+                $('.modal-body').html(data.body);
+                $("#applicantModal").modal('show');
+            });
+
+
+        });
+    </script>
+{% endblock %}

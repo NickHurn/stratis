@@ -1,0 +1,36 @@
+
+{% extends 'base.admin.menu.html.twig' %}
+
+
+{% block body %}
+
+            <div class="col-lg-12">
+                <div class="tab-content">
+                    <div class="settings">
+                        <article>
+                            <div class="col-xs-12 margin-vertically">
+                                <div class="row col-xs-12">
+                                    <h4>Delete Applicants</h4>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <div class="col-md-6 ">
+								<b>Sorry, but this operation has failed. Applicant not deleted.</b>
+								<div style='margin:25px 0'>
+									Either you did not type in the verification word properly, this applicant does not
+									belong to your agency, or the applicant has already been deleted.
+									<p>
+										<br/>
+										Please try again.
+								</div>
+								
+								<a href='/applicant/delete' class="btn btn-red btn">Return to Start</a>
+								
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}

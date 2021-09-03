@@ -1,0 +1,16 @@
+{% extends 'ud.email.html.twig' %}
+
+{% block body %}
+
+<h5>Hello {{ candidate }},</h5>
+
+<p>Thank you for your interest in the {{ title }} position at {{ companyname }}. Your application has been processed successfully.
+
+<p>{{ message }}</p>
+
+<p>You will receive more details via email shortly.</p>
+
+<p>Many Thanks,<br/>
+{{ companyname }}</p>
+
+{% endblock %}

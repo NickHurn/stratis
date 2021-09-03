@@ -1,0 +1,23 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+    <div class="container ml-auto mr-auto mt-4 mb-4 ">
+        <div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+            <div class="row ml-auto mr-auto">
+                <div class="jd col-sm-12">
+                    <div class="title checkabl">
+                        <h2>Disclosure Application</h2>
+                    </div>
+                    <div class="">
+                        <div class=" alert alert-info col-md-12">
+                            Your disclosure has been successfully submitted.
+                        </div>
+						<button type="button" class="btn btn-black appBtn-black appBtn" style='margin:30px 0' onclick="location.href='/candidate/home'">Return to Job Applications</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

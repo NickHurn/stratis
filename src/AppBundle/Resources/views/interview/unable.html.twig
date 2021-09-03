@@ -1,0 +1,51 @@
+{% extends 'base.admin.menu.html.twig' %}
+{% block customStylesheets %}
+	<style>
+		.announce {
+			font-size: 18px;
+			margin: 20px 0;
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+    <div class="container ml-auto mr-auto mt-4 mb-4 ">
+        <div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+            <div class="row ml-auto mr-auto">
+                <div class="jd col-sm-12">
+
+
+                    <div class='title checkabl'>
+                        <h2>Interview Status</h2>
+                    </div>
+                    <br clear='all'/>
+                    <div class="col-lg-12">
+                        <div class="settings">
+                            <div class="row">
+
+                                <div class='announce'>
+                                    Sorry, but interviews cannot be arranged at this time.
+                                    <div class='genericmargin'>
+                                        <button type="button" onclick="history.back(-1)" class='btn btn-black'>Go
+                                            Back</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+	
+
+
+
+
+
+
+
+

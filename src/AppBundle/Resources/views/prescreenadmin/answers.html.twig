@@ -1,0 +1,38 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-12">
+			
+		<div class="tab-content">
+			<div class="settings">
+				<article>
+					<div class="col-xs-12 margin-vertically no-left">
+						<div class="row col-xs-12">
+							<h4>Pre-Screen Answers &raquo; {{info.firstname}} {{info.surname}} &raquo; {{info.title}}</h4>
+						</div>
+						<div class="row col-xs-12">
+							<h6 style='color:#888'>Pass score = {{info.percentage}}% </h6>
+							<h6 style='color:#888'>Score: {{info.score}}/{{info.maxScore}} ({{info.percentage}}%) - {% if info.percentage >= info.passScore %} Pass {% else %} Fail{% endif %}. </h6>
+						</div>
+					</div>
+				</article>
+				<article>
+
+						<div class="col-md-12 no-left no-right" >
+								{% if answers %}
+									{% for a in answers %}
+										<b>Q{{a.seq}}. {{a.question}}</b><br/>{{a.answer}}
+										<br/>&nbsp;<br/>
+									{% endfor %}
+								{% else %}
+									Sorry, there are no results for this questionnaire.
+								{% endif %}
+						</div>
+
+				</article>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

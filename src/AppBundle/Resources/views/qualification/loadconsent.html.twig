@@ -1,0 +1,92 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+    <div class="row m-0">
+        <div class="col-8 offset-2 mt-3 pt-3 mt-2">
+             <div class="page-title col-12">
+                 <div class="title checkabl"><h2>Qualification check documentation</h2></div>
+            </div>
+        </div>
+        <div class="col-8 offset-2 mt-2">
+            <div class="col-12">
+                <p>Your check has been submitted but for us to be able to access your information the institute requires some paperwork. This paperwork authorises us to access your data as well any other requirements from your institute.  Below is a list of all the paperwork required and the ability for you to upload the documents.</p>
+                <p>Once you have uploaded all the documents your qualification check will be submitted.  The documents must all be in PDF format.</p>
+            </div>
+        </div>
+        {% for doc in application.awaiting.documents %}
+
+
+            <div class="col-8 offset-2 mt-2">
+                <div class="col-12">
+                    <h3>{{ doc.name }}</h3>
+                </div>
+                {% if doc.name == 'Consent Form' %}
+                    <div class="col-12">
+                        <p><a class="btn btn-black" href="{{ asset('assets/Koine-Hireabl-Information-Release-Form-Qualification-Check-Blank.pdf') }}" target="_blank" download="Koine consent form v1">Download Consent Form</a></p>
+                        Please download the Consent Form, print the form and then complete the required details.  Once complete you can upload the form to complete the process.
+                    </div>
+                {% elseif doc.template is not null %}
+                    <div class="col-12">
+                        <p><a class="btn btn-black" href="{{ doc.template }}" target="_blank" download="Institute consent form v1">Download {{ doc.name }}</a></p>
+                        Please download the Institutes Form, print the form and then complete the required details.  Once complete you can upload the form to complete the process.
+                    </div>
+                {% else %}
+                    <div class="col-12">
+                        <p>Please upload your {{ doc.name }} to complete the process</p>
+                    </div>
+                {% endif %}
+                <div class="uploaderror{{ loop.index }}"></div>
+                <div class="uploadsuccess{{ loop.index }}"></div>
+                <div class="col-12 mt-2">
+                    <form method="post" id="consentform" action="#" enctype="multipart/form-data">
+                        <div class="btn btn-black">
+                            <input type="file" id="app_bundle_consent_import_consentFile{{ loop.index }}" name="app_bundle_consent_import[consentFile]" required="required">
+                        </div>
+                        <div id="queue{{ loop.index }}"></div>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block customJavascripts %}
+
+    <script src="{{ asset('js/jquery.uploadifive.min.js') }}" type="text/javascript"></script>
+    {% for doc in application.awaiting.documents %}
+    <script>
+
+        $(function() {
+            $('#app_bundle_consent_import_consentFile{{ loop.index }}').uploadifive( {
+                'auto'              : true,
+                'multi'             : false,
+                'method'            : 'post',
+                'formData'          : {
+                    'token'         : '{{ token }}',
+                    'name'          : '{{ doc.name }}'
+                },
+                'queueID'           : 'queue{{ loop.index }}',
+                'fileObjName'       : 'app_bundle_consent_import[consentFile]',
+                'buttonText'        : 'Save and Upload File',
+                'width'             : 200,
+                'removeCompleted'   : true,
+                'uploadScript'      : '{{ path('qualification_consent_process') }}',
+                'onUploadComplete'  : function(file, data) {
+                    var filedata = $.parseJSON(data);
+                    if(filedata.success === false){
+                        console.log(filedata);
+                        $('.uploaderror{{ loop.index }}').empty();
+                        $('.uploaderror{{ loop.index }}').html('<div class="alert alert-danger">'+filedata.fileErrors.consentFile+'</div>');
+                    } else {
+                        alert('Consent form added successfully')
+                        window.location.reload();
+                    }
+                },
+                'onError' : function(errorType) {
+                    $('.uploaderror{{ loop.index }}').empty();
+                    $('.uploaderror{{ loop.index }}').html('<div class="alert alert-danger">failed due to page error' + errorType +'</div>');
+                }
+            });
+        });
+    </script>
+    {%  endfor %}
+{% endblock %}

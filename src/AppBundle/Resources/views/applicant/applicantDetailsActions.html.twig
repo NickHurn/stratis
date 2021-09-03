@@ -1,0 +1,56 @@
+
+<div class="col-md-12">
+    <div class="well">
+
+        <a href="{{ path('generate_excel', {'userId': user.id, 'employerJobId': job.employerid }) }}" title="Download Data" class="btn btn-black applcantActionsButtons" >Data <i class="fa fa-download" aria-hidden="true"></i></a>
+        {% if cv %}
+            <a href="/jobs/cvdownload/id/{{ cv.id }}" class="btn btn-black applcantActionsButtons" title="Download CV" >CV <i class="fa fa-download" aria-hidden="true"></i></a>
+        {% endif %}
+        {% if interviewStatus == 'Requested' %}
+            <a href="/interview/index/jobid/{{ job.uniqueid }}/id/{{ user.id }}" class="btn btn-black applcantActionsButtons" title="View accepted interview / status" ><i class="text-center  fa fa-handshake-o" aria-hidden="true"></i> </a>
+        {% elseif interviewStatus == 'Accepted' %}
+            <a href="/interview/index/jobid/{{ job.uniqueid }}/id/{{ user.id }}" class="btn btn-black applcantActionsButtons" title="View accepted interview / status"><i class="text-center  fa fa-handshake-o" aria-hidden="true"></i> </a>
+            {% if d.reference_checks == 'Not Requested' %}
+                <a href="/reference/request/jobid/{{ job.uniqueid }}/id/{{ user.id }}" class="btn btn-black applcantActionsButtons" title="Request references"><i class="text-center  fa fa-file-text-o" aria-hidden="true"></i>  </a>
+            {% elseif d.reference_checks == 'Requested' %}
+                <a href="/reference/view/jobid/{{ job.uniqueid }}" class="btn btn-black applcantActionsButtons" title="Awaiting References"><i class="text-center  fa fa-file-text-o" aria-hidden="true"></i></a>
+            {% elseif d.reference_checks == 'Received' %}
+                <a href="/reference/view/jobid/{{ job.uniqueid }}" class="btn btn-black applcantActionsButtons" title="View References"><i class="text-center  fa fa-file-text-o" aria-hidden="true"></i></a>
+            {% elseif d.reference_checks == 'Part Received' %}
+                <a href="/reference/view/jobid/{{ job.uniqueid }}" class="btn btn-black applcantActionsButtons" title="Awaiting References">Awaiting References</a>
+            {% endif %}
+        {%  elseif interviewStatus != 'Accepted' %}
+            <a href="/interview/index/jobid/{{ job.uniqueid }}/id/{{ user.id }}" class="btn btn-black applcantActionsButtons" title="View pending interview / status"><i class="text-center  fa fa-handshake-o" aria-hidden="true"></i> </a>
+        {%  elseif interviewStatus == 'Rejected'%}
+            <a href="/interview/index/jobid/{{ job.uniqueid }}/id/{{ user.id }}" class="btn btn-black applcantActionsButtons" title="View rejected interview / status"><i class="text-center  fa fa-handshake-o" aria-hidden="true"></i> </a>
+        {%  else %}
+            <a href="/interview/index/jobid/{{ job.uniqueid }}/id/{{ user.id }}" class="btn btn-black applcantActionsButtons" title="View details / interview status"><i class="text-center  fa fa-handshake-o" aria-hidden="true"></i></a>
+        {% endif %}
+        {% if userJob.rejected == 0 %}<!-- extra checks -->
+            <a href="/idchecks/extrachecks/{{ user.id }}/{{job.uniqueid }}" role="button"  class=" btn btn-black applcantActionsButtons checkablActionButton extraChecksButton"  title="Extra Checks"><i class="fa fa-th-list" aria-hidden="true"></i></a>
+        {% endif %}
+<!--        <a href="#applicantModal" role="button" data-toggle="modal" data-id="{{ user.id }}" data-jobid="{{ job.uniqueid }}" data-employeeid="{{ job.employerid }}" class="shareApplicantButton btn btn-black applcantActionsButtons"   title="Share Applicant"><i class="fa fa-share-alt-square" aria-hidden="true"></i></a>
+-->
+		<a href="" role="button" data-toggle="modal" class="shareApplicantButton btn btn-black" title="Share Applicant"><i class="fa fa-share-alt-square" aria-hidden="true"></i></a>
+        
+		   
+		{% if userJob.rejected == 0 and userJob.accepted == 0 %}
+            <a href="#" role="button" data-toggle="modal" data-id="{{ user.id }}" data-jobid="{{ job.uniqueid }}"  class="btn btn-black  rejectApplicantButton"  title="Reject"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+            <a href="#" role="button" data-toggle="modal" data-id="{{ user.id }}" data-jobid="{{ job.uniqueid }}"  class="btn btn-black  acceptApplicantButton"  title="Accept"><i class="fa fa-check-circle" aria-hidden="true"></i></a>
+        {% endif %}
+        {% if watched %}
+            <span class="watchbutton"><button class="removewatchlist btn btn-black applcantActionsButtons" data-id="{{ user.id }}" data-jobid="{{ job.uniqueid }}" data-employeeid="{{ job.employerid }}" type="button" title="Un Watch"><i class="fa fa-eye-slash" aria-hidden="true"></i></button></span>
+        {% else %}
+            <span class="watchbutton"><button class="watchlist btn btn-black applcantActionsButtons" data-id="{{ user.id }}" data-jobid="{{ job.uniqueid }}" data-employeeid="{{ job.employerid }}" type="button" title="Watch"><i class="fa fa-eye" aria-hidden="true" ></i></button></span>
+        {% endif %}
+    </div>
+</div>
+
+
+
+<script>
+function gdprx()
+{
+	alert("Sorry, applicant share functions are disabled until GDPR terms have been agreed");
+}
+</script>

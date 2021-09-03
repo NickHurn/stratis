@@ -1,0 +1,16 @@
+{% extends 'ud.email.html.twig' %}
+
+{% block body %}
+    <h5>Hello {{ candidate }},</h5>
+
+<p>Thank you for your interest in the {{ title }} position at {{ client }}. We have reviewed your application. Unfortunately, you are not the right fit for the position at this time.
+
+<p>{{ message }}</p>
+
+<p>I am sorry for the disappointing news. Best of luck in your job search.</p>
+
+<p>Many Thanks,<br/>
+{{ companyname }}</p>
+
+
+{% endblock %}

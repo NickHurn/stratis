@@ -1,0 +1,36 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+            <div class="col-lg-12">
+                <div class="tab-content">
+                    <div class="settings">
+                        <article>
+                            <div class="col-xs-12 margin-vertically">
+                                <div class="row">
+                                    <h4>New client added</h4>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <div class="col-md-12 margin-vertically">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            The new client as been added successfully.
+                                            <ul>
+                                                <li><a href="{{ path('admin_client_add') }}">Add another client</a></li>
+                                                <li><a href="/admin">Go to dashboard</a></li>
+                                                <li><a href="/credit">Assign the client credits</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+
+{% endblock %}

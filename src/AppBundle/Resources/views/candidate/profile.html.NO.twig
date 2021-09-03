@@ -1,0 +1,123 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+<style>
+.jobblock { color: #888; margin-bottom: 20px; }
+.jobblock h4 { color: #222; margin:5px 0 15px; }
+</style>
+
+  <div class="col-xs-6">
+                <div class="tab-content">
+                    <div class="settings">
+                        <article>
+                            <div class='title checkabl'>
+								<h2>Edit your Profile</h2>
+							</div>
+                            <div class="col-md-12 margin-vertically" style='margin-top:30px'>
+                                <div class="row ">
+
+<form action="" id="applicantreg" method="post" class="pre-screen-form">
+    <div>
+            <div class="form-group">
+        <label class="sr-only" for="email">Email Address</label>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i></span>
+            <input name="email" type="text" id="email" placeholder="Email Address" title="email" class="form-control" data-validation="server"
+                   data-validation-url="/register/emailexists/origemail/admin123@outlook.com"
+                   value="admin123@outlook.com">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="sr-only" for="mobile">Mobile Number</label>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-mobile fa-fw" aria-hidden="true"></i></span>
+            <input name="mobiletel" type="text" id="mobile" placeholder="Mobile Number" title="mobiletel" class="form-control" data-validation="required"
+                   value="01944-369967">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="sr-only" for="home">Home Number</label>
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-phone fa-fw" aria-hidden="true"></i></div>
+            <input name="hometel" type="text" id="home" placeholder="Home Phone Number" title="hometel" class="form-control"
+                   value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="postcode">Post Code</label>
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-globe fa-fw" aria-hidden="true"></i></div>
+            <input name="postcode" type="text" id="postcode" placeholder="Post Code" title="postcode" class="form-control" data-validation="required"
+                   value="CT2 7PP">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="line1">Address Line 1</label>
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-globe fa-fw" aria-hidden="true"></i></div>
+            <input name="line1" type="text" id="line1" placeholder="Address Line 1" title="line1" class="form-control" data-validation="required"
+                   value="14 Taylor St">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="line2">Address Line 2</label>
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-globe fa-fw" aria-hidden="true"></i></div>
+            <input name="line2" type="text" id="line2" placeholder="Address Line 2" title="line2" class="form-control"
+                   value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="line3">Address Line 3</label>
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-globe fa-fw" aria-hidden="true"></i></div>
+            <input name="line3" type="text" id="line3" placeholder="Address Line 3" title="line3" class="form-control"
+                   value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="town">Town or City</label>
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-globe fa-fw" aria-hidden="true"></i></div>
+            <input name="town" type="text" id="town" placeholder="Town or City" title="town" class="form-control" data-validation="required"
+                   value="St. Stephens Ward">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="county">County</label>
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-globe fa-fw" aria-hidden="true"></i></div>
+            <input name="county" type="text" id="county" placeholder="County" title="county" class="form-control"
+                   value="Kent">
+        </div>
+    </div>
+
+
+
+<link rel="stylesheet" type="text/css" href="https://services.postcodeanywhere.co.uk/css/captureplus-2.30.min.css?key=tb21-zd55-am83-mr35" />
+<script type="text/javascript" src="https://services.postcodeanywhere.co.uk/js/captureplus-2.30.min.js?key=tb21-zd55-am83-mr35"></script>
+
+
+
+
+
+
+
+
+
+    </div>
+    <div>
+        <input type="submit" value="Update Details" id="update-contact" class="btn btn-black btn-primary" />
+    </div>
+</form>
+</div>                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+
+
+{% endblock %}

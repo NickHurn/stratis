@@ -1,0 +1,54 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+
+<div class="col-md-6 offset-md-3 mt-2">
+	<div class="col-xs-12">
+		<div class="title job">
+			<h2 style='font-size:28px'>Interview Status - {{jobtitle}}</h2>
+		</div>
+		<div style='clear: both'></div>
+		<div class='ivstatus' style='margin-top:40px'><span>Current Status:</span> 
+				{% if arranged %} 
+					{% if interview.accepted %} 
+						<div class='yes'>INTERVIEW ACCEPTED</div>
+					{% endif %}
+					{% if interview.rejected %} 
+						<div class='no'>INTERVIEW REJECTED</div>
+					{% endif %}
+					{% if not interview.accepted and  not interview.rejected %} 
+						<div class='yes'>INTERVIEW PENDING</div>
+					{% endif %}
+				{% else %}
+					<div class='none'>NO INTERVIEW ARRANGED</div>
+				{% endif %}
+			</div>
+				
+			{% if interview.rejected %} 
+				<div style='clear: both; margin: 20px 0'>
+					Reason for cancellation:<br/>{{reason}}
+				</div>
+			{% endif %}
+
+			<div style='clear: both; margin: 20px 0'>
+			{% if arranged and interview.rejected == 0 %} 
+				<div style='margin:30px 0 10px; font-style:italic; color:#888; font-size:14px'>
+				If you would like to cancel this interview, please enter a reason below and press the Confirm Cancellation button.
+				</div>
+				
+				<form method='post' style='margin:0 !important'>
+					<input type='hidden' name='typ' value='cancel'/>
+					Reason to cancel:<br/>
+					<textarea name='cancel' cols='50' rows='5'/></textarea>
+					<br/>
+					<input type='submit' value='Confirm Cancellation' class='btn btn-default btn-black'/>
+				</form>
+			{% endif %}
+			</div>
+			
+			<a href='/candidate/home' class='btn btn-default btn-black' style='margin-top:20px'>Return to Job Applications</a>
+		</div>
+	</div>
+ </div>
+
+{% endblock %}

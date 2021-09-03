@@ -1,0 +1,20 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-6 col-md-8 col-sm-12">
+	<h1>{{title}}</h1>
+	{{msg}}
+	<div style='margin:20px 0 50px'>
+	{% if hideextra == 1 %}
+		Please press the BACK button to return the to screen prior to this error. All errors are automatically recorded and
+	should be rectified automatically, but should the problem occur or you require a more immediate solution, please 
+	contact us using the information on screen.
+	{% endif %}
+	</div>
+	
+	<a href='javascript:history(-1)' class='btn btn-default btn-black'>Back to Previous Screen</a>
+</div>
+
+
+{% endblock %}

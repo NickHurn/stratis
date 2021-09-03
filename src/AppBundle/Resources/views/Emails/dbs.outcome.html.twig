@@ -1,0 +1,14 @@
+{% extends 'ud.email.html.twig' %}
+{% block body %}
+
+<h5>Hello {{ client }},</h5>
+
+    <p>{{ candidate }} has had their DBS application completed.</p>
+
+    <p><strong>Outcome:</strong> {{ outcome }} </p>
+
+<p>Many Thanks</p>
+
+<p>{{ custom_css.whitelabel.companyName }}</p>
+
+{% endblock %}

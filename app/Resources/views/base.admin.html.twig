@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hireabl</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/faviconblue.png') }}">
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/styles.css?v={{ version }}" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <link href="/css/responsive.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/e5d0111f84.js"></script>
+    <link href="/css/simple-sidebar.css" rel="stylesheet">
+    <link href="/css/jqueryui.custom/jquery-ui.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/fonts/embed/stylesheet.css"/>
+    <script src="/js/jquery-1.11.3.min.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="/js/percircle.js"></script>
+    <link rel="stylesheet" href="/css/percircle.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/theme-default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/jquery.form-validator.min.js"></script>
+    <link rel = "stylesheet" href = "/css/custom.css" >
+    <script src="/js/knockout-3.4.0.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="/css/buttons.css?v={{ version }}">
+
+
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/v/ju/dt-1.10.16/datatables.min.css"/>
+
+    <script type="text/javascript" src="//cdn.datatables.net/v/ju/dt-1.10.16/datatables.min.js"></script>
+
+</head>
+
+<body>
+<!-- header start -->
+<nav class="navbar navbar-layout">
+    <div class="main-width-wrap admin_main-width-wrap">
+        <div class="container">
+            <div class="col-lg-5 col-md-5 col-sm-4">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <span class="navbar-brand logo">
+					{% if custom_css.whitelabel.headerLogoAdmin is defined %}{% set img = custom_css.whitelabel.headerLogoAdmin %}{% endif %}
+					{% if domain is defined %}{% set img = domain ~ "_logo.png" %}{% endif %}
+					<img src='/images/default_logo.png' class="img-responsive" style="height:50px" alt=""></span>
+                </div>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+
+            <div class="col-lg-7 col-md-7 col-sm-8">
+                <div class="collapse navbar-collapse" id="defaultNavbar1">
+                    <div class="row bg-ul">
+
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <div class="col-lg-4 col-md-4 login-box pull-right dashboard">
+                            <ul>
+                                <li>
+                                    <a href="#changeDetails" class="welcome" data-toggle="modal">Welcome {{ app.user.firstname }}</a>
+
+                                </li>
+                                <li>
+                                    <a href="/logout" class="btn btn-black logoutButton"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a>
+                                </li>
+                            </ul>
+                        </div>
+                      {% else %}
+                        <div class="col-lg-4 col-md-4 login-box pull-right dashboard">
+                            <ul>
+                                <li>
+                                    &nbsp;
+                                </li>
+                                <li>
+                                    <a  href="/login" class="btn btn-black "><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+                                </li>
+                            </ul>
+                        </div>
+                       {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+</nav>
+
+
+
+<!-- header End -->
+
+<!-- Sidebar -->
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav" style='margin-bottom:2px'>
+            <li class="sidebar-brand"> Main Menu </li>
+            <li> <a href="/admin" ><i class="fa fa-list" aria-hidden="true"></i> Dashboard</a> </li>
+            <li> <a href="/staff" ><i class="fa fa-user-plus" aria-hidden="true"></i> Staff</a> </li>
+            <li> <a href="/jobs/view" ><i class="fa fa-file-text-o" aria-hidden="true"></i> Jobs</a> </li>
+            <li> <a href="{{ path('applicant_view') }}"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Applicants</a> </li>
+            <li> <a href="/id" ><i class="fa fa-id-card-o" aria-hidden="true"></i> ID Checks</a> </li>
+            <li> <a href="{{ path('qualification_view') }}" ><i class="fa fa-graduation-cap" aria-hidden="true"></i> Qualification Checks</a> </li>
+            <li> <a href="/disclosures" class="active"><i class="fa fa-id-card-o" aria-hidden="true"></i> Disclosures</a> </li>
+            <!--<li> <a href="/checkabladmin" <?php echo ($this->layout()->section == 'admin-checkabl' ? 'class="active"' : ''); ?>><i class="fa fa-check-square-o" aria-hidden="true"></i> Checkabl</a> </li> -->
+            <li> <a href="/testadmin/assignment" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Testabl</a> </li>
+            <li> <a href="/personabladmin" ><i class="fa fa-users" aria-hidden="true"></i> Personabl</a> </li>
+            <li> <a href="{{ path('form_create_admin') }}" ><i class="fa fa-check-square-o" aria-hidden="true"></i> Form Admin</a> </li>
+            <li> <a href="/reference/view" ><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> View References</a> </li>
+            <li> <a href="/credit" ><i class="fa fa-gbp" aria-hidden="true"></i> Credits</a> </li>
+            <li> <a href="/termsadmin" ><i class="fa fa-columns" aria-hidden="true"></i> Terms and Condition</a> </li>
+            <li> <a href="/admin/clearuser" ><i class="fa fa-gbp"></i> Clear Users</a> </li>
+            <li> <a href="/user/generateexcel/employer_id/1" ><i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel Data Download</a> </li>
+            {% if is_granted('ROLE_ADMIN') %}
+				<li class="sidebar-brand" style='height:50px'> Admin Options </li>
+                <li> <a href="/admin/client/list" ><i class="fa fa-user" aria-hidden="true"></i> Client List</a> </li>
+				<li> <a href="/admin/client/add" ><i class="fa fa-user-plus" aria-hidden="true"></i> Add Client</a> </li>
+			{% endif %}            
+            <li> <a href="{{ path('shared_applicants') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> Shared Applicants</a> </li>
+
+        </ul>
+    </div>
+    {% for flash_message in app.session.flashBag.get('notice') %}
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="alert alert-info alert-dismissible">
+                    {{ flash_message }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% block body %}{% endblock %}
+
+</div>
+<br/>
+<br/>
+<footer class="dashboard-footer">
+    <div class="container-fluid">
+        <div class="dashboard-main-wrap">
+            <div class="wrapper-innerbox">
+                <div class="">
+                    <div class="col-sm-4 col-xs-3 footer-logo help-tag"></div>
+                    <div class="text-center col-sm-4 col-xs-6 help-tag">
+                        <span>&copy; {{ custom_css.whitelabel.getFooterCoName }}  {{ version }}  </span>
+                    </div>
+                    <div class=" text-right col-sm-4 col-xs-3 help-tag">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Footer wrap End -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+</script>
+
+
+{% block javascripts %}{% endblock %}
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+
+
+</body>
+</html>

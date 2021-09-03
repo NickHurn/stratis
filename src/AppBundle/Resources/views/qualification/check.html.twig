@@ -1,0 +1,71 @@
+{% extends 'base2.html.twig' %}
+{% block body %}
+
+
+
+    <div class="container ml-auto mr-auto">
+
+        <div class="page-title">
+            <div class="col-md-8 offset-md-2">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="title checkabl">
+                            <h2>Qualification Check</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if error %}
+            <div class="page-title">
+                <div class="col-md-8 offset-md-2">
+                    <div class="row">
+                        <div class="">
+                            <div class="alert alert-warning">
+                                {{ error }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="col-md-8 offset-md-2">
+            <div class="row">
+                <form action="" method="post" class="col-md-12">
+                    <fieldset >
+                        <legend>Your Institute: {{ institute.name }}</legend>
+                        <div class="margin-vertically">
+                            {{ form_errors(form) }}
+                        </div>
+                    </fieldset>
+                    <fieldset >
+                        <legend>Personal Details:</legend>
+                        {{ form_row(form.firstName) }}
+                        {{ form_row(form.middleName) }}
+                        {{ form_row(form.lastName) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.dob) }}
+                        {{ form_row(form.gender) }}
+                    </fieldset>
+
+                    <fieldset >
+                        <legend>Course Details:</legend>
+                        {{ form_row(form.studentId, {attr: {placeholder:'Your Id or membership number'}}) }}
+                        {{ form_row(form.membership, {attr: {placeholder:'eg. Student, Chartered Member, Associate'}}) }}
+                        {{ form_row(form.courseTitle, {attr: {placeholder:'eg. \'Accounting\' or \'Engineering\''}}) }}
+                        {{ form_row(form.award, {attr: {placeholder:'eg. \'Bachelor of Arts\' or \'BSc\''}}) }}
+                        {{ form_row(form.grade, {attr: {placeholder:'eg. \'First\' or \'2:1\' or \'Honours\''}}) }}
+                        {{ form_row(form.enrolment, {attr: {placeholder:'eg. 2012'}}) }}
+                        {{ form_row(form.graduated, {attr: {placeholder:'eg. 2016'}}) }}
+                        {{ form_row(form.reference, {attr: {placeholder:'Any reference number you wish to assign to the check'}}) }}
+                    </fieldset>
+                    {{ form_widget(form._token) }}
+                    {{ form_row(form.submit, {attr:{class:'btn btn-black'}}) }}
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

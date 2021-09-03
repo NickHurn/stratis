@@ -1,0 +1,21 @@
+{{ form_start(choiceFieldParams, {'attr': {'id': 'choiceFieldParams'}}) }}
+{{ form_row(choiceFieldParams.name) }}
+{{ form_row(choiceFieldParams.formId) }}
+{{ form_row(choiceFieldParams.fieldType) }}
+{{ form_row(choiceFieldParams.required) }}
+<fieldset >
+    <legend>Add options</legend>
+
+    <ul id="email-fields-list"
+        data-prototype="{{ form_widget(choiceFieldParams.options.vars.prototype)|e }}">
+        {% for optionField in choiceFieldParams.options %}
+            <li>
+                {{ form_errors(optionField) }}
+                {{ form_widget(optionField) }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="#" id="add-another-email"><strong>Add an option</strong></a>
+</fieldset>
+{{ form_end(choiceFieldParams) }}

@@ -1,0 +1,78 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-12">
+			
+		<div class="tab-content">
+			<div class="settings">
+				<article>
+					<div class="col-xs-12 margin-vertically no-left">
+						<div class="row col-xs-12">
+							<h4>Pre-Screen Questionnaires</h4>
+						</div>
+					</div>
+				</article>
+				<article>
+
+					{% if errorMessage %}
+						<div class="col-md-12 dangerBg bg-danger">
+							<strong>{{ errorMessage }}</strong>
+						</div>
+					{% endif %}
+					{% if appMessage %}
+						<div class="col-md-12 appMessage bg-success">
+							<strong>{{ appMessage }}</strong>
+						</div>
+					{% endif %}
+
+						<div class="col-md-12 no-left no-right" >
+							<table class="dataTable">
+								<thead>
+									<tr>
+										<th class='ui-corner-tl ui-state-default' title="Question">Form Name</th>
+										<th class='ui-state-default' title="NumQuestions">Number of Questions</th>
+										<th class='ui-state-default' title="PassScore">Pass Score</th>
+										<th class='ui-state-default' title="Options">Options</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% if forms %}
+									{% for f in forms %}
+										<tr>
+											<td>{{f.title}}</td>
+											{% if f.numQuestions == '' %}
+												<td>--</td>
+												<td>--</td>
+											{% else %}
+												<td>{{f.numQuestions}}</td>
+												<td>{{f.passScore}}</td>
+											{% endif %}
+											<td><a class='btn btn-black btn-small' href='/prescreenadmin/edit/{{f.uniqueid}}'>EDIT</a></td>
+										</tr>
+									{% endfor %}
+								{% else %}
+									<tr><td colspan="4" class='noresults'>No results found</td></tr>
+								{% endif %}
+								</tbody>
+							</table>
+						</div>
+						<div id="applicantModal" class="modal fade">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title"></h4>
+									</div>
+									<div class="modal-body ">
+									</div>
+								</div>
+							</div>
+						</div>
+
+				</article>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

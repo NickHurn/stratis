@@ -1,0 +1,64 @@
+input[type=text]{
+    width: 120px;
+    position: relative;
+    margin: 5px auto !important;
+}
+
+form {
+    width: 740px;
+    margin: 10px auto;
+    position: relative;
+}
+
+div {
+    display: block;
+}
+
+.right {
+    text-align: right;
+}
+
+.inline {
+    display: inline-block;
+    width: 368px;
+    vertical-align: top;
+}
+
+#in2, #in3, #in7 {
+    width: 100%;
+}
+
+#in4, #in5, #in6 {
+    width: 120px;
+}
+
+#in12, #in13, #in14, #in15, #in16 {
+    width: 210px;
+}
+
+.table input:nth-child(2) {
+    width: 492px;
+}
+
+.button {
+    padding: 5px 15px 5px 15px;
+    text-align: center;
+    font-size: 21px;
+    font-family: Verdana;
+    color: #f8f8f8;
+    background: #4b4b4b;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #3b3b3b;
+}
+
+.topBanner {
+    text-align: center;
+    display: block;
+    width: 100%;
+    margin: 30px auto;
+}

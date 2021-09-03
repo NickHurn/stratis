@@ -1,0 +1,29 @@
+Apache Configuration
+--------------------
+
+Hireabl runs on apache with a wildcard subdomain and also wildcard SSL certificate. The certifcate can be obtained for free and is automatically configured by the service LetsEncrypt (https://letsencrypt.org/)
+
+First, set up hireabl to run on port 80 as a wildcard sub-domain, configured thus:
+
+/etc/apache2/sites/available/hireabl.conf (ubuntu)
+
+<VirtualHost 85.13.249.211:80>
+  ServerName hireabl.co.uk
+  ServerAlias *.hireabl.co.uk
+  DocumentRoot /var/www/hireabl/web/
+  <Directory />
+    Options Indexes FollowSymLinks MultiViews
+    Options FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from All
+  </Directory>
+  ErrorLog ${APACHE_LOG_DIR}/hireabl-error.log
+  LogLevel warn
+  CustomLog ${APACHE_LOG_DIR}/hireabl-access.log combined
+  RewriteEngine on
+</VirtualHost>
+
+
+Once up and running, you can run the lets encrypt script which will ask you which site(s) to generate SSL certificates for. It will also create an additional apache vhost conf for the SSL variant.
+

@@ -1,0 +1,59 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-12">
+	<div class="settings">
+
+		<div class="col-xs-12 no-left">
+			<div class="row col-xs-12">
+				<h4>Checkabl &raquo; References</h4>
+			</div>
+		</div>
+
+					
+		<div style='clear:both; margin:10px 0 30px; color:#888; width:700px; font-style: italic; font-size:14px'>
+			If you wish to issue a new reference request please go to the <a href='/jobs/view'>Job View</a> and expand the list of applicants. You will 
+			be able to request a reference from there if the applicant meets the requirements.
+		</div>
+
+		<div class="col-md-12 filterBox">
+			<div class="col-md-12">
+				<label for="applicantSearch">Filter Questions by Job: </label>
+			</div>
+			<div class="col-md-10">
+				<select id='jobs' name='jobs' class='form-control'>
+					{% if jobs %}
+						{% for jid,title in jobs %}
+							<option {% if id == jid %} selected {% endif %} value="{{jid}}">{{title}}</option>
+						{% endfor %}
+					{% endif %}
+				</select>
+
+			</div>
+			<div class="col-md-2">
+				<button class=" btn btn-black" onclick="window.location.href='/references/view/'+document.getElementById('jobs').value">Select</button>
+			</div>
+		</div>
+							
+
+		<div class="row">
+			<table class="dataTable">
+				<thead>
+					<tr>
+						<th class='ui-state-default ui-corner-tl' title="Question">Candidate Name</th>
+						<th class='ui-state-default'>Reference Details</th>
+						<th class='ui-state-default ui-corner-tr'>Options</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr><td colspan="3" class='noresults'>No results found</td></tr>
+				</tbody>
+			</table>
+		</div>
+
+				
+	</div>
+</div>
+	
+{% endblock %}

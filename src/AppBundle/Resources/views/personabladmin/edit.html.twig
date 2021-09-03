@@ -1,0 +1,57 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+	
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+
+<style type='text/css'>
+	.videobtn { display:inline-block; border:1px solid black; border-radius:3px; padding:3px 8px 2px 8px; background-color:#eee; }
+</style>
+
+
+<div class="col-lg-12">
+
+		
+<div class="tab-content">
+	<div class="settings">
+		<h4>Personabl &raquo; Edit Question</h4>
+	</div>
+</div>
+
+
+<div class="col-xs-12 margin-vertically">
+	<div class="row col-xs-12">
+		<div class="row col-lg-6 col-md-9">
+			<form method="post">
+				Question Text<br/>
+				<input class="form-control" type="text" name="question" value="{{vq.question}}"/><br/>
+
+				Is this Question Active?
+				<select class="form-control" name="active">
+					<option value="0" {% if vq.active==0 %} selected {% endif %}>No</option>
+					<option value="1" {% if vq.active==1 %} selected {% endif %}>Yes</option>
+				</select><br/>
+
+				Question Type
+				<select class="form-control" name="video">
+					<option value="0" {% if vq.video==0 %} selected {% endif %}>Text</option>
+					<option value="1" {% if vq.video==1 %} selected {% endif %}>Video</option>
+				</select><br/>
+
+				<input type="submit" name="sbm" class="btn btn-black btn-default" value="Save"/> 
+				<input type="submit" name="sbm" class="btn btn-default btn-danger" style="margin-left:50px" onclick="return confirmDelete()" value="Delete"/> 
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<script>
+function confirmDelete()
+{
+	resp = confirm("Are you sure you wish to delete this question?");
+	return resp;
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+Face Recognition API / proxy
+----------------------------
+
+The facial recognition site faceplusplus.com will not run on a UK server due to GDPR restrictions.
+Therefore, there is a proxy site developed which will need to run on a US-based server. Hireabl connects to this, sends the photos to it, and receives the comparison data back.
+
+The proxy consists of just 2 files, index.php and faceModel.php, both of which are in the /facerec directory.
+You need to run this on a US server with the domain name of facerec.dev
+On your hireabl host server, you will need to add a hosts entry for facerec.dev to point to that proxy site.
+My proxy at 18.217.200.129 may be used for the next few months.
+
+

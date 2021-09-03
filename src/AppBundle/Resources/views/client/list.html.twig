@@ -1,0 +1,46 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+	
+            <div class="col-lg-12">
+                <div class="tab-content">
+                    <div class="settings">
+                                <div class="row margin-vertically">
+                                    <h4>List Of Clients</h4>
+								</div>
+								<div>
+									<table class="dataTable">
+										<tr>
+											<th class='ui-corner-tl ui-state-default'>Client Name</th>
+											<th class='ui-state-default'>Logo</th>
+											<th class='ui-state-default'>Domain</th>
+											<th class='ui-state-default'>Checkabl</th>
+											<th class='ui-state-default'>Testabl</th>
+											<th class='ui-state-default'>Personabl</th>
+											<th class='ui-state-default'>CV Uploads</th>
+											<th class='ui-corner-tr ui-state-default'>Options</th>
+										</tr>
+									{% for r in recs %}
+										<tr>
+											<td>{{ r['company'] }}</td>
+											<td><img class="logosample" style="background-color:{{r['headerBackground']}}" src="/images/{{r['domain']}}_logo.png" alt=""/></td>
+											<td>{{ r['domain'] }}</td>
+											<td>{{ r['checkabl'] == 1 ? 'Yes':'No' }}</td>
+											<td>{{ r['testabl'] == 1 ? 'Yes':'No' }}</td>
+											<td>{{ r['personabl'] == 1 ? 'Yes':'No' }}</td>
+											<td>{{ r['cvcheck'] > 0 ? 'Yes':'No' }}</td>
+											<td>
+													<a class="btn btn-black btn-xs" href="/admin/client/edit/basic/{{ r['id'] }}"><i class='fa fa-edit'></i> Edit</a>
+											</td>
+										</tr>
+									{% endfor %}
+									</table>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+
+{% endblock %}

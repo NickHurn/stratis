@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Hireabl{% endblock %}</title>
+    <link rel="icon" type="image/png" href="/<?php echo strtolower($this->companyName); ?>.png">
+
+    <!-- CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/styles.css?v={{ version }}" rel="stylesheet">
+    <link href="/css/responsive.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <script src="/js/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <link type="text/css" rel="stylesheet" href="/fonts/embed/stylesheet.css"/>
+    <script type="text/javascript" src="/js/global.js"></script>
+    <script type="text/javascript" src="/js/percircle.js"></script>
+    <link rel="stylesheet" href="/css/percircle.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/theme-default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/jquery.form-validator.min.js"></script>
+    <link rel = "stylesheet" href = "/css/custom.css" >
+    <link href="/css/jqueryui/jquery-ui.min.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/e5d0111f84.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/koineStyles.css') }}">
+</head>
+<body class="application">
+<!-- header start -->
+<nav class="navbar navbar-layout">
+    <div class="main-width-wrap">
+        <div class="container">
+            <div class="col-lg-5 col-md-5 col-sm-4">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <span class="navbar-brand logo"><img src="/images/{{ custom_css.whitelabel.headerLogo }}" class="img-responsive" style="height:75px" alt=""></span>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-8">
+                <div class="collapse navbar-collapse" id="defaultNavbar1">
+                    <div class="row bg-ul">
+
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+                            <div class="col-lg-4 col-md-4 login-box pull-right dashboard">
+                                <ul>
+                                    <li>
+                                        Welcome {{ app.user.firstname }}
+
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('logout') }}" class="btn btn-black logoutButton"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <div class="col-lg-4 col-md-4 login-box pull-right dashboard">
+                                <ul>
+                                    <li>
+                                        &nbsp;
+                                    </li>
+                                    <li>
+                                        <a  href="{{ path('login') }}" class="btn btn-black "><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+</nav>
+
+
+
+<section style="padding:3px;">
+    <div class="container">
+
+        <div class="row">
+            <div class="application-main-wrap container">
+                <div class="wrapper-innerbox">
+                    {% for flash_message in app.session.flashBag.get('notice') %}
+                        <div id="page-content-wrapper">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="alert alert-info alert-dismissible">
+                                        {{ flash_message }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer>
+    <div class="container-fluid">
+
+        <div class="application-main-wrap">
+            <div class="wrapper-innerbox">
+                <div class="">
+                    <div class="col-sm-4 col-xs-3 footer-logo help-tag"></div>
+                    <div class="text-center col-sm-4 col-xs-6 help-tag">
+                        <span>{{ custom_css.whitelabel.getFooterCoName }} {{ version }} </span>
+                    </div>
+                    <div class=" text-right col-sm-4 col-xs-3 help-tag">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+</body>
+</html>
+
+{% block scripts %}{% endblock %}

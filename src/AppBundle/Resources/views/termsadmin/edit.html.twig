@@ -1,0 +1,40 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<div class="row col-xs-12">
+	<div class="settings">
+
+		<div class="col-xs-12">
+			<div class="row">
+				<h4>Edit Terms and Conditions</h4>
+			</div>
+		</div>
+
+		<div class="row col-xs-12 col-md-10">
+			{{ form_start(form) }}
+			{{ form_widget(form) }}
+			{{ form_end(form) }}
+		</div>
+				
+	</div>
+</div>
+
+<style>
+textarea#job_description { background-color:white; }
+div.nicEdit-main { background-color:white; font-size: 1em; }
+div.nicEdit-main h1 { font-size: 1.5m; }
+div.nicEdit-main h2 { font-size: 1.2em; }
+div.nicEdit-main ol { left:0; margin-left: 40px; }
+div.nicEdit-main ul { left:0; margin-left: 40px; }
+</style>
+
+
+<script type="text/javascript" src="/js/nicEdit-latest.js"></script> 
+<script type="text/javascript">
+	new nicEditor({fullPanel:false, buttonList:['bold','italic','underline','left','center','right','justify','ol','ul','fontFormat'], maxHeight:300, bgcolor:'#fff'}).panelInstance('terms_edit_terms');
+
+</script>
+
+
+{% endblock %}

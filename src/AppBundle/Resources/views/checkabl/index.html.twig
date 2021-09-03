@@ -1,0 +1,182 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+<div class="container mt-4 mb-4 ">
+	<div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+		<div class="row ml-auto mr-auto">
+			<div class="jd col-sm-12">
+
+				<div class='title checkabl'>
+					<h2>Checkabl &raquo; {{title}}</h2>
+				</div>
+
+				<div style='clear:both; margin:100px 0 30px; color:#888'>
+					Please conduct the necessary steps to check off each of the items on the following list,<br/>
+					to complete the first step of your application.
+				</div>
+
+				{% set tick = "fa fa-check-circle-o chktick" %}
+				{% set cross = "fa fa-times-circle-o chkcross" %}
+
+				<div class="">
+					<table id='checkabl'>
+						<tr>
+							<td><i class='{% if done.email==1 %} {{tick}} {% else %} {{cross}} {% endif %}'> </i></td>
+							<td>Verify Your email address</td>
+							<td>
+								{% if done.email==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='/checkabl/email/{{jobid}}'><i class='fa fa-arrow-circle-right'></i> Verify</a>{% endif %}
+							</td>
+						</tr>
+
+						<tr>
+							<td><i class='{% if done.mobile==1 %} {{tick}} {% else %} {{cross}} {% endif %}'> </i></td>
+							<td>Verify Your mobile number</td>
+							<td>
+								{% if done.mobile==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='/checkabl/mobile/{{jobid}}'><i class='fa fa-arrow-circle-right'></i> Verify</a>{% endif %}
+							</td>
+						</tr>
+
+						{% if required.terms == 1 %}
+						<tr>
+							<td><i class='{% if done.terms==1 %} {{tick}} {% else %} {{cross}} {% endif %}'> </i></td>
+							<td>Agree to Job Application Terms and Conditions</td>
+							<td>
+								{% if done.terms==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='/checkabl/terms/{{jobid}}'><i class='fa fa-arrow-circle-right'></i> Agree</a>
+								{% else %} <a href='/checkabl/terms/{{jobid}}' class='btn' style='width:95px; border:1px solid #aaa'>View</a>
+								{% endif %}
+							</td>
+						</tr>
+						{% endif %}
+
+						{% if required.prescreen == 1 %}
+						<tr>
+							<td><i class='{% if done.prescreen==1 %} {{tick}} {% else %} {{cross}} {% endif %}'> </i></td>
+							<td>Pre-Screen Questions</td>
+							<td>
+								{% if done.prescreen==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='/prescreen/{{jobid}}'><i class='fa fa-arrow-circle-right'></i> Answer</a>{% endif %}
+							</td>
+						</tr>
+						{% endif %}
+
+						{% if required.cv == 1 %}
+						<tr>
+							<td><i class='{% if done.cv==1 %} {{tick}} {% else %} {{cross}} {% endif %}'> </i></td>
+							<td>Upload Your C.V.</td>
+							<td>
+								{% if done.cv==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='/checkabl/cvupload/{{jobid}}'><i class='fa fa-arrow-circle-right'></i> Upload</a>{% endif %}
+							</td>
+						</tr>
+						{% endif %}
+
+						{% if required.emphistory == 1 %}
+						<tr>
+							<td><i class='{% if done.emphistory==1 %} {{tick}} {% else %} {{cross}} {% endif %}'> </i></td>
+							<td>Enter Your Employment History</td>
+							<td>
+								{% if done.emphistory==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='/checkabl/employerhistory/{{jobid}}'><i class='fa fa-arrow-circle-right'></i> Enter</a>{% endif %}
+							</td>
+						</tr>
+						{% endif %}
+						{% if required.eduhistory == 1 %}
+						<tr>
+							<td><i class='{% if done.eduhistory==1 %} {{tick}} {% else %} {{cross}} {% endif %}'> </i></td>
+							<td>Enter Your Education History</td>
+							<td>
+								{% if done.eduhistory==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='/checkabl/educationhistory/{{jobid}}'><i class='fa fa-arrow-circle-right'></i> Enter</a>{% endif %}
+							</td>
+						</tr>
+						{% endif %}
+
+
+						{% if required.passport == 1 %}
+						<tr>
+							<td><i class='{% if done.passport==1 %} {{tick}} {% else %} {{cross}} {% endif %}'> </i></td>
+							<td>Upload Your Passport</td>
+							<td>
+								{% if done.passport==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='/checkabl/passport/{{jobid}}'><i class='fa fa-arrow-circle-right'></i> Upload</a>{% endif %}
+							</td>
+						</tr>
+						{% endif %}
+
+
+						{% if required.driving == 1 %}
+						<tr>
+							<td><i class='{% if done.driving==1 %} {{tick}} {% else %} {{cross}} {% endif %}'> </i></td>
+							<td>Upload Your Driving Licence</td>
+							<td>
+								{% if done.driving==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='/checkabl/driving/{{jobid}}'><i class='fa fa-arrow-circle-right'></i> Upload</a>{% endif %}
+							</td>
+						</tr>
+						{% endif %}
+
+
+						{% if required.visualid == 1 %}
+						<tr>
+							<td><i class='{% if done.visualid==1 %} {{tick}} {% else %} {{cross}} {% endif %}'> </i></td>
+							<td>Visual ID Checks</td>
+							<td>
+								{% if done.visualid==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='/checkabl/visualid/{{jobid}}'><i class='fa fa-arrow-circle-right'></i> Enter</a>{% endif %}
+							</td>
+						</tr>
+						{% endif %}
+
+
+						{% if required.aml== 1 %}
+						<tr>
+							<td><i class='{% if done.aml==1 %} {{tick}} {% else %} {{cross}} {% endif %}'> </i></td>
+							<td>KYC / AML Checks</td>
+							<td>
+								{% if done.aml==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='/checkabl/aml/{{jobid}}'><i class='fa fa-arrow-circle-right'></i> Enter</a>{% endif %}
+							</td>
+						</tr>
+						{% endif %}
+
+
+						{% if required.director == 1 %}
+						<tr>
+							<td><i class='{% if done.director==1 %} {{tick}} {% else %} {{cross}} {% endif %}'> </i></td>
+							<td>Director Checks</td>
+							<td>
+								{% if done.director==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='/checkabl/director/{{jobid}}'><i class='fa fa-arrow-circle-right'></i> Enter</a>{% endif %}
+							</td>
+						</tr>
+						{% endif %}
+
+						{% if required.dbs == 1 %}
+						<tr>
+							<td><i class='{% if done.dbs==1 %} {{tick}} {% else %} {{cross}} {% endif %}'> </i></td>
+							<td>DBS Checks</td>
+							<td>
+								{% if done.dbs==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='/dbs/apply/{{ dbs.id }}/{{dbs.jobCode}}'><i class='fa fa-arrow-circle-right'></i> Enter</a>{% endif %}
+							</td>
+						</tr>
+						{% endif %}
+
+
+
+						{% if required.qual == 1 %}
+							<tr>
+								<td><i class='{% if done.qual==1 %} {{tick}} {% else %} {{cross}} {% endif %}'> </i></td>
+								<td>Qualifications</td>
+								<td>
+									{% if qual.verificationStatus is empty %}
+										{% if done.qual==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='{{ qual.shortUrl }}'><i class='fa fa-arrow-circle-right'></i> Enter</a>{% endif %}
+									{% elseif qual.verificationStatus == 'AWAITING_CONSENT' %}
+										{% if done.qual==0 %}<a class='btn btn-black appBtn-black appBtn' style='width:95px' href='{{ path('qualification_consent_upload', {'token': qual.token}) }}'><i class='fa fa-arrow-circle-right'></i> Enter</a>{% endif %}
+									{% endif %}
+
+								</td>
+							</tr>
+						{% endif %}
+					</table>
+				</div>
+				<div  class="mt-4">
+					<a href="{{ path('candidate_home') }}"   class="btn btn-black">Back to Applications</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	
+		
+{% endblock %}

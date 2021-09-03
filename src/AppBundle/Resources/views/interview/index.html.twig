@@ -1,0 +1,93 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+	 <div class="col-lg-12">
+	<div class="settings">
+		<div class="col-xs-12 margin-vertically">
+			<div class="row no-left">
+				<h4>Interview Status - {{candidatename}}</h4>
+			</div>
+
+			<div class='ivstatus' style='margin-top:20px'>
+				<span>Position:</span>{{jobtitle}}
+			</div><br/>
+
+			<div class='ivstatus'><span>Current Status:</span>
+				{% if arranged %}
+					{% if interview.accepted %}
+						<div class='yes'>INTERVIEW ACCEPTED</div>
+					{% endif %}
+					{% if interview.rejected %}
+						<div class='no'>INTERVIEW REJECTED</div>
+					{% endif %}
+					{% if not interview.accepted and  not interview.rejected %}
+						<div class='yes'>INTERVIEW PENDING</div>
+					{% endif %}
+				{% else %}
+					<div class='none'>NO INTERVIEW ARRANGED</div>
+				{% endif %}
+			</div><br/>
+
+			{% if interview is not null and interview.rejected %}
+				<div style='clear: both; margin: 20px 0'>
+					Reason for cancellation:<br/>{{reason}}
+				</div>
+			{% endif %}
+
+
+			<div style='clear: both; margin: 20px 0'>
+				{% if arranged == 0 or interview.rejected == 1 %}
+					<hr/>
+					<h5>Arrange An Interview</h5>
+					<form method='post' style='margin:0 !important'>
+						<input type='hidden' name='typ' value='arrange'/>
+
+						<table cellpadding='2' style='margin:0 !important'>
+							<tr><td>Date</td><td><input type='text' name='dt_interview' id='dt_interview' autocomplete='off' size='10'/></td></tr>
+							<tr><td>Time</td><td><select name='tm_interview' id='tm_interview'/></select></td></tr>
+							<tr valign='top'><td>Location &nbsp; &nbsp; </td><td><textarea name='location' cols='50' rows='5'/></textarea></td></tr>
+							<tr><td></td><td><input type='submit' class='btn btn-black btn-default' value='Confirm'/></td></tr>
+						</table>
+					</form>
+				{% else %}
+
+					<hr/>
+					<h5>Cancel an Interview</h5>
+					<form method='post' style='margin:0 !important'>
+						<input type='hidden' name='typ' value='cancel'/>
+						Reason to cancel:<br/>
+						<textarea name='cancel' cols='50' rows='5'/></textarea>
+						<br/>
+						<input type='submit' value='Confirm Cancellation' class='btn btn-default btn-black'/>
+					</form>
+				{% endif %}
+			</div>
+
+			<a href='/applicant/view' class='btn btn-default btn-black' style='margin-top:40px'>Return to ATS Applicant View</a>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block customJavascripts %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#dt_interview').datepicker({ dateFormat:'dd/mm/yy', minDate:'0' });
+
+			var html = '';
+			for(var hr=0; hr<24; hr++)
+			{
+				if(hr<10) var hour='0'+hr; else hour=hr;
+				for(var mn=0; mn<60; mn+=15)
+				{
+					if(mn<10) var min='0'+mn; else min=mn;
+					var tm = hour+':'+min;
+					html = html +'<option value="' + tm + '">' + tm + '</option>';
+				}
+			}
+			//html = "<option value='09:00'>09:00</option>";
+			$('#tm_interview').append(html);
+		});
+	</script>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+    <style>
+        html, body{
+            height: 100%;
+            background-color: #ffffff;
+            color: #155b59;
+            font-family: Verdana, Georgia, Arial, sans-serif;
+            font-size:1em;
+            margin:5px;
+        }
+
+    </style>
+
+
+    <table cellpadding="10px" width="100%">
+        <tr style=" background-color: {{ custom_css.whitelabel.headerBackground }};">
+            <td style="height:40px">
+                <!-- <img src="https://{{ custom_css.host }}/images/
+				{{ custom_css.whitelabel.headerLogoAdmin }}" style="max-height:100px;width:100%;max-width: 200px;padding-left:10px;"/> -->
+            </td>
+        </tr>
+    </table>
+    
+        <div style="width:100%;clear: both; max-width:800px;margin: 0 auto;">
+            <div style="padding-left:10px;">
+            {% block body %}{% endblock %}
+            </div>
+        </div>
+
+
+    </body>
+</html>

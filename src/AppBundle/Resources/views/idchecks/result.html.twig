@@ -1,0 +1,55 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-12">
+	<div class="settings">
+
+		<div class="col-xs-12 no-left">
+			<div class="row col-xs-12 no-left">
+				<h4>Checkabl &raquo; Validation</h4>
+			</div>
+		</div>
+	</div>
+					
+	<div class="col-xs-12 no-left">
+		<div class="row checklist" clear='both'>
+			<div style='float:left; width:320px'>
+				<img src='{{id_photo}}' width='320'>
+				<table style='width:100%'>
+				{% for key,val in id_nicedata %}
+					<tr><td>{{key}}</td><td>{{val}}</td></tr>
+				{% endfor %}
+				</table>
+				<div style='border:1px solid black; height:400px;overflow:scroll'>
+					 {{id_info|raw}}
+				</div>
+			</div>
+		
+			<div style='float:left; width:320px'>
+				<img src='{{face_photo}}' width='320'>
+				<table style='width:100%'>
+				{% for key,val in face_nicedata %}
+					<tr><td>{{key}}</td><td>{{val}}</td></tr>
+				{% endfor %}
+				</table>
+
+				<div style='border:1px solid black; height:400px; overflow:scroll'>
+					 {{face_info|raw}}
+				</div>
+			</div>
+			<br clear='all'/>
+			<div style='clear:all; margin-top:50px'>
+				<h4>Face Comparison Check</h4>
+				Confidence Rating: {{comp_info}}%
+			</div>
+			<div style='clear:all; margin-top:50px'>
+				<h4>ID Validation</h4>
+				{{validation|raw}}
+			</div>
+	</div>
+				
+</div>
+
+
+{% endblock %}

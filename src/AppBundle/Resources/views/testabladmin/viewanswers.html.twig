@@ -1,0 +1,43 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-12">
+			
+		<div class="tab-content">
+			<div class="settings">
+				<article>
+					<div class="col-xs-12 margin-vertically no-left">
+						<div class="row col-xs-12">
+							<h4>{{jobname}} &raquo; {{testname}} &raquo; {{candidatename}}</h4>
+							<br clear='all'>
+							<h6 style='color:#888'>Score: {{score}}/{{max_score}} ({{score_pcnt}}%)
+								{% if score < pass_score %} <span style='color:red'>Failed</span>.
+								{% else %} <span style='color:#0b0'>Pass</span>. 
+								{% endif %}
+								Pass score = {{pass_score}} ({{pass_pcnt}}%) </h6>
+						</div>
+					</div>
+				</article>
+				<article>
+
+					<div class="col-md-12 no-left no-right" >
+						<table class="dataTable noleft">
+							<tr>
+								<th class="ui-corner-tl ui-state-default">Question</th>
+								<th class="ui-state-default">Answer</th>
+								<th class="ui-state-default">Score</th>
+								<th class="ui-corner-tr ui-state-default">Max Score</th></tr>
+							{% for a in answers %}
+								<tr><td>Q{{a.seq}}. {{a.question}}</td><td>{{a.answer}}</td><td>{{a.score}}</td><td>{{a.maxScore}}</td></tr>
+							{% endfor %}
+						</table>
+					</div>
+
+					<a href='/testabladmin/results/{{jobid}}' style="margin-top:20px" class='btn btn-default btn-black'><i class='fa fa-caret-square-o-left'></i> Return to Results List</a>
+				</article>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

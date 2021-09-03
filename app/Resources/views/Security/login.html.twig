@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section>
+<div class="container-fluid">
+    <div class="row">
+        <div class="application-main-wrap">
+            <div class="wrapper-innerbox">
+                <div class="page-title">
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="title checkabl">
+                                    <h2>Login</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+				{% if error %}
+				<div class="col-md-7">
+                    <div class="row">
+						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					</div>
+				</div>
+				{% endif %}
+
+                <div class="col-md-7">
+                    <div class="row">
+                        <form action="https://{{ custom_css.host }}/login" method="post" class="pre-screen-form col-md-12">
+                            <div class="row margin-vertically">
+                                <div class="col-md-4 standard-field row">Email Address</div>
+                                <div class="col-md-8">
+                                    <div class="col-md-12 textalign-right row input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                                        <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row margin-vertically">
+                                <div class="col-md-4 standard-field row">Password</div>
+                                <div class="col-md-8">
+                                    <div class="col-md-12 textalign-right row input-group">
+                                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                                        <input type="password" id="password" name="_password" title="password" placeholder="Password" class="form-control">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row margin-vertically">
+                                <div class="col-md-4 standard-field row"></div>
+                                <div class="col-md-8">
+                                    <div class="col-md-12 row input-group">
+                                        <input type="submit" name="login" class="btn btn-black btn-lg" value="Login">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="_target_path" value="/login" />
+                            <input type="hidden" name="_failure_path" value="/login" />
+                            <div class="row margin-vertically">
+                                <div class="col-md-4 standard-field row"></div>
+                                <div class="col-md-8">
+                                    <div class="col-md-12 row input-group bump-right">
+                                        <p><a href="/login/forgottenpassword">Forgotten your password ?</a></p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

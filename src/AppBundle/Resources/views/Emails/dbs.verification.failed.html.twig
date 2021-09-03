@@ -1,0 +1,12 @@
+{% extends 'ud.email.html.twig' %}
+{% block body %}
+
+<h5>Hello {{ client }},</h5>
+
+    <p>{{ candidate }} has failed the DBS verification process.  Please check that any details entered are correct and resubmit the verification.</p>
+
+<p>Many Thanks</p>
+
+<p>{{ custom_css.whitelabel.companyName }}</p>
+
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-12">
+			
+ <div class="col-lg-12">
+                <div class="tab-content">
+                    <div class="settings">
+                        <article>
+                            <div class="col-xs-12 margin-vertically">
+                                <div class="row no-left">
+									<h4>Pre-Screen Questionnaires</h4>
+								</div>
+								<div class="note" style="margin-left:-14px">
+									Below is a list of jobs you have defined. To create a new pre-screen questionnaire, simply start
+									adding questions to the respective job.
+								</div>
+							</div>
+						</article>
+						<article>
+
+					{% if errorMessage %}
+						<div class="col-md-12 dangerBg bg-danger">
+							<strong>{{ errorMessage }}</strong>
+						</div>
+					{% endif %}
+					{% if appMessage %}
+						<div class="col-md-12 appMessage bg-success">
+							<strong>{{ appMessage }}</strong>
+						</div>
+					{% endif %}
+
+						<div class="col-md-12 no-left no-right" >
+							<table class="dataTable noleft">
+								<thead>
+									<tr>
+										<th class='ui-corner-tl ui-state-default' title="Question">Job Title</th>
+										<th class='ui-state-default' title="NumQuestions">Number of Questions</th>
+										<th class='ui-state-default' title="PassScore">Pass Score</th>
+										<th class='ui-state-default' title="Completed">#Applicants Completed</th>										
+										<th class='ui-state-default' title="Options">Options</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% if jobs %}
+									{% for j in jobs %}
+										<tr>
+											<td>{{j.title}}</td>
+											{% if j.numQuestions == '' %}
+												<td>--</td>
+												<td>--</td>
+											{% else %}
+												<td>{{j.numQuestions}}</td>
+												<td>{{j.passScore}}</td>
+											{% endif %}
+											<td>
+												{% if j.numQuestions != '' %} {{j.completed}} {% else %}--{% endif %}
+												</td>
+											<td>
+												<a class='btn btn-black btn-small' href='/prescreenadmin/edit/{{j.uniqueid}}'><i class='fa fa-edit'></i> Edit</a>
+												{% if j.numQuestions != '' %}
+												<a class='btn btn-black btn-small' href='/prescreenadmin/delete/{{j.uniqueid}}' onclick='return confirmDelete()'><i class='fa fa-edit'>
+														
+</i> Delete</a>{% endif %}
+											</td>
+										</tr>
+									{% endfor %}
+								{% else %}
+									<tr><td colspan="5" class='noresults'>No results found</td></tr>
+								{% endif %}
+								</tbody>
+							</table>
+						</div>
+						<div id="applicantModal" class="modal fade">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title"></h4>
+									</div>
+									<div class="modal-body ">
+									</div>
+								</div>
+							</div>
+						</div>
+
+				</article>
+			</div>
+		</div>
+	</div>
+
+
+<script>
+function confirmDelete()
+{
+	return confirm('Are you sure you wish to delete all pre-screen questions for this job?');
+}
+</script>
+
+{% endblock %}

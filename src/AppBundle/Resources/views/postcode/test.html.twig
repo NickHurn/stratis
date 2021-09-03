@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<style type='text/css'>
+div.pcdropdown {
+    position:absolute; width:300px; height:300px; border-radius:3px; border:1px solid #aaa;
+    z-index:10;background-color:#f4f4f4; display:none;
+}
+
+.postcode { width: 12em; display:inline-block !important; margin-right: 5px; }
+select.pcode { height:2em; font-size:.85em; background-color: #f5f5f5; }
+</style>
+
+
+<div class="row col-xs-12">
+	
+	<div class="tab-content">
+		<div class="settings">
+			<div class="title job">
+				<h2>PostCode Test</h2>
+			</div>
+		</div>
+</div>
+
+
+    
+    
+    	<form name="client_edit_basic" method="post">
+									<div id="client_edit_basic"><div class="form-group row"><label class="col-form-label col-sm-3 required" for="client_edit_basic_companyName">Company name</label><div class="col-sm-5"><input type="text" id="client_editzbasic_companyName" name="client_edit_basic[companyName]" required="required" help="Your company name, as it should appear in formal communications" class="form-control" value="Koine" />				<div class="formhelp">Your company name, as it should appear in formal communications</div>
+			</div>
+    </div><div class="form-group row"><label class="col-form-label col-sm-3 required" for="client_edit_basic_firstName">Main User First Name</label><div class="col-sm-5"><input type="text" id="client_edit_basic_firstName" name="client_edit_basic[firstName]" required="required" class="form-control" value="Matt" /></div>
+    </div><div class="form-group row"><label class="col-form-label col-sm-3 required" for="client_edit_basic_surname">Main User Surname</label><div class="col-sm-5"><input type="text" id="client_edit_basic_surname" name="client_edit_basic[surname]" required="required" class="form-control" value="David" /></div>
+    </div><div class="form-group row"><label class="col-form-label col-sm-3 required" for="client_edit_basic_mobileNumber">Office / Mobile Number</label><div class="col-sm-5"><input type="text" id="client_edit_basic_mobileNumber" name="client_edit_basic[mobileNumber]" required="required" help="This is only used for our communications with you regarding your account" class="form-control" value="+99 07123 123456" />				<div class="formhelp">This is only used for our communications with you regarding your account</div>
+			</div>
+    </div><div class="form-group row"><label class="col-form-label col-sm-3 required" for="client_edit_basic_emailAddress">Email Address</label><div class="col-sm-5"><input type="email" id="client_edit_basic_emailAddress" name="client_edit_basic[emailAddress]" required="required" class="form-control" value="admin@dev.dev" /></div>
+    </div><div class="form-group row"><label class="col-form-label col-sm-3 required" for="client_edit_basic_postcode">Post Code</label><div class="col-sm-5"><input type="text" id="client_edit_basic_postcode" name="client_edit_basic[postcode]" required="required" class="form-control" value="EC1 1AB" /></div>
+    </div><div class="form-group row"><label class="col-form-label col-sm-3 required" for="client_edit_basic_line1">Address Line 1</label><div class="col-sm-5"><input type="text" id="client_edit_basic_line1" name="client_edit_basic[line1]" required="required" class="form-control" value="1 Any Road" /></div>
+    </div><div class="form-group row"><label class=" col-form-label col-sm-3" for="client_edit_basic_line2">Address Line 2</label><div class="col-sm-5"><input type="text" id="client_edit_basic_line2" name="client_edit_basic[line2]" class="form-control" /></div>
+    </div><div class="form-group row"><label class="col-form-label col-sm-3 required" for="client_edit_basic_town">Town</label><div class="col-sm-5"><input type="text" id="client_edit_basic_town" name="client_edit_basic[town]" required="required" class="form-control" value="Anytown" /></div>
+    </div><div class="form-group row"><label class="col-form-label col-sm-3 required" for="client_edit_basic_county">County</label><div class="col-sm-5"><input type="text" id="client_edit_basic_county" name="client_edit_basic[county]" required="required" class="form-control" value="London" /></div>
+    </div><div><button type="submit" id="client_edit_basic_save" name="client_edit_basic[save]" class="btn btn-black">Save Details</button></div><input type="hidden" id="client_edit_basic__token" name="client_edit_basic[_token]" value="71tDkijAgG4QC5nnggE7Ei_MsI3xg4ILMV62uAalbAM" />
+    </div>
+									
+    </form>
+									
+									  									
+            
+</div>
+
+
+<script src='/js/getpostcode.js'></script>
+
+<script>
+$('#client_edit_basic_postcode').postcodelookup('pcode', ['client_edit_basic_line1','client_edit_basic_line2','client_edit_basic_town','client_edit_basic_county']);
+</script>
+
+{% endblock %}

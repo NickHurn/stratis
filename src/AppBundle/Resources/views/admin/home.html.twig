@@ -1,0 +1,264 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+	
+<div class="col-lg-12">
+	<div class="tab-content">
+		<div class="settings">
+			<article>
+				<div class="col-md-12 margin-vertically">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="row">
+								<form action="" method="post">
+									<select title="jobs" class="form-control" id="jobid" name="jobid" onchange="reload()">
+										<option value="0">All Jobs</option>
+										{% if jobs %}
+											{% for id,title in jobs%}
+												<option {% if jobid == id %} selected {% endif %} value="{{id}}">{{title}}</option>
+											{% endfor %}
+										{% endif %}
+									</select>
+								</form>
+							</div>
+						</div>
+						<div class="col-md-6"><label>Select the job to see the related dashboard</label>
+							<a href='#' id='dasheditbtn' onclick='dashedit()' style='float:right'  class=''>Add/Remove</a> 
+						</div>
+					</div>	
+
+					
+					<div class="row">
+						<div class="grid-stack" data-gs-width="12" data-gs-animate="yes" style='margin-top:30px'>
+						{{ gridHtml|raw }}
+						</div>
+					</div>
+					<div style='clear:both'></div>
+					<hr/>
+
+				</div>
+			</article>
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+function reload()
+{
+	var id = $("#jobid").val();
+	if(id==0) window.location.href='/admin';
+	if(id>0) window.location.href='/admin/'+id;
+	return false;
+}
+
+    $.ajax({
+        method: "POST",
+        url: "/dashboard/percentagefilledvacancies",
+            })
+        .done(function( msg ) {
+            var data;
+            var label;
+            var chartdata = $.parseJSON(msg);
+            label = chartdata[0];
+            data = chartdata[1];
+
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: label,
+                    datasets: [{
+                        label: 'months',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: '% Vacancies filled by month'
+                    }
+                }
+            });
+
+        });
+
+    $.ajax({
+        method: "POST",
+        url: "/dashboard/percentageinterviews",
+            })
+        .done(function( msg ) {
+            var chartdata = $.parseJSON(msg);
+            interviews = chartdata[0];
+            noninterviews = chartdata[1];
+
+            var ctx = document.getElementById("interviewChart");
+
+            var data = {
+                labels: [
+                    "Interviewed",
+                    "Not interviewed"
+                ],
+                datasets: [
+                    {
+                        data: [interviews, noninterviews],
+                        backgroundColor: [
+                            "#FF6384",
+                            "#36A2EB"
+                        ],
+                        hoverBackgroundColor: [
+                            "#FF6384",
+                            "#36A2EB"
+                        ]
+                    }]
+            };
+
+            var interviewChart = new Chart(ctx,{
+                type: 'pie',
+                data: data,
+                options: {
+                    title: {
+                        display: true,
+                        text: '% applicants interviewed'
+                    }
+                }
+            });
+
+        });
+
+
+    $.ajax({
+        method: "POST",
+        url: "/dashboard/timetorecruit",
+            })
+        .done(function( msg ) {
+            var chartdata = $.parseJSON(msg);
+            $('#timetorecruit').html(chartdata+' days');
+        });
+
+
+function dashItemOnOff(obj)
+{
+	var id = obj.id.replace(/^\D+/g,'');
+	var ovr = '#dashgridovr'+id;
+	var x = $(obj).children().hasClass('fa-times-circle');
+	if(x==true)
+	{
+		$(obj).children().removeClass('fa-times-circle');
+		$(obj).children().addClass('fa-power-off');
+		$(ovr).show();
+	}
+	else
+	{
+		$(obj).children().addClass('fa-times-circle');
+		$(obj).children().removeClass('fa-power-off');
+		$(ovr).hide();
+	}
+	saveWidgetState();
+}
+
+function dashedit()
+{
+	var x = $('#dasheditbtn').html();
+	if(x == 'Add/Remove')
+	{
+		// Edit pressed, re-display all widgets
+		$('#dasheditbtn').html('Finish');
+		$('.dashgridbtn').show();
+		for(var i=1; i<12; i++)
+		{
+			var em = '#dashgriditem'+i;
+			var btn = '#dashgridbtn'+i;
+			var ovr = '#dashgridovr'+i;
+			if($(em).is(":visible")==true) {
+				$(btn).html("<i class='fa fa-times-circle'></i>");
+				$(ovr).hide();
+			} else {
+				$(btn).html("<i class='fa fa-power-off'></i>");
+				
+				$(em).show();
+				$(ovr).show();
+			}
+		}
+	}
+	else
+	{
+		//  Finish pressed, hide all disabled widgets
+		$('#dasheditbtn').html('Add/Remove');
+		$('.dashgridbtn').hide();
+		for(var i=1; i<12; i++)
+		{
+			var item = '#dashgriditem'+i;
+			var btn = '#dashgridbtn'+i;
+			var x = $(btn).children().hasClass('fa-power-off');
+			if(x==true) { $(item).hide(); }
+		}
+	}
+}
+
+var saveWidgetState = function() {
+	var gdata = [];
+	for (i=1; i<12; i++) { 
+		var grdobj = '#dashgriditem'+i;
+		var grdbtn = '#dashgridbtn'+i;
+		if($(grdbtn).children().hasClass('fa-times-circle')) var vis=1; else var vis=0;
+		var x = $(grdobj).attr('data-gs-x');
+		var y = $(grdobj).attr('data-gs-y');
+		var w = $(grdobj).attr('data-gs-width');
+		var h = $(grdobj).attr('data-gs-height');
+		gdata[i] = [vis, x, y, w, h];
+	}
+	var gdata_json = JSON.stringify(gdata);
+	$.ajax({
+        method: "POST",
+        url: "/dashboard/saveconfig",
+        data: { "data":gdata, "job_id":"{{jobid}}" },
+    }).done(function( msg ) {
+		console.log(msg)
+	});
+
+};
+</script>
+
+<script type="text/javascript">
+$(function () {
+    var options = { cellHeight: 80, verticalMargin: 10 };
+    $('.grid-stack').gridstack(options);
+	$('.grid-stack').on('change', function(event, items) { saveWidgetState(); });
+	$('.dashgridbtn').click(function() { dashItemOnOff(this); });
+});
+</script>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

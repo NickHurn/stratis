@@ -1,0 +1,15 @@
+{% extends 'ud.email.html.twig' %}
+{% block body %}
+
+Hello {{ name }}
+<p>
+With respect to your application for the position of {{jobtitle}}, we are delighted to offer you an interview on {{nicedate}} at {{time}} at {{location}}.
+Please log on to the website to accept or reject this interview.
+<p>
+You may use the following link to access your account directly:
+<a href='{{url}}'>{{url}}</a>
+<p>
+Many Thanks,<br/>
+{{ companyname }}
+
+{% endblock %}

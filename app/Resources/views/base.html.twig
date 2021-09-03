@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Hireabl{% endblock %}</title>
+    <link rel="icon" type="image/png" href="/<?php echo strtolower($this->companyName); ?>.png">
+
+    <!-- CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/styles.css?v={{ version }}" rel="stylesheet">
+    <link href="/css/responsive.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+
+	<!--<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>-->
+	<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="/js/bootstrap.js"></script>
+    <link type="text/css" rel="stylesheet" href="/fonts/embed/stylesheet.css"/>
+    <script type="text/javascript" src="/js/global.js"></script>
+    <script type="text/javascript" src="/js/percircle.js"></script>
+    <link rel="stylesheet" href="/css/percircle.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/theme-default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/jquery.form-validator.min.js"></script>
+    <link rel = "stylesheet" href = "/css/custom.css" >
+    <script src="https://use.fontawesome.com/e5d0111f84.js"></script>
+	<link href="/css/datatables.min.css" rel="stylesheet">
+	<!--
+	<link rel="stylesheet" type="text/css" href="//services.postcodeanywhere.co.uk/css/address-3.70.css" />
+	<script type="text/javascript" src="//services.postcodeanywhere.co.uk/js/address-3.70.js"></script>
+	-->
+	<link href="https://api.addressy.com/css/address-3.50.min.css" rel="stylesheet" type="text/css" />
+    <script type='text/javascript' src='https://api.addressy.com/js/address-3.50.min.js?ver=4.7.3'></script>
+
+	
+</head>
+<body class="application" style="position:relative;min-height:100%;padding-bottom:4rem;">
+
+	{% if nodevphone != 1%}
+	
+	<div id='devphone' style='display:none; position:fixed; top:20px; left:20px; width:260px; height:600px; text-align:left; background-image:url(/images/fakedevphone.png); z-index:1000'>
+	<div style='position:absolute; top:408px; left:170px; width:70px; height:40px;cursor:pointer' onclick='hidePhone()'></div>
+	<div id='phonemsg' style='position:absolute; top:88px; left:39px; width:183px; height:229px; overflow: auto; color:white; font-size:12px; font-weight:bold'>
+	</div>
+	<audio id='phonebeep' src='/images/phonemsg.mp3' type="audio/mpeg"></audio>
+</div>
+	
+<script>
+function hidePhone()
+{
+	var request = $.ajax({
+		url: "/devphone/clear",
+			type: 'GET',
+		});
+	request.done(function (msg) {
+			$('#devphone').hide();
+	});
+}
+function checkPhone()
+{
+	var request = $.ajax({
+		url: "/devphone/check",
+			type: 'GET',
+		}).done(function (msg) {
+			if(typeof msg !== 'undefined' && msg.length>2) {
+				$('#phonemsg').html(msg);
+				$('#devphone').show();
+				$('#phonebeep').get(0).play();
+			}
+		});
+}
+
+$(document).ready(function() {
+	setTimeout(function(){ checkPhone(); }, 1500);
+});
+
+</script>
+
+
+{% endif %}
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- header start -->
+<nav class="navbar navbar-layout">
+    <section>
+        <div class="container">
+			<div class="row">
+	            <div class="col-xs-8 col-sm-6 col-md-4">
+					<img src='/images/{{ custom_css.getDomain() }}_logo.png' alt=''/>
+				</div>
+
+	            <div class="col-xs-4 col-md-6 col-md-8">
+					<div style='float:right'>
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+							{% if nousermenu is null %}
+								<p style='color:white'>
+									Welcome, {{ app.user.firstname }}
+								</p>
+								<a href="/candidate/home" class="btn btn-black logoutButton"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+								<a href="/candidate/profile" class="btn btn-black logoutButton"><i class="fa fa-user" aria-hidden="true"></i> Profile</a>
+								<a href="/jobboard" class="btn btn-black logoutButton"><i class="fa fa-th-list" aria-hidden="true"></i> Job List</a>
+								<a href="/logout" class="btn btn-black logoutButton"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
+							{% endif %}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+        </div>
+    </section>
+</nav>
+
+
+
+<section>
+    <div class="container">
+        <div class="row">
+			{% block body %}{% endblock %}
+        </div>
+    </div>
+</section>
+		<div style="height:60px">&nbsp;</div>
+
+
+<div style="position:fixed;bottom:0;margin:0; width:100%; padding:15px 20px; background-color:#ddd; border-top:1px solid #888">
+	&copy; {{ custom_css.getCompanyName() }}. All rights reserved. <a href='/privacy'>privacy policy</a>. {{version}}
+</div>
+		
+<script src="https://use.fontawesome.com/e5d0111f84.js"></script>
+
+</body>
+</html>
+
+{% block scripts %}{% endblock %}

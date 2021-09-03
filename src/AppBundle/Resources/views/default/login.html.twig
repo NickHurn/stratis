@@ -1,0 +1,81 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+
+<div class="row ml-0 mr-0 mt-4 mb-4 ">
+	<div class="col-xl-8 offset-xl-2 mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2 ">
+		<div class="row ml-auto mr-auto">
+			<div class="jd col-sm-12">
+				<div class="title checkabl">
+					<h2>Login</h2>
+				</div>
+				{% if message != null %}
+					<div class="alert-warning alert wrapper-innerbox">
+						<div class="col-md-1 alert-warning-icon"><i class="fa fa-exclamation-triangle fa-5x" style="color:#f3c412" aria-hidden="true"></i></div>
+						<div class="col-md-9">
+							<div class="position-title">{{ message }}</div>
+						</div>
+					</div>
+				{% endif %}
+				{% if resetmessage != null %}
+					<div class="alert-info alert wrapper-innerbox">
+						<div class="col-md-1 alert-info-icon"><i class="fa fa-info-circle fa-5x" style="color:#31708f" aria-hidden="true"></i></div>
+						<div class="col-md-9">
+							<div class="position-title">
+								{{ resetmessage }}
+							</div>
+						</div>
+					</div>
+				{% endif %}
+				<div class="col-md-7">
+					<div class="row">
+						{% if error %}
+							<div class="alert-warning alert">
+								<i class="fa fa-exclamation-triangle fa-2x" style="color:#f3c412; vertical-align: middle"></i>
+								{{ error }}
+							</div>
+						{% endif %}
+						<form action="/login" method="post" class="pre-screen-form col-md-12">
+							<div class="row margin-vertically mb-3">
+								<div class="col-md-4 standard-field row">Email Address</div>
+								<div class="col-md-8">
+									<div class="col-md-12 textalign-right row input-group">
+										<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+										<input name="_username" type="email" title="username" placeholder="Username" class="form-control">
+									</div>
+								</div>
+							</div>
+							<div class="row margin-vertically">
+								<div class="col-md-4 standard-field row">Password</div>
+								<div class="col-md-8">
+									<div class="col-md-12 textalign-right row input-group">
+										<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+										<input name="_password" type="password" title="password" placeholder="Password" class="form-control">
+									</div>
+								</div>
+							</div>
+							<div class="row margin-vertically">
+								<div class="col-md-4 standard-field row"></div>
+								<div class="col-md-8">
+									<div class="col-md-12 row input-group bump-right">
+										<input type="submit" name="login" class="btn btn-black btn-lg" value="Login">
+									</div>
+								</div>
+							</div>
+							<div class="row margin-vertically">
+								<div class="col-md-4 standard-field row"></div>
+								<div class="col-md-8">
+									<div class="col-md-12 row input-group bump-right">
+										<p><a href="/forgotpassword">Forgotten your password ?</a></p>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+						
+{% endblock %}

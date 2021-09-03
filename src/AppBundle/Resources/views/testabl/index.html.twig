@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<style>
+.btn { border:1px solid black; border-radius:3px; padding:2px 6px; background-color:#eee; }
+table.dataTable tbody td { border-right:1px solid #ccc; }
+table.dataTable tbody td:first-of-type { border-left:1px solid #ccc; }
+table.dataTable tr:hover { background-color: #f8f8f8; }
+ul { margin-left: 0px; }
+</style>
+
+<div class='title testabl'>
+	<h2>Testabl &raquo; {{jobtitle}}</h2>
+</div>
+
+<div style='clear:both; margin:100px 0 30px; color:#888; width:700px'>
+	Please complete the following on-line test(s). Instructions for each test are given before you start. Each test must be completed in one sitting, but you can
+	pause between taking each test (if there is more than one). Note that you will need a webcam for visual verification during these tests.
+</div>
+	<div class="row">
+		<table class="dataTable">
+			<thead>
+				<tr>
+					<th class='ui-corner-tl ui-state-default' title="Question">Test Name</th>
+					<th class='ui-state-default' title="Video">Number Of Questions</th>
+					<th colspan=2 class='ui-state-default' title="Response">Options</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% if tests %}
+				{% for t in tests %}
+					<tr>
+						<td>{{t.formName}}</td>
+						<td>{{t.numQuestions}}</td>
+						<td>
+							{% if t.status == 'COMPLETED' %}
+								<i class='fa fa-check-circle-o chktick' style='font-size:2em; color:green; vertical-align:middle'> </i> Test Completed
+							{% else %}
+								<a href='/testabl/test/{{t.id}}' class='btn btn-black'>Take Test</a>
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			{% else %}
+					<tr>
+						<td colspan='3'><div style='margin:30px'>No tests found</div></td>
+					</tr>
+			{% endif %}
+				<tr>
+					<th class='ui-corner-bl ui-corner-br ui-state-default' colspan='4'>&nbsp;</th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+{% endblock %}
+	
+
+
+
+
+
+
+
+

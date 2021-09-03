@@ -1,0 +1,339 @@
+
+.base2Nav{
+    background-color: #211747;
+    color: #FFF;
+}
+.base2Nav a {
+    color: #5a6268;
+}
+.base2Nav a:hover{
+    color: #FFF;
+}
+.what img{
+    width: auto;
+    max-height: 200px;
+}
+.logo img{
+    width:140px;
+}
+
+.row{
+    padding-right: 0;
+}
+.bg-opacity09{
+    opacity: 0.9;
+}
+.bg-binary{
+    background-image: url("/images/binary_background_pattern.png");
+    background-repeat: repeat;
+}
+.active{
+    background-image: url("/images/web_menu_active_arrow.png");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+}
+.active a{
+    color: #FFF;
+    font-weight: bold;
+}
+.nav li{
+    height: 100px;
+    line-height: 7.1em;
+}
+.logo img{
+    max-width:90%;
+    max-height:90%;
+}
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: #FFF;
+    font-weight: bold;
+}
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: #FFF;
+    font-weight: bold;
+}
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: #FFF;
+    font-weight: bold;
+}
+.navbar-light ul li a{
+    color: #5a6268;
+
+}
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: #FFF;
+    font-weight: bold;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: silver;
+}
+
+.navbar-collapse {
+    flex-grow: 0;
+}
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+    color: #FFF;
+}
+.xx{
+    width:100%
+}
+.diamondRow{
+    height: 50%;
+    margin-top: 70px;
+}
+.diamondRow2{
+    margin-top: -50px;
+}
+
+
+.whatItemImage{
+    margin-top: 120px;
+}
+.whatItemImage img{
+    width: 75%;
+}
+.whatItemLeft{
+    margin-left: -80px;
+}
+.whatWeDoOptions{
+    height:30%;
+}
+.whatWeDoOptions img{
+    width:85%;
+}
+
+
+
+
+.ffff{
+    padding-top: 35%;
+}
+.contactBox{
+    width:206px;
+    height:256px;
+}
+.contactPageButton{
+    background-image: url("/images/contact_page_button_Bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.contactBoxText{
+    height:256px;
+    width:180px;
+    font-size: 0.8rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+}
+.contactBoxText img{
+    width:100%;
+}
+.followButton{
+    background-image: url("/images/followbutton.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.followButton a{
+    color: white;
+    text-decoration: none;
+}
+.bg-contactForm{
+    background-image: url("/images/contnet_form_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.teamRow2{
+    margin-top:-45px;
+}
+.teamDetails1{
+    margin-top:-32%;
+    z-index: 1;
+    margin-left: -86px;
+}
+.teamDetails{
+    margin-top:-55%;
+    z-index: 1;
+    margin-left: -85px;
+}
+.teamDetailsNonExec{
+    margin-top: -155px;
+    z-index: 1;
+    margin-left: 35px;
+}
+
+
+.rowheight{
+    height:275px;
+}
+.rowheight img{
+    height:100%;
+}
+.teamImage{
+    background-image: url("/images/teamimagebg1.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.teamImage1{
+    background-image: url("/images/teamimagebg2.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.teamProfile{
+    height: 100%;
+}
+.teamProfileButton{
+    background-image: url("/images/team_button_small.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 100%;
+    width:50%;
+    margin-left: 48%;
+    margin-top:-10%;
+}
+.whyImg img{
+    width: 100%;
+    height: auto;
+}
+.learnMoreButton {
+    background-image: url("/images/learnmore_button.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.infoButton{
+    width:20px;
+}
+
+
+.custodyImg1{
+    margin-left: -280px;
+    padding-top: 90px;
+}
+.custodyImg2{
+    margin-left: 100px;
+    padding-top: 90px;
+}
+
+
+.optInDiv{
+    display: none;
+}
+.whatWeDoImg img{
+    width:70%;
+}
+.navbar-collapse {
+    top: 45px;
+}
+.navbar-collapse.show {
+    right: 0;
+    z-index: 100;
+}
+@media screen and  (min-width: 1600px) {
+
+}
+@media screen and  (max-width: 1599px) {
+
+}
+@media screen and  (max-width: 1199px) {
+
+
+}
+
+@media screen and  (max-width: 991.98px) {
+    .active {
+        background-image: none;
+    }
+    .nav li {
+        height: auto;
+        line-height: normal;
+        padding-left: 20px;
+    }
+    .footerBreak{
+        display: none;
+        padding: 10px 0 10px 0;
+    }
+    .navbar-collapse {
+        position: absolute;
+        right: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        width: 100%;
+        transition: all 0.1s ease;
+        display: block;
+        background-color:#211747 ;
+    }
+    .navbar-collapse.collapsing {
+        height: auto !important;
+        margin-right: 50%;
+        transition: all 0.1s ease;
+        display: block;
+    }
+
+    .homeImg img{
+        width: 105%;
+        margin-top: 70px;
+    }
+}
+@media screen and  (max-width: 767.98px) {
+    .active {
+        background-image: none;
+    }
+    .nav li {
+        height: auto;
+        line-height: normal;
+        padding-left: 20px;
+    }
+    .footerBreak{
+        display: none;
+        padding: 10px 0 10px 0;
+    }
+    .navbar-collapse {
+        position: absolute;
+        right: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        width: 100%;
+        transition: all 0.1s ease;
+        display: block;
+        background-color:#211747 ;
+    }
+    .navbar-collapse.collapsing {
+        height: auto !important;
+        margin-right: 50%;
+        transition: all 0.1s ease;
+        display: block;
+    }
+    .homeImg img{
+        margin-top: 0;
+    }
+}
+@media screen and  (max-width: 767.98px) {
+    .whatImg img{
+        width:100%;
+        margin-top: 80px;
+    }
+}
+@media (min-width: 576px) {
+
+}
+.whatImgSize img{
+    width:35%;
+}
+.partnershipImage{
+    width: 65%;
+}
+
+@media (min-width: 768px) {
+    .navbar {
+        border-radius: 0;
+    }
+}
+
+
+.bump-right{
+    margin:5px 0 0 7px;
+}

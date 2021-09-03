@@ -1,0 +1,5 @@
+services:
+
+    app.form_factory:
+        class:        FormBundle\Factory\FormFactory
+        arguments:    ['@doctrine.orm.entity_manager', '@form.factory', '@service_container']

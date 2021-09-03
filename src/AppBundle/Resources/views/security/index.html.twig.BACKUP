@@ -1,0 +1,105 @@
+{% set nodevphone = 1 %}
+(% set nousermenu = 1 %}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	
+	
+<div class='title checkabl'>
+	<h2>Set Password - {{name}}</h2>
+</div>
+
+<div style='clear:both; margin:100px 0 30px; color:#888'>
+	Please enter and confirm a new password below.
+</div>
+
+
+<div class="row">
+	<form method="post" action="">
+		<div class="row">
+			<div class="col-8">
+
+				<div class="row margin-bottom" id="pwd-container">
+					<div class="col-md-2 divlabel">Password:</div>
+					<div class="col-md-4">{{ form_widget(form.password.first) }}</div>
+					<div class="col-md-2 divlabel">&nbsp;</div>
+					<div class="col-md-4" style="padding-top:10px;">
+						<div class="pwstrength_viewport_progress"></div>
+					</div>
+				</div>
+				{% if form_errors(form.password.first) %}
+					<div class="row justify-content-end">
+						<div class="col-8 custom-error" role="alert">
+							{{  form_errors(form.password.first) }}
+						</div>
+					</div>
+				{% endif %}
+
+				<div class="row justify-content-end passwordMessage">
+				</div>
+
+				<div class="row">
+					<div class="col-md-2 divlabel">Confirm Password:</div>
+					<div class="col-md-4">{{ form_widget(form.password.second) }}</div>
+				</div>
+				{% if form_errors(form.password.second) %}
+					<div class="row justify-content-end">
+						<div class="col-8 custom-error" role="alert">
+							{{  form_errors(form.password.second) }}
+						</div>
+					</div>
+				{% endif %}
+			</div>
+			<div class="col-12">
+				<div class="col-md-4 divlabel"></div>
+				<div class="col-md-8">
+					{{ form_widget(form._token) }}
+					{{ form_widget(form.save) }}
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/zxcvbn.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/pwstrength-bootstrap.min.js') }}"></script>
+    <script>
+
+        $(document).ready(function () {
+            var options = {};
+            options.common = {
+                zxcvbn:true,
+                onLoad: function () {
+                    $('.passwordMessage').hide();
+                },
+                onKeyUp: function (evt, data) {
+
+                    if(data.score >= 26 ){
+                        $('#new_password_save').removeAttr("disabled");
+                        $('.passwordMessage').hide();
+                    }
+                    if(data.score < 26 ){
+                        $('#new_password_save').attr("disabled", "disabled");
+                        $('.passwordMessage').show().html('<div class="col-10 custom-error" role="alert">Your password must be of at least medium strength. Using uppercase, lowercase and special characters will help.  Avoid common words such as password</div>');
+                    }
+                    console.log(data.score);
+                    $("#length-help-text").html("Current length: " + $(evt.target).val().length + " and score: " + data.score);
+                }
+            };
+            options.ui = {
+                bootstrap4: true,
+                container: "#pwd-container",
+                viewports: {
+                    progress: ".pwstrength_viewport_progress"
+                },
+                showVerdictsInsideProgressBar: true
+            };
+            $('#new_password_password_first').pwstrength(options);
+        });
+    </script>
+
+{% endblock %}

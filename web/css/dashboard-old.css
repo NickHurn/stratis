@@ -1,0 +1,129 @@
+
+
+
+.dashboard-header{max-height:150px;  padding:1.9% 0;}
+.dashboard-footer{
+  background-color: #3c8dbc;
+  position:fixed;
+  bottom:0;
+  z-index:9999;}
+	
+
+.dashboard-footer .text-center.col-sm-4 a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.dashboard-main-wrap {
+    float: left;
+    width: 1240px;
+}
+
+ .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #064264;
+    border-color: #ddd #ddd transparent;
+    border-image: none;
+    border-style:none;
+    border-width:0;
+    color: #fff;
+    cursor: default;
+}
+
+.nav-tabs > li > a {
+    border:0px ;
+	background:#2d2d2d;
+    border-radius: 0 0;
+  
+	font-size:16px;
+    margin-right: 2px;
+	color:#fff;
+}
+
+.nav > li > a:focus, .nav > li > a:hover {
+    background-color: #3c8dbc;
+    text-decoration: none;
+}
+
+.nav-tabs > li:first-child > a#menu-toggle{background:none; color:#2d2d2d;}
+
+.nav-tabs {
+    border-bottom:none;
+}
+
+#myTab li a{outline:none;}
+
+
+#page-content-wrapper .tab-content{padding:3% 0 15% 3%; float: left;
+    width: 970px;}
+
+.settings h4{font-size:24px; margin:0 0 2% 0; float:left; font-weight:bold;}
+.settings h4:after{content:""; display:block; height:2px; background:#3c8dbc; width:100%; float:left;}
+
+.job-dashboard h1{margin:2% 0; font-size:46px}
+.job-dashboard span{color:#545f1d; font-weight:bold;}
+.job-dashboard strong{ font-size:16px;}
+
+.dashboard-title h3{
+    color: #000;
+    margin: -10px 0 5% 0;
+	font-size:30px;
+}
+
+.green-title{color:#545f1d;}
+
+.view-jobs span{color:#2d2d2d; font-weight:bold;}
+.view-jobs h2{color:#2d2d2d; font-size:26px; margin:0px 0 20px 0 }
+.view-jobs p{margin:1% 0; float:left; line-height:10px;}
+.view-jobs div{word-wrap: break-word;}
+.job-search-box-details{margin:0 2%;}
+.job-search-box-inner{margin:6% 0 0 0;}
+.text-center .btn-default{background:#2d2d2d; color:#fff; font-size:12px; border:none; margin:2% 0; font-weight:bold; text-align:center; width:200px; height:30px;}
+.text-center .btn-view{background:#545f1d; color:#fff; font-size:12px; border:none; margin:2% 0; font-weight:bold; text-align:center; width:200px; height:30px;}
+.view-job .well {
+    background: #f4f4f4 none repeat scroll 0 0;
+    float: left;
+    margin: 0 0 1% 0%;
+    padding: 10px;
+    width: 100%;
+}
+
+#settings .col-md-6 > label{margin:1% 0;}
+
+.avail-test span{color:#2d2d2d; }
+.avail-test h2{color:#2d2d2d; font-size:22px; margin:0px 0 0px 0; font-weight:bold; }
+.avail-test .well{
+    padding:10px 19px;
+    margin-bottom:10px;
+    border: 1px solid #c5c5c5;
+    background: #f6f6f6;
+    font-weight: normal;
+    color: #454545;
+}
+
+.test-catagory-text{font-size:18px;}
+
+.border-drag-box{width:100%; padding:15px; border:3px dotted #ccc; margin:20px 0; border-radius:10px;}
+
+
+.applicants {display:none;}
+
+.legend {
+    margin: 0;
+    padding: 0 0 20% 0;
+}
+
+.test-assign li{
+    list-style-type: none;
+}
+
+ul#sortable1, ul#sortable2{
+    padding: 20px 0;
+}
+
+.container-fluid{
+    min-height:50%;
+}

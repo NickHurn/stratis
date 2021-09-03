@@ -1,0 +1,781 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+        <div class="col-lg-12">
+            <div class="tab-content">
+                <div class="settings">
+                    <article>
+                        <div class="col-xs-12 margin-vertically">
+                            <div class="row col-xs-12">
+                                <h4>Create and edit custom forms</h4>
+                            </div>
+                            <div class="row col-xs-12 col-sm-8 col-md-6">
+                                {{ form_start(form) }}
+                                {{ form_widget(form) }}
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </article>
+
+                    {% if show %}
+
+                    <article>
+                        <div class="col-xs-12 row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 pull-right">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary btn-lg margin-vertically" style="width:100%" data-toggle="modal" data-target="#textModal">
+                                Add Text Field
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg margin-vertically" data-toggle="modal" style="width:100%" data-target="#textAreaModal">
+                                Add Text Area Field
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg margin-vertically" style="width:100%" data-toggle="modal" data-target="#numberModal">
+                                Add Number Field
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg margin-vertically" data-toggle="modal" style="width:100%" data-target="#emailModal">
+                                Add Email Field
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg margin-vertically" data-toggle="modal" style="width:100%" data-target="#urlModal">
+                                Add Url Field
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg margin-vertically" data-toggle="modal" style="width:100%" data-target="#dateModal">
+                                Add Date Field
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg margin-vertically" data-toggle="modal" style="width:100%" data-target="#yesNoModal">
+                                Add Yes/No Field
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg margin-vertically" data-toggle="modal" style="width:100%" data-target="#countryModal">
+                                Add Country Field
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg margin-vertically" data-toggle="modal" style="width:100%" data-target="#numberRangeModal">
+                                Add Number Range Field
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg margin-vertically" data-toggle="modal" style="width:100%" data-target="#choiceModal">
+                                Add Choice Field
+                            </button>
+                        </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8" id="customForm">
+                                <fieldset>
+                                    <legend>Your new form</legend>
+                                    {{ form_start(customForm) }}
+                                    {{ form_widget(customForm) }}
+                                    {{ form_end(customForm) }}
+                                </fieldset>
+
+                            </div>
+                        </div>
+                    </article>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+
+{% if show %}
+
+    <!-- Modal -->
+    <div class="modal fade" id="textModal" tabindex="-1" role="dialog" aria-labelledby="textModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New Text Input</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="custom-error applicants alert alert-danger" id="textErrors"></div>
+                    {{ form_start(textFieldParams, {'attr': {'id': 'textFieldParams'}}) }}
+                    {{ form_widget(textFieldParams) }}
+                    {{ form_end(textFieldParams) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="textAreaModal" tabindex="-1" role="dialog" aria-labelledby="textAreaModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New Text Area</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="custom-error applicants alert alert-danger" id="textAreaErrors"></div>
+                    {{ form_start(textAreaFieldParams, {'attr': {'id': 'textAreaFieldParams'}}) }}
+                    {{ form_widget(textAreaFieldParams) }}
+                    {{ form_end(textAreaFieldParams) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New Email Input</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="custom-error applicants alert alert-danger" id="emailErrors"></div>
+                    {{ form_start(emailFieldParams, {'attr': {'id': 'emailFieldParams'}}) }}
+                    {{ form_widget(emailFieldParams) }}
+                    {{ form_end(emailFieldParams) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="urlModal" tabindex="-1" role="dialog" aria-labelledby="urlModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New Url Input</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="custom-error applicants alert alert-danger" id="urlErrors"></div>
+                    {{ form_start(urlFieldParams, {'attr': {'id': 'urlFieldParams'}}) }}
+                    {{ form_widget(urlFieldParams) }}
+                    {{ form_end(urlFieldParams) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="numberModal" tabindex="-1" role="dialog" aria-labelledby="numberModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New Number Input</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="custom-error applicants alert alert-danger" id="numberErrors"></div>
+
+                    {{ form_start(numberFieldParams, {'attr': {'id': 'numberFieldParams','novalidate': 'novalidate'}}) }}
+                    {{ form_row(numberFieldParams.name) }}
+                    {{ form_row(numberFieldParams.heading) }}
+                    {{ form_row(numberFieldParams.required) }}
+                    <fieldset>
+                        <legend>Filter Options</legend>
+                        {{ form_row(numberFieldParams.filterable) }}
+                        <div class="numberFilterOptions">
+                        {{ form_row(numberFieldParams.filterOperator) }}
+                        {{ form_row(numberFieldParams.filterOn) }}
+                        </div>
+                    </fieldset>
+                    {{ form_end(numberFieldParams) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New Date Input</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="custom-error applicants alert alert-danger" id="dateErrors"></div>
+
+                    {{ form_start(dateFieldParams, {'attr': {'id': 'dateFieldParams'}}) }}
+                    {{ form_widget(dateFieldParams) }}
+                    {{ form_end(dateFieldParams) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="yesNoModal" tabindex="-1" role="dialog" aria-labelledby="yesNoModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New Yes/No Radios</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="custom-error applicants alert alert-danger" id="yesNoErrors"></div>
+
+                    {{ form_start(yesNoFieldParams, {'attr': {'id': 'yesNoFieldParams'}}) }}
+                    {{ form_row(yesNoFieldParams.name) }}
+                    {{ form_row(yesNoFieldParams.heading) }}
+                    {{ form_row(yesNoFieldParams.required) }}
+                    <fieldset>
+                        <legend>Filter Options</legend>
+                        <div class="numberFilterOptions">
+                            {{ form_row(yesNoFieldParams.filterOn) }}
+                        </div>
+                    </fieldset>
+                    {{ form_end(yesNoFieldParams) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="countryModal" tabindex="-1" role="dialog" aria-labelledby="countryModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New Country Field</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="custom-error applicants alert alert-danger" id="countryErrors"></div>
+
+                    {{ form_start(countryFieldParams, {'attr': {'id': 'countryFieldParams'}}) }}
+                    {{ form_widget(countryFieldParams) }}
+                    {{ form_end(countryFieldParams) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="numberRangeModal" tabindex="-1" role="dialog" aria-labelledby="numberRangeModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New Range Field</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="custom-error applicants alert alert-danger" id="numberRangeErrors"></div>
+
+                    {{ form_start(numberRangeFieldParams, {'attr': {'id': 'numberRangeFieldParams','novalidate': 'novalidate'}}) }}
+                    {{ form_row(numberRangeFieldParams.name) }}
+                    {{ form_row(numberRangeFieldParams.heading) }}
+                    {{ form_row(numberRangeFieldParams.min) }}
+                    {{ form_row(numberRangeFieldParams.max) }}
+                    {{ form_row(numberRangeFieldParams.required) }}
+                    <fieldset>
+                        <legend>Filter Options</legend>
+                        {{ form_row(numberRangeFieldParams.filterable) }}
+                        <div class="numberRangeFilterOptions">
+                            {{ form_row(numberRangeFieldParams.filterOperator) }}
+                            {{ form_row(numberRangeFieldParams.filterOn) }}
+                        </div>
+                    </fieldset>
+                    {{ form_end(numberRangeFieldParams) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="choiceModal" tabindex="-1" role="dialog" aria-labelledby="ChoiceModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New Range Field</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="custom-error applicants alert alert-danger" id="choiceErrors"></div>
+                    <div class="choiceForm">
+                        {{ form_start(choiceFieldParams, {'attr': {'id': 'choiceFieldParams'}}) }}
+                        {{ form_row(choiceFieldParams.name) }}
+                        {{ form_row(choiceFieldParams.heading) }}
+                        {{ form_row(choiceFieldParams.formId) }}
+                        {{ form_row(choiceFieldParams.fieldType) }}
+                        {{ form_row(choiceFieldParams.required) }}
+                        <fieldset >
+                            <legend>Add options</legend>
+
+                        <ul id="email-fields-list"
+                            data-prototype="{{ form_widget(choiceFieldParams.options.vars.prototype)|e }}">
+                            {% for optionField in choiceFieldParams.options %}
+                                <li>
+                                    {{ form_errors(optionField) }}
+                                    {{ form_widget(optionField) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                            <a href="#" id="add-another-email"><strong>Add an option</strong></a>
+                        </fieldset>
+                        {{ form_end(choiceFieldParams) }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {% if show %}
+
+        <script src="{{ asset('js/formbuilder/formbuilder.js') }}" type="application/javascript"></script>
+        <script type="application/javascript">
+
+            var emailCount = '{{ choiceFieldParams.options|length }}';
+
+            jQuery(document).ready(function() {
+
+                jQuery('#number_field_params_filterable').change(function(e) {
+                    e.preventDefault();
+                    jQuery('.numberFilterOptions').toggle();
+                });
+
+                jQuery('#number_range_field_params_filterable').change(function(e) {
+                    e.preventDefault();
+                    jQuery('.numberRangeFilterOptions').toggle();
+                });
+
+
+
+            });
+
+
+            $('.datepicker').datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true
+            });
+
+            $( "#textFieldParams" ).on( "submit", function( event ) {
+                event.preventDefault();
+                var data = $( this ).serialize();
+                var req = $.ajax({
+                    method: "GET",
+                    url: "{{ path('form_add_textfield') }}",
+                    data: data
+                });
+                req.done(function( msg ) {
+                    $('#customForm').empty();
+                    $.ajax({
+                        method: "GET",
+                        url: "{{ path('form_get_rendered',{ 'formTypeId': formTypeId.id, 'jobId': job.id }) }}",
+                        data: data
+                    })
+                        .done(function( msg ) {
+                            $('#customForm').empty();
+                            $('#customForm').html(msg);
+                            $('#textModal').modal('toggle');
+                            loadedits();
+
+                        });
+                });
+                req.fail(function( jqXHR, textStatus ) {
+                    $('#textErrors').empty();
+                    $.each(jqXHR.responseJSON, function( index, value ) {
+                        $('#textErrors').append( index + ": " + value + "<br/>" );
+                    });
+                    $('#textErrors').show();
+                });
+
+            });
+
+            $( "#textAreaFieldParams" ).on( "submit", function( event ) {
+                event.preventDefault();
+                var data = $( this ).serialize();
+                var req = $.ajax({
+                    method: "GET",
+                    url: "{{ path('form_add_textareafield') }}",
+                    data: data
+                });
+                req.done(function( msg ) {
+                    $('#customForm').empty();
+                    $.ajax({
+                        method: "GET",
+                        url: "{{ path('form_get_rendered',{ 'formTypeId': formTypeId.id, 'jobId': job.id}) }}",
+                        data: data
+                    })
+                        .done(function( msg ) {
+                            $('#customForm').empty();
+                            $('#customForm').html(msg);
+                            $('#textAreaModal').modal('toggle');
+                            loadedits();
+
+                        });
+                });
+                req.fail(function( jqXHR, textStatus ) {
+                    $('#textAreaErrors').empty();
+                    $.each(jqXHR.responseJSON, function( index, value ) {
+                        $('#textAreaErrors').append( index + ": " + value + "<br/>" );
+                    });
+                    $('#textAreaErrors').show();
+                });
+
+            });
+
+            $( "#emailFieldParams" ).on( "submit", function( event ) {
+                event.preventDefault();
+                var data = $( this ).serialize();
+                var req = $.ajax({
+                    method: "GET",
+                    url: "{{ path('form_add_emailfield') }}",
+                    data: data
+                });
+                req.done(function( msg ) {
+                    $('#customForm').empty();
+                    $.ajax({
+                        method: "GET",
+                        url: "{{ path('form_get_rendered',{ 'formTypeId': formTypeId.id, 'jobId': job.id}) }}",
+                        data: data
+                    })
+                        .done(function( msg ) {
+                            $('#customForm').empty();
+                            $('#customForm').html(msg);
+                            $('#emailModal').modal('toggle');
+                            loadedits();
+                        });
+                });
+                req.fail(function( jqXHR, textStatus ) {
+                    $('#emailErrors').empty();
+                    $.each(jqXHR.responseJSON, function( index, value ) {
+                        $('#emailErrors').append( index + ": " + value + "<br/>" );
+                    });
+                    $('#emailErrors').show();
+                });
+
+            });
+
+            $( "#urlFieldParams" ).on( "submit", function( event ) {
+                event.preventDefault();
+                var data = $( this ).serialize();
+                var req = $.ajax({
+                    method: "GET",
+                    url: "{{ path('form_add_urlfield') }}",
+                    data: data
+                });
+                req.done(function( msg ) {
+                    $('#customForm').empty();
+                    $.ajax({
+                        method: "GET",
+                        url: "{{ path('form_get_rendered',{ 'formTypeId': formTypeId.id, 'jobId': job.id}) }}",
+                        data: data
+                    })
+                        .done(function( msg ) {
+                            $('#customForm').empty();
+                            $('#customForm').html(msg);
+                            $('#urlModal').modal('toggle');
+                            loadedits();
+                        });
+                });
+                req.fail(function( jqXHR, textStatus ) {
+                    $('#urlErrors').empty();
+                    $.each(jqXHR.responseJSON, function( index, value ) {
+                        $('#urlErrors').append( index + ": " + value + "<br/>" );
+                    });
+                    $('#urlErrors').show();
+                });
+
+            });
+
+            $( "#numberFieldParams" ).on( "submit", function( event ) {
+                event.preventDefault();
+                var data = $( this ).serialize();
+                var req = $.ajax({
+                    method: "GET",
+                    url: "{{ path('form_add_numberfield') }}",
+                    data: data
+                })
+                req.done(function( msg ) {
+                    $('#customForm').empty();
+                    var request = $.ajax({
+                        method: "GET",
+                        url: "{{ path('form_get_rendered',{ 'formTypeId': formTypeId.id, 'jobId': job.id}) }}",
+                        data: data
+                    });
+                    request.done(function( msg ) {
+                        $('#customForm').empty();
+                        $('#customForm').html(msg);
+                        $('#numberModal').modal('toggle');
+                        loadedits();
+                    });
+                });
+                req.fail(function( jqXHR, textStatus ) {
+                    $('#numberErrors').empty();
+                    $.each(jqXHR.responseJSON, function( index, value ) {
+                        $('#numberErrors').append( index + ": " + value + "<br/>" );
+                    });
+                    $('#numberErrors').show();
+                });
+
+            });
+
+            $( "#dateFieldParams" ).on( "submit", function( event ) {
+                event.preventDefault();
+                var data = $( this ).serialize();
+                var req = $.ajax({
+                    method: "GET",
+                    url: "{{ path('form_add_datefield') }}",
+                    data: data
+                })
+                req.done(function( msg ) {
+                    $('#customForm').empty();
+                    var request = $.ajax({
+                        method: "GET",
+                        url: "{{ path('form_get_rendered',{ 'formTypeId': formTypeId.id, 'jobId': job.id}) }}",
+                        data: data
+                    });
+                    request.done(function( msg ) {
+                        $('#customForm').empty();
+                        $('#customForm').html(msg);
+                        $('#dateModal').modal('toggle');
+                        loadedits();
+                    });
+                });
+                req.fail(function( jqXHR, textStatus ) {
+                    $('#dateErrors').empty();
+                    $.each(jqXHR.responseJSON, function( index, value ) {
+                        $('#dateErrors').append( index + ": " + value + "<br/>" );
+                    });
+                    $('#dateErrors').show();
+                });
+
+            });
+
+            $( "#yesNoFieldParams" ).on( "submit", function( event ) {
+                event.preventDefault();
+                var data = $( this ).serialize();
+                var req = $.ajax({
+                    method: "GET",
+                    url: "{{ path('form_add_yesnofield') }}",
+                    data: data
+                })
+                req.done(function( msg ) {
+                    $('#customForm').empty();
+                    var request = $.ajax({
+                        method: "GET",
+                        url: "{{ path('form_get_rendered',{ 'formTypeId': formTypeId.id, 'jobId': job.id}) }}",
+                        data: data
+                    });
+                    request.done(function( msg ) {
+                        $('#customForm').empty();
+                        $('#customForm').html(msg);
+                        $('#yesNoModal').modal('toggle');
+                        loadedits();
+                    });
+                });
+                req.fail(function( jqXHR, textStatus ) {
+                    $('#yesNoErrors').empty();
+                    $.each(jqXHR.responseJSON, function( index, value ) {
+                        $('#yesNoErrors').append( index + ": " + value + "<br/>" );
+                    });
+                    $('#yesNoErrors').show();
+                });
+            });
+
+            $( "#numberRangeFieldParams" ).on( "submit", function( event ) {
+                event.preventDefault();
+                var data = $( this ).serialize();
+                var req = $.ajax({
+                    method: "GET",
+                    url: "{{ path('form_add_numberrangefield') }}",
+                    data: data
+                })
+                req.done(function( msg ) {
+                    $('#customForm').empty();
+                    var request = $.ajax({
+                        method: "GET",
+                        url: "{{ path('form_get_rendered',{ 'formTypeId': formTypeId.id, 'jobId': job.id}) }}",
+                        data: data
+                    });
+                    request.done(function( msg ) {
+                        $('#customForm').empty();
+                        $('#customForm').html(msg);
+                        $('#numberRangeModal').modal('toggle');
+                        loadedits();
+                    });
+                });
+                req.fail(function( jqXHR, textStatus ) {
+                    $('#numberRangeErrors').empty();
+                    $.each(jqXHR.responseJSON, function( index, value ) {
+                        $('#numberRangeErrors').append( index + ": " + value + "<br/>" );
+                    });
+                    $('#numberRangeErrors').show();
+                });
+            });
+
+            $( "#countryFieldParams" ).on( "submit", function( event ) {
+                event.preventDefault();
+                var data = $( this ).serialize();
+                var req = $.ajax({
+                    method: "GET",
+                    url: "{{ path('form_add_countryfield') }}",
+                    data: data
+                })
+                req.done(function( msg ) {
+                    $('#customForm').empty();
+                    var request = $.ajax({
+                        method: "GET",
+                        url: "{{ path('form_get_rendered',{ 'formTypeId': formTypeId.id, 'jobId': job.id}) }}",
+                        data: data
+                    });
+                    request.done(function( msg ) {
+                        $('#customForm').empty();
+                        $('#customForm').html(msg);
+                        $('#countryModal').modal('toggle');
+                        loadedits();
+                    });
+                });
+                req.fail(function( jqXHR, textStatus ) {
+                    $('#countryErrors').empty();
+                    $.each(jqXHR.responseJSON, function( index, value ) {
+                        $('#countryErrors').append( index + ": " + value + "<br/>" );
+                    });
+                    $('#countryErrors').show();
+                });
+            });
+
+            $( "#choiceFieldParams" ).on( "submit", function( event ) {
+                event.preventDefault();
+                var data = $( this ).serialize();
+                var req = $.ajax({
+                    method: "GET",
+                    url: "{{ path('form_add_choicesfield') }}",
+                    data: data
+                })
+                req.done(function( msg ) {
+                    $('#customForm').empty();
+                    var request = $.ajax({
+                        method: "GET",
+                        url: "{{ path('form_get_rendered',{ 'formTypeId': formTypeId.id, 'jobId': job.id}) }}",
+                        data: data
+                    });
+                    request.done(function( msg ) {
+                        $('#customForm').empty();
+                        $('#customForm').html(msg);
+                        $('#choiceModal').modal('toggle');
+                        loadedits();
+                    });
+                });
+                req.fail(function( jqXHR, textStatus ) {
+                    $('#choiceErrors').empty();
+                    $.each(jqXHR.responseJSON, function( index, value ) {
+                        $('#choiceErrors').append( index + ": " + value + "<br/>" );
+                    });
+                    $('#choiceErrors').show();
+                });
+            });
+
+            function loadChoices(){
+                jQuery('#add-another-email').click(function(e) {
+                    e.preventDefault();
+
+                    var emailList = jQuery('#email-fields-list');
+
+                    // grab the prototype template
+                    var newWidget = emailList.attr('data-prototype');
+                    // replace the "__name__" used in the id and name of the prototype
+                    // with a number that's unique to your emails
+                    // end name attribute looks like name="contact[emails][2]"
+                    newWidget = newWidget.replace(/__name__/g, emailCount);
+                    emailCount++;
+
+                    // create a new list element and add it to the list
+                    var newLi = jQuery('<li></li>').html(newWidget);
+                    newLi.appendTo(emailList);
+                });
+            }
+
+            function loadedits(){
+                $('form[name="base_form"] label.control-label').each(function(){
+                    $(this).append(' - <i style="cursor: pointer" class="fa fa-times remove-element"></i>');
+                });
+
+
+                $('i.remove-element').on('click', function(){
+                    if(confirm('Are you sure you wish to remove this field. If this form has been published any data attached to this field will be irrevocably removed and cannot be recovered')){
+                        var fieldId = $(this).parent().data('id');
+                        var jobId = $(this).parent().data('jobid');
+                        var request = $.ajax({
+                            method: "GET",
+                            url: "/form/{{ formTypeId.id }}/delete/field/"+fieldId+"/"+jobId
+                        });
+                        request.done(function( msg ) {
+                            $('#customForm').empty();
+                            var request2 = $.ajax({
+                                method: "GET",
+                                url: "{{ path('form_get_rendered',{ 'formTypeId': formTypeId.id, 'jobId': job.id}) }}",
+                            });
+                            request2.done(function( msg ) {
+                                $('#customForm').empty();
+                                $('#customForm').html(msg);
+                                loadedits();
+                            });
+                        });
+                    }
+                });
+
+
+                $('i.edit-element').on('click', function(){
+                    if(confirm('Are you sure you wish to edit this field. Most types of edit will require any previous applicants to be contacted and they will be require to complete the form again. Any filters changes will re-evaluate applicants as well.')){
+                        var fieldId = $(this).parent().data('id');
+                        var jobId = $(this).parent().data('jobid');
+                        var request = $.ajax({
+                            method: "GET",
+                            url: "/form/{{ formTypeId.id }}/edit/choice/"+fieldId+"/"+jobId
+                        });
+                        request.done(function( msg ) {
+                            $('.choiceForm').html(msg);
+                            $('#choiceModal').modal('toggle');
+                            loadChoices();
+                        });
+                    }
+                });
+
+            };
+
+        </script>
+
+        <script>
+            $(document).ready(function(){
+                loadedits();
+                loadChoices();
+            });
+        </script>
+    {% endif %}
+{% endblock %}

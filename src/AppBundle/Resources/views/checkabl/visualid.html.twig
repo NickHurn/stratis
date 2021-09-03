@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block customStylesheets %}
+
+        <style>
+            .announce {
+                font-size: 18px;
+                margin: 20px 0;
+            }
+        </style>
+    {% endblock %}
+
+
+
+    <div class="container ml-auto mr-auto mt-4 mb-4 ">
+        <div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+            <div class="row ml-auto mr-auto">
+                <div class="jd col-sm-12">
+
+                    <div class='title checkabl'>
+                        <h2>Checkabl &raquo; Live Photo</h2>
+                    </div>
+                    <br clear='all'/>
+                    <div class="col-lg-12">
+                        <div class="settings">
+                            <div class="row ">
+                                {% if ready_to_capture %}
+
+                                    {% if photo %}
+
+                                        <div class="note">
+                                            Your photo has been uploaded.
+                                        </div>
+                                        <img src='{{ photo }}' width='320'
+                                             style='display:inline-block;text-align:left'/><br/>
+
+                                        <button type="button" class="btn btn-black " style='margin:30px 0'
+                                                onclick="location.href='/checkabl/{{ jobcode }}'">Go Back
+                                        </button>
+
+                                    {% else %}
+
+                                        <form method="post" id="frm" name="frm" enctype="multipart/form-data">
+                                            <input type="hidden" name="jobid" value="{{ jobcode }}"/>
+                                            <input type="hidden" name="raw" id="raw" value=""/>
+                                            <!--input type="submit" class="btn btn-black" value="Upload"/-->
+                                        </form>
+
+                                        <div class="note" style="margin-top:50px">
+                                            Please use your webcam to submit a live photo of yourself.
+                                        </div>
+
+
+                                        <div style="margin-bottom:30px">
+                                            <div id='take_btns' style='display:block'>
+                                                <button type="button" id="startbutton" class="btn btn-black "
+                                                        onclick="takepicture()">Take photo
+                                                </button>
+                                            </div>
+                                            <div id='upl_btns' style='display:none'>
+                                                <button type="button" id="retake" class="btn btn-black ">Re-Take photo
+                                                </button>
+                                                <button type="button" id="uploadimg" onclick="upload()"
+                                                        class="btn btn-black ">Upload Photo
+                                                </button>
+                                            </div>
+
+                                            <div style='margin:10px 0 0; width:242px; height:180px'>
+                                                <div style='position:relative'>
+                                                    <div id="camera" class="camera">
+                                                        <video id="video" style="border:1px solid black">Video stream
+                                                            not available.
+                                                        </video>
+                                                    </div>
+                                                    <canvas id="canvas" style="display:none">
+                                                    </canvas>
+                                                    <div id="output" class="output"
+                                                         style='display:none; width:auto !important'>
+                                                        <img id="photo"
+                                                             style="width:480px; height:360px; border:1px solid black"
+                                                             alt="The screen capture will appear in this box.">
+                                                    </div>
+                                                    &nbsp;<br/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {% endif %}
+
+                                {% else %}
+
+                                    <div class="note" style="margin-top:50px">
+                                        Please upload either your passport or driving licence before submitting your
+                                        live photo here.
+                                    </div>
+                                    <br clear='all'/>
+                                    <button type="button" class="btn btn-black " style='margin:30px 0'
+                                            onclick="location.href='/checkabl/{{ jobcode }}'">Go Back
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block customJavascripts %}
+    <script src='/js/photo.js'></script>
+
+    <script>
+        function upload() {
+            $('#uploadimg').click(function () {
+                $('#upl_btns').hide();
+                $(document.body).css({'cursor': 'wait'});
+                setTimeout(function () {
+                    upload2();
+                }, 200);
+            });
+        }
+
+        function upload2() {
+            var dataUrl = canvas.toDataURL();
+            $('#raw').val(dataUrl);
+            $("#frm").submit();
+
+        }
+
+
+        $(document).ready(function () {
+            startup();
+        });
+
+
+    </script>
+{% endblock %}
+	

@@ -1,0 +1,20 @@
+{% extends 'ud.email.html.twig' %}
+
+{% block body %}
+
+<h5>Hello,</h5>
+
+    <p>Please rate the linked applicant(s) below:</p>
+
+    {% for url in urls %}
+
+        <p><a href="{{ url }}">{{ url }}</a></p>
+
+    {% endfor %}
+
+<p>Many Thanks</p>
+
+<p>{{ client }}</p>
+
+
+{% endblock %}

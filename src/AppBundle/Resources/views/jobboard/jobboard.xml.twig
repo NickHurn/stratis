@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<source>
+<publisher>{{companyName}}</publisher>
+<publisherurl>{{jobboardUrl}}</publisherurl>
+<lastBuildDate>{{dateNow}}</lastBuildDate>
+{% for job in jobs %}
+<job>
+<title><![CDATA[{{job.title}}]]></title>
+<date><![CDATA[{{job.createdOn}}]]></date>
+<referencenumber><![CDATA[{{job.uniqueId}}]]></referencenumber>
+<url><![CDATA[{{jobboardUrl}}/{{job.uniqueId}}]]></url>
+<company><![CDATA[{{companyName}}]]></company>
+<city><![CDATA[{{job.county}}]]></city>
+<state></state>
+<country>UK</country>
+<postalcode></postalcode>
+<description><![CDATA[{{job.description}}]]></description>
+<salary><![CDATA[{{job.salary}}]]></salary>
+<education></education>
+<jobtype></jobtype>
+<category></category>
+<experience></experience>
+</job>
+{% endfor %}
+</source>

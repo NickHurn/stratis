@@ -1,0 +1,866 @@
+
+@media screen and (max-width: 1366px) {
+
+}
+
+@media screen and (max-width: 1024px) {
+    .main-width-wrap {
+        width: 96%;
+        min-height:130px;
+    }
+    .navbar-brand {
+        width: 100%;
+        margin: -4% 0 0 0;
+        max-width: 280px;
+        max-height: 50px;
+    }
+    .navbar-brand {
+        color: #777;
+        margin: 2%;
+    }
+    .title h1 {
+        font-size: 45px;
+    }
+    .title > img {
+        width: 100%;
+    }
+    section {
+        float: left;
+        margin: 1% 0;
+        width:100%;
+    }
+    .application-main-wrap {
+        width: 100%;
+    }
+    .carousel-caption h1 {
+        font-family: "Roboto",sans-serif;
+        font-size: 6vh;
+        font-weight: 900;
+        line-height: 45px;
+    }
+
+    .applicants { margin-top:30%;}
+
+
+    .application .title h2 {
+        float: left;
+        font-size: 22px;
+    }
+
+    .status-tab .title > span {
+        font-size: 26px;
+        margin: 8% 0 0;}
+
+
+
+
+    .application .well, .application .well2{width:98%;}
+
+    .Uncomplete{margin:0;}
+    .btn-black{margin:0;}
+
+
+    .completed-pragrph {
+        color: #8c8c8c;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 15% 0 0 0%;
+    }
+
+    .completed-pragrph-text {
+        color: #8c8c8c;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0 0 0 0;
+    }
+
+
+    .test-well-active .Uncomplete {
+        margin: 15% 0 0 0;
+    }
+
+
+
+    .btn-yellow {margin:16% 0 0 15%;}
+
+
+
+    #page-content-wrapper .tab-content{width:100%;}
+    #settings .text-center .btn-default, #settings .text-center .btn-view{width:100%; font-size:9px;}
+    .dashboard-main-wrap {width:100%;}
+    .dashboard-main-wrap .btn-black {
+        margin: 6% 0 0;
+    }
+    .login-box .btn-black {
+        margin: 10px 0 0 0;
+    }
+
+    .dashboard-main-wrap .logo .btn-black {
+        margin: 6% 0 0 0;
+    }
+
+    .status-tab .title > span {
+        font-size: 24px;}
+
+
+    .view-jobs p {width:100%;}
+
+
+}
+
+@media screen and (max-width: 768px) {
+    .main-width-wrap {
+        width: 96%;
+        min-height:130px;
+    }
+    .navbar-brand {
+        width: 1000%;
+    }
+    .title > img {
+        width: 100%;
+    }
+
+    .error-input {
+        margin: 0 0 0 0;
+    }
+
+    .logo{ width:100%; margin:0% 0 0 0; text-align:center;}
+
+    .application .title h2 {
+        float: left;
+        font-size: 18px;
+    }
+
+    .navbar-nav > li > a {
+        color: #fff !important;
+        font-family: "Roboto",sans-serif;
+        font-size: 17px;
+        font-weight: 500;
+        height: 50px;
+        padding: 0 5px;
+    }
+
+    .col-lg-4.col-md-3.login-box.pull-right.dashboard > ul {
+        margin: -20px -10px 0 0;
+    }
+
+    .navbar-nav > li > a:hover{
+        padding: 0px 10px;
+        height:30px;}
+
+    .status-tab .title > span {
+        font-size: 20px;
+        margin: 13% 0 0;
+    }
+
+    .signout-topmargin{ margin: -16px 0 0;}
+
+    .page-title .personabl h2{ font-size: 24px;}
+
+    .position-title h4, .salary-title h4, .video-position-title h4, .video-well h4 {font-size:16px;}
+    .video-well{padding:0;}
+    .padding-vertically {
+        padding: 2% 0;
+
+    }
+    .application-header .btn-black{padding: 5px 10px; margin: 8px; }
+
+    .left-position{text-align:left;}
+    .left-marg{padding:0 0 0 20px;}
+
+
+    .status {margin:0;}
+    .status ul{ float:left; width:100%; margin:2% 0; font-size:16px;}
+    .status li{ float:left;}
+    .status li:nth-child(3), .status li:nth-child(2), .status li:nth-child(1) {
+        margin: 5% 2%;
+        padding: 0 0 0 5%;
+    }
+
+
+    .carousel-caption h1 {
+        font-family: "Roboto",sans-serif;
+        font-size: 4vh;
+        font-weight: 900;
+        line-height: 45px;
+        margin:-20px 0 0 0;
+    }
+
+
+    .dashboard-main-wrap {width:100%;}
+
+
+    .dashboard-main-wrap .btn-black {
+        margin: 4% 0 0 10%;
+    }
+
+
+
+    .pre-screen-feild {
+        color: #2d2d2d;
+        font-size: 16px;
+        margin: 0 0 5px 18px;
+    }
+
+    .radio-btn {
+        float: left;
+        font-size: 16px;
+        width: 20%;
+    }
+
+    .alert-warning-icon{text-align:center;}
+
+    .padd-zero{padding:0;}
+    .padd-fifteen{padding:0 15px;}
+
+    .page-title .checkabl h2, .page-title .testabl h2{font-size:30px;}
+
+
+    .completed-pragrph {
+        color: #8c8c8c;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 5% 0 0 0%;
+    }
+
+    .completed-pragrph-text {
+        color: #8c8c8c;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0 0 0 0;
+    }
+
+    .test-well-active .Uncomplete{ margin:0;}
+
+    #defaultNavbar1 .navbar-nav{ margin:-3% 0 0 0;}
+    #settings .text-center .btn-default, #settings .text-center .btn-view{width:100%; font-size:8px;}
+    .login-box .btn-black {
+        margin: 10px;
+    }
+
+    .dashboard-main-wrap .logo .btn-black {
+        margin: 4% 0 0 10%;
+    }
+
+    #defaultNavbar1 .navbar-nav {
+        margin: 3% 0 0 0;
+    }
+}
+
+
+
+@media screen and (max-width: 667px) {
+    .main-width-wrap {
+        width: 100%;
+        min-height:130px;
+    }
+    .navbar-brand {
+        width: 100%;
+        max-width: 280px;
+        max-height: 50px;
+    }
+
+
+    .navbar-nav > li > a {
+        padding: 15px;
+    }
+    .navbar-nav > li > a:hover{padding:10px 15px; height:auto;  line-height: 30px;}
+    .nav > li a {
+        font-size:16px;
+        width: 100%;
+        margin:2px 0;
+    }
+
+    .navbar-toggle .icon-bar{ background:#ccc;}
+    .navbar-toggle {
+        background: #2d2d2d none repeat scroll 0 0;
+        margin: 20px 0 0;
+    }
+
+    .alert-warning {
+        background-color: #fffce5;
+        position: relative;
+        z-index: 99;
+    }
+    .application .title h2 {
+        float: left;
+        font-size: 15px;
+    }
+
+    .status-tab .title > span {
+        font-size: 17px;
+        margin: 13% 0 0;
+    }
+
+    .logo{ width:auto; margin: 0; text-align:center;}
+
+    .application-header .textalign-right {text-align:left;}
+
+    .page-title .personabl h2 {
+        font-size: 30px;
+    }
+
+    .footer-logo img{width:100%; margin:10% 0 0 0}
+
+    .status {margin:0;}
+    .status ul{ float:left; width:100%; margin:2% 0; font-size:16px;}
+    .status li{ float:left;}
+    .status li:nth-child(3), .status li:nth-child(2), .status li:nth-child(1) {
+        margin: 0 2%;
+        padding: 0 0 0 1%;
+    }
+
+    .wrapper-innerbox #first-div{ float:right;}
+    .wrapper-innerbox #second-div{float:left; width:100%;}
+    .application-breadcrumbs .breadcrumb { padding:8px 0;}
+    .dashboard-main-wrap{width:100%;}
+
+    .btn-black {
+        margin: 0;
+    }
+
+
+    .login-box .btn-black {
+        margin: 10px;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        margin-right: 0px!important;
+        position: relative!important;
+    }
+
+    .nav-tabs > li > a{font-size:11px;}
+
+    .dashboard-header .logo .padding-vertically {
+        padding: 2% 0;
+        text-align: left;
+    }
+}
+
+
+@media screen and (max-width: 568px) {
+    #wrapper.toggled #page-content-wrapper {
+        margin-right: 0px!important;
+        position: relative!important;
+    }
+
+    .nav-tabs > li {
+        float: left;
+        margin: 2px 0;
+        width: 100%;
+    }
+
+
+    .nav-tabs > li > a {
+        font-size: 16px;
+    }
+
+}
+
+
+
+@media screen and (max-width: 736px) {
+    .main-width-wrap {
+        width: 100%;
+        min-height:130px;
+    }
+    .navbar-brand {
+        width: 100%;
+        max-width: 280px;
+        max-height: 50px;
+
+    }
+
+
+    .navbar-nav > li > a {
+        padding: 15px;
+    }
+    .navbar-nav > li > a:hover{padding:10px 15px; height:auto;  line-height: 30px;}
+    .nav > li a {
+        font-size:16px;
+        width: 100%;
+        margin:2px 0;
+    }
+
+    .navbar-toggle .icon-bar{ background:#ccc;}
+    .navbar-toggle {
+        background: #2d2d2d none repeat scroll 0 0;
+        margin: 20px 0 0;
+    }
+
+    .alert-warning {
+        background-color: #fffce5;
+        position: relative;
+        z-index: 99;
+    }
+
+    .dashboard-main-wrap .logo .btn-black {
+        margin: 4% 0 0 10%;
+    }
+
+    #second-div{ width:100%;}
+    .carousel-caption h1 {
+        font-family: "Roboto",sans-serif;
+        font-size: 8vh;
+        font-weight: 900;
+        line-height: 45px;
+        margin: -20px 0 0;
+    }
+    #settings .text-center .btn-default, #settings .text-center .btn-view{width:100%; font-size:12px;}
+
+
+    #defaultNavbar1 .navbar-nav{text-align:left;}
+    .navbar-nav > li{ display:inherit; border-bottom:1px solid #494949}
+
+    .bg-ul{background:#1b1b1b; padding:2% 0;  position: relative;
+        z-index: 999;  margin: 10px 0 0;}
+
+    .alert-warning label {
+        text-align: left;
+        width: 100%;
+    }
+
+
+
+
+
+    .status li:nth-child(3), .status li:nth-child(2), .status li:nth-child(1) {
+        margin: 0% 2%;
+        padding: 0 0 0 1%;
+    }
+
+    .login-box .btn-black {
+        margin: 10px;
+    }
+
+    .application .title h2 {
+        float: left;
+        font-size: 17px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .status-tab .title > span {
+        font-size: 16px;}
+
+    .application .title h2 {
+        float: left;
+        font-size: 13px;
+    }
+    #defaultNavbar1 .navbar-nav{ margin:0;}
+    #success, #success2{text-align:left;}
+
+    .nav > li {
+
+        width: 100%;
+    }
+
+
+    .navbar-nav > li > a {
+        padding: 15px;
+    }
+    .navbar-nav > li > a:hover{padding:10px 15px; height:auto;  line-height: 30px;}
+    .nav > li a {
+        font-size:16px;
+        width: 100%;
+        margin:2px 0;
+    }
+
+    .navbar-toggle .icon-bar{ background:#ccc;}
+    .navbar-toggle {
+        background: #2d2d2d none repeat scroll 0 0;
+        margin: 20px 0 0;
+    }
+
+    .alert-warning {
+        background-color: #fffce5;
+        position: relative;
+        z-index: 99;
+    }
+
+    .dashboard li:first-child {
+        float: left;
+        color:#fff;
+        list-style: outside none none;
+        margin: 20px 0 0;
+    }
+
+    .application .personabl h2 {
+        float: left;
+        font-size: 20px;
+    }
+
+    .status-tab li{height:45px;}
+
+    .carousel-caption h1 {
+        font-family: "Roboto",sans-serif;
+        font-size: 3vh;
+        font-weight: 900;
+        line-height: 33px;
+        margin: 0;
+    }
+
+    .users-img {
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .main-width-wrap {
+        width: 100%;
+        min-height:130px;
+    }
+    .navbar-brand {
+        width: 100%;
+        max-width: 280px;
+        max-height: 50px;
+    }
+
+    .navbar-brand {
+        color: #777;
+        margin: 2%;
+    }
+
+    .width-box-text {
+        color: #2d2d2d;
+        font-family: "NeueHaasGroteskText W01";
+        font-size: 18px}
+
+
+    .navbar-nav li .btn-black, .navbar-nav li .btn-yellow {
+        margin: 0;
+        float: right;
+        margin: 2% 0;
+    }
+
+    .activitys ul li{width:100%;}
+
+    footer {
+        background: #f3c412 none repeat scroll 0 0;
+        max-height: 200px;
+    }
+
+    .application-main-wrap > .wrapper-innerbox > .col-sm-4{text-align:center;}
+    .application-main-wrap > .wrapper-innerbox > .text-right{text-align:center;}
+    footer .text-center.col-sm-4{line-height:20px;}
+
+    .title h1 {
+        font-size: 35px;
+        line-height:inherit;
+    }
+
+
+
+    .status-tab li{width:100%;}
+    .application .title h2 {
+        float: left;
+        font-size: 30px;
+    }
+
+    .status-tab .title > span {
+        font-size: 30px;
+        margin: 5% 0 0 0;
+    }
+
+    .status li:nth-child(3), .status li:nth-child(2), .status li:nth-child(1) {
+        margin: 0 5%;
+        padding: 0 0 0 1%;
+    }
+
+
+
+    .help-tag{width:100%; float:left; text-align:center;}
+    .login-tag{width:50%; float:left;}
+    .login-move-left{float:left;}
+
+
+    .user-name{ margin:3% 0 0 0!important;}
+    .social-move .textalign-right{text-align:left;}
+    #second-div{margin:10% 0 0 0;}
+    .breadcrumb > li + li::before {padding:0;}
+    .page-title .personabl h2 {
+        font-size: 22px;
+    }
+
+    .cant-record {
+        color: #6b9dc8;
+        font-size: 14px;
+        margin:15% 0 0 0;
+    }
+
+    .footer-logo img {
+
+        margin: 0 0 0 10%;
+        width: 70%;
+    }
+
+    .application-header .textalign-right{text-align:center;}
+
+    .video-well{padding:0 10px;}
+
+    .login-box .btn-black {
+        margin: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footer-logo img {
+        margin: 24% 0 0 0;
+        width: 100%;
+    }
+
+    .help-tag{width:100%;}
+
+    .users-img {
+        margin-top: 0px;
+    }
+
+    .main-width-wrap {
+        width: 100%;
+        min-height:130px;
+    }
+
+    .width-box-text {
+        color: #2d2d2d;
+        font-family: "NeueHaasGroteskText W01";
+        font-size: 18px}
+
+    .activitys ul li{width:100%;}
+    .status-tab li{ width:100%;}
+    .status{margin:5% 0 0 0;}
+    .help-tag{ text-align:center;}
+    .social-move .textalign-right {
+        text-align: left;
+    }
+
+    .status-tab .title > span {
+        font-size: 20px;
+        margin: 4% 0 0;
+    }
+
+    .footer-logo img {
+        margin:0 0 0 10%;
+        width:auto;
+    }
+
+    footer .text-center.col-sm-4{line-height:20px;}
+
+    footer {max-height:100%;}
+    .login-box .btn-black {
+        margin: 10px;
+    }
+
+}
+
+
+@media screen and (max-width: 414px) {
+
+    .help-tag{width:100%;}
+    .page-title .personabl h2 {
+        font-size: 26px;
+    }
+
+
+    .status-tab li {
+        height: 60px;
+    }
+    .width-box-text {
+        color: #2d2d2d;
+        font-family: "NeueHaasGroteskText W01";
+        font-size: 18px}
+
+    .cant-record {
+        color: #6b9dc8;
+        font-size: 15px;
+        margin: 15% 0 0;
+    }
+
+    .application .title h2 {
+        float: left;
+        font-size: 30px;
+    }
+
+    .status-tab .title > span {
+        font-size: 30px;
+        margin: 4% 0 0;
+    }
+
+
+
+    .activitys ul li{width:100%;}
+
+    .width-box-text {
+        color: #2d2d2d;
+        font-family: "NeueHaasGroteskText W01";
+        font-size: 18px}
+
+    .navbar-brand {
+        width: 100%;
+        max-width: 280px;
+        max-height: 50px;
+        margin: 10px 0 0 0;
+    }
+
+    #defaultNavbar1 .navbar-nav{text-align:left;}
+    .navbar-nav > li{ display:inherit; border-bottom:1px solid #494949}
+
+    .bg-ul{background:#1b1b1b; padding:2% 0;}
+
+    .alert-warning label {
+        text-align: left;
+        width: 100%;
+    }
+
+    #settings .text-center .btn-default, #settings .text-center .btn-view{width:100%; font-size:12px;}
+
+    .view-jobs h2{margin:0 0 10px 0;}
+
+    .view-jobs details {
+
+        width: 100%;
+    }
+
+    .nav-tabs > li > a{ font-size:11px;}
+    .login-box .btn-black {
+        margin: 10px;
+    }
+}
+
+
+@media screen and (max-width: 375px) {
+    .need-help{ width:100%;}
+    .col-xs-6.col-md-4.video-box{width:100%;}
+    .video-well h4 {text-align:center;}
+
+    .video-well .remove-btn {
+        padding: 3% 25%;}
+    .video-well .re-record-btn {
+        padding: 3% 22.5%; }
+
+    .video-well .start-recording-btn  {
+        padding: 3% 20%; }
+
+    .video-well p {
+        color: #adadad;
+        text-align: center;
+        width: 100%;
+    }
+
+    .dashboard-header {max-height:inherit;}
+    .dashboard-main-wrap .logo .textalign-right{text-align:left;}
+    .dashboard-main-wrap .left-position{text-align:center;}
+
+
+
+    .login-box .btn-black {
+        margin: 10px;
+    }
+
+    .width-box-text {
+        color: #2d2d2d;
+        font-family: "NeueHaasGroteskText W01";
+        font-size: 18px}
+}
+
+
+@media screen and (max-width: 320px) {
+    .main-width-wrap {
+        width: 100%;
+        min-height:130px;
+    }
+    .navbar-brand {
+        width: 100%;
+        max-width: 280px;
+        max-height: 50px;
+    }
+    .navbar-brand {
+        color: #777;
+        margin: 2%;
+    }
+
+    .navbar-nav li .btn-black, .navbar-nav li .btn-yellow {
+        margin: 0;
+        float: right;
+        margin: 2% 0;
+    }
+
+    .status ul {
+        float: left;
+        font-size: 14px;}
+
+    .page-title .personabl h2 {
+        font-size: 20px;
+    }
+
+    .cant-record {
+        color: #6b9dc8;
+        font-size: 13px;
+        margin: 18% 0 0 0;
+    }
+
+    .status-tab .title > span {
+        font-size: 26px;
+        margin: 7% 0 0;
+    }
+
+    .need-help{width:100%;}
+
+
+    .dashboard-main-wrap .logo .textalign-right{text-align:left;}
+    .dashboard-main-wrap .left-position{text-align:center;}
+
+    .dashboard-header { max-height:inherit;}
+
+
+    .position-title {
+        float: left;
+        margin: 2%;
+        padding: 0;
+        width: 100%;
+    }
+
+    .alert-warning label{text-align:left;}
+
+    .test-well-active .Uncomplete {
+        margin: 15% 0 0 0;
+    }
+
+    .test-well-active .complete {
+        padding: 3% 8%;
+    }
+
+    .video-well p {
+        color: #adadad;
+        text-align: center;
+        width: 100%;
+    }
+
+    .col-xs-6.col-md-4.video-box{width:100%;}
+    .video-well h4 {text-align:center;}
+
+
+    .video-well .remove-btn {
+        padding: 3% 25%;}
+    .video-well .re-record-btn {
+        padding: 3% 22.5%; }
+
+    .video-well .start-recording-btn  {
+        padding: 3% 20%; }
+
+    .login-box .btn-black {
+        margin: 10px;
+    }
+
+    .width-box-text {
+        color: #2d2d2d;
+        font-family: "NeueHaasGroteskText W01";
+        font-size: 18px}
+
+
+    .status-tab li {
+        height: 60px;
+    }
+
+
+
+}

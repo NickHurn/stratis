@@ -1,0 +1,787 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+<style>
+	div.actionsDropdown-content a:hover { color:black !important; }
+</style>
+<div class="col-lg-12">
+    <div class="tab-content">
+        <div class="settings">
+            <article>
+                <div class="col-xs-12 margin-vertically no-left">
+                    <div class="row col-xs-12">
+                        <h4>Applicants</h4>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <div class="col-md-12 filterBox" style="width:120%">
+                    <form method="GET">
+                        <div class="col-md-12">
+                            <label for="applicantSearch">Search for Applicant: </label>
+                        </div>
+                        <div class="col-md-10">
+                            {% if searchTerm %}
+                                <input type="text" name="applicantSearch" value="{{ searchTerm }}" class="form-control" id="">
+                            {% else %}
+                                <input type="text" name="applicantSearch" value="" class="form-control" id="">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-2">
+                            <button class=" btn btn-black">Search</button>
+                        </div>
+                        <div class="col-md-12">
+                            <hr />
+                        </div>
+                        <div class="row standardFilters">
+                            <div class="col-md-12">
+                                <div class="col-md-3">
+                                    {{ form_row(applicantViewDateForm.fromDate) }}
+                                </div>
+                                <div class="col-md-3">
+                                    {{ form_row(applicantViewDateForm.toDate) }}
+                                </div>
+                                <div class="col-md-5">
+                                    {{ form_row(jobList.jobList) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!--
+                        <div class="row advancedFilters">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    {{ form_row(checkablForm.checkabl) }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form_row(testablForm.testabl) }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form_row(personablForm.personabl) }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    {{ form_row(idCheckForm.idCheck) }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form_row(dbsForm.dbs) }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form_row(qualificationsForm.qualifications) }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    {{ form_row(refForm.ref) }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form_row(interviewForm.interview) }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form_row(preScreenForm.preScreen) }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    {{ form_row(applicantStatusForm.applicantStatus) }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form_row(watchStatusForm.watchStatus) }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form_row(avgRatingForm.avgRating) }}
+                                </div>
+                            </div>
+                        </div>
+                        -->
+                        <div class="col-md-12">
+                            <div class="col-md-12" style="margin-left:-14px">
+                                <span>
+                                    <!-- {form_widget(applicantViewDateForm.save)} -->
+                                    <button type="submit" id="date_range_filter_save" name="date_range_filter[save]" class="btn-black btn" style="padding:6px 14px !important">Apply Filters</button>
+                                </span>
+
+                                <span>
+                                    <a href="{{ path('applicant_view') }}" role="button" class="btn btn-black resetFilter">Reset Filters</a>
+                                </span>
+                            </div>
+                            <div class="col-md-12">
+                                <br />
+                                <!-- <a href="#" class="advancedFiltersOption" style="margin-left:-14px">Advanced Filters</a> -->
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                {% if errorMessage %}
+                    <div class="col-md-12 dangerBg bg-danger">
+                        <strong>{{ errorMessage }}</strong>
+                    </div>
+                {% endif %}
+                {% if appMessage %}
+                    <div class="col-md-12 appMessage bg-success">
+                        <strong>{{ appMessage }}</strong>
+                    </div>
+                {% endif %}
+                {% if show %}
+                    <div class="col-md-12 no-left no-right" style="width:120%">
+                        <table class="applicantsData" style="margin-left:0px !important">
+                            <thead>
+                                <tr>
+                                    <th title="User">Applicant</th>
+                                    <th title="Job Title">Job Title</th>
+                                    <th title="Checkabl Percentage" class="text-center ">C %</th>
+                                    <th title="Testabl Percentage" class="text-center" >T %</th>
+                                    <th title="Personal Percentage" class="text-center" >P %</th>
+                                    <th class="appViewIconSize" title="ID checks"><i class=" text-center fa fa-id-card-o " aria-hidden="true" ></i></th>
+                                    <th class="appViewIconSize" title="Pre Screen Status"><i class="fa fa-list-alt" aria-hidden="true"></i></th>
+                                    <th class="appViewIconSize" title="DBS checks"><i class="text-center  fa fa-search" aria-hidden="true"></i></th>
+                                    <th class="appViewIconSize" title="KYC/AML checks"><i class="text-center  fa fa-book" aria-hidden="true"></i></th>
+                                    <th class="appViewIconSize" title="Qualification Checks"><i class="text-center  fa fa-graduation-cap" aria-hidden="true"></i></th>
+                                    <th class="appViewIconSize" title="References Requested"><i class="text-center  fa fa-file-text-o" aria-hidden="true"></i></th>
+                                    <th class="appViewIconSize" title="Interview Status"><i class="text-center  fa fa-handshake-o" aria-hidden="true"></i></th>
+                                    <th class="appViewIconSize" title="Applicant Status"><i class="fa fa-check-square-o" aria-hidden="true"></i></th>
+                                    <th class="appViewIconSize" title="Watch List"><i class="fa fa-eye" aria-hidden="true"></i></th>
+                                    <th class="appViewIconSize" title="Average Rating"><i class="fa fa-star" aria-hidden="true"></i></th>
+                                    <th class="appViewIconSize" title="Additional Actions"><i class="fa fa-bars" aria-hidden="true"></i></th>
+                                    <th title="Bulk Actions">Action<br/><select class="bulkaction" name="bulkAction">
+                                            <option value="">Select...</option>
+                                            <option value="">Accept</option>
+                                            <option value="">Reject</option>
+                                            <option value="">Share</option>
+                                        </select>
+                                        <input type="checkbox" name="selectall" id="bulktoggle" value="1"/>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% if data %}
+                                {% for d in data %}
+                                    <tr>
+                                        <td><a href="/applicant/details/{{ d.applicant_id }}/{{ d.job_unique_id }}">  {{ d.firstname }} {{ d.surname }}</a></td>
+                                        <td>{{ d.title }}</td>
+                                        <td class="checkablView " title="Checkabl score">{{ d.checkabl_progress }}%</td>
+                                        <td class="testablView " title="Testabl score">{{ d.Ntestabl_progress }}%</td>
+                                        <td class="personablView" title="Personabl score">{{ d.Npersonabl_progress }}%</td>
+
+                                        {% if  d.id_checks == 'Completed' %}
+                                            <td class="text-center applicantDataGreen" title="ID check passed">C</td>
+                                        {% elseif d.id_checks == 'Failed' %}
+                                            <td class="text-center applicantDataRed" title="ID check failed">F</td>
+                                        {% elseif d.id_checks == 'Requested' %}
+                                            <td class="text-center applicantDataAmber" title="ID check has been requested">R</td>
+                                        {% else %}
+                                            <td class="text-center" title="ID check has not been requested"> - </td>
+                                        {% endif %}
+
+                                        {% if d.prescreen_pass == 'Completed' %}
+                                            <td class="text-center applicantDataGreen" title="Pre Checks completed">C</td>
+                                        {% elseif d.prescreen_pass == 'Not Completed' %}
+                                            <td class="text-center applicantDataAmber" title="Pre Checks not completed">R</td>
+                                        {% else %}
+                                            <td class="text-center " title="Pre Checks requested">-</td>
+                                        {%  endif %}
+
+                                        {% if d.disclosure_checks == 'Completed' %}
+                                            <td class="text-center applicantDataGreen" title="DBS check completed">C </td>
+                                        {% elseif d.disclosure_checks == 'Requested' %}
+                                            <td class="text-center applicantDataAmber" title="DBS check has been requested">R </td>
+                                        {% else %}
+                                            <td class="text-center" title="DBS check has not been requested"> -  </td>
+                                        {%  endif %}
+
+                                        {% if d.kyc_checks == 'Completed' %}
+                                            <td class="text-center applicantDataGreen" title="KYC/AML check completed">C </td>
+                                        {% elseif d.kyc_checks == 'Requested' %}
+                                            <td class="text-center applicantDataAmber" title="KYC/AML check has been requested">R</td>
+                                        {% else %}
+                                            <td class="text-center" title="KYC/AML check has not been requested"> -  </td>
+                                        {%  endif %}
+
+                                        {% if d.qual_checks == 'Received' %}
+                                            <td class="text-center applicantDataGreen" title="Qualifications check completed">C</td>
+                                        {% elseif d.qual_checks == 'Requested' %}
+                                            <td class="text-center applicantDataAmber" title="Qualifications check requested">R</td>
+                                        {% else %}
+                                            <td class="text-center " title="Qualifications has not been requested">-</td>
+                                        {%  endif %}
+
+                                        {% if d.reference_checks == 'Requested' %}
+                                            <td class="text-center applicantDataAmber" title="References requested">R</td>
+                                        {% elseif d.reference_checks == 'Part Received' %}
+                                            <td class="text-center applicantDataAmber" title="Some references have been received">P</td>
+                                        {% elseif d.reference_checks == 'Received' %}
+                                            <td class="text-center applicantDataGreen" title="References received">R</td>%}
+                                        {% else %}
+                                            <td class="text-center " title="References have not been requested">-</td>
+                                        {%  endif %}
+
+                                        {% if  d.interview == 'Accepted' %}
+                                                <td class="text-center applicantDataGreen" title="Interview Completed">C</td>
+                                            {% elseif d.interview == 'Rejected' %}
+                                                <td class="text-center applicantDataRed" title="Interview Rejected">F</td>
+                                            {% elseif d.interview == 'Requested' %}
+                                                <td class="text-center applicantDataAmber" title="Interview requested">R</td>
+                                            {% else %}
+                                                <td class="text-center" title="Interview has not been requested"> - </td>
+                                            {% endif %}
+
+                                            {% if d.accepted %}
+                                                <td class="text-center applicantDataGreen" title="Applicant Accepted">A</td>
+                                            {% elseif d.rejected %}
+                                                <td class="text-center applicantDataRed" title="Applicant Rejected">R</td>
+                                            {% elseif d.shared == 'Shared' and d.accepted == null  and  d.rejected == null %}
+                                                <td class="text-center applicantDataAmber" title="Applicant Shared">S</td>
+                                            {% else %}
+                                                <td class="text-center" title="Applicant in Progress">-</td>
+                                            {% endif %}
+                                            {% if d.watched == 'Watched' %}
+                                                <td class="text-center" title="on watch list"><i class="fa fa-eye" aria-hidden="true"></i></td>
+                                            {% else %}
+                                                <td class="text-center" title="on watch list">-</td>
+                                            {% endif %}
+                                            {% if d.rating %}
+                                                <td class="text-center" title="Applicants average rating">{{ d.rating|round(1) }}</td>
+                                            {% else %}
+                                                <td class="text-center" title="Applicant not yet rated">-</td>
+                                            {% endif %}
+
+                                            <td class="text-center">
+                                                <div class="actionsDropdown">
+                                                    <span><i class="fa fa-bars" aria-hidden="true"></i></span>
+                                                    <div class="actionsDropdown-content">
+                                                        <a href="{{ path('generate_excel', {'userId': d.applicant_id, 'employerJobId': d.employer_id }) }}" title="Download Data" >Download Applicant Data</a>
+                                                        {% if d.cv_id %}
+                                                            <a href="/jobs/cvdownload/id/{{ d.cv_id }}" title="Download CV" >Download CV</a>
+                                                        {% endif %}
+
+                                                        {% if d.interview == 'Requested' %}
+                                                            <a href="/interview/index/jobid/{{ d.job_unique_id }}/id/{{ d.applicant_id }}" class="defaultActionButton">View requested interview / status</a>
+                                                        {% elseif d.interview == 'Accepted' %}
+                                                            <a href="/interview/index/jobid/{{ d.job_unique_id }}/id/{{ d.applicant_id }}" class="defaultActionButton">View accepted interview / status</a>
+                                                            {% if d.reference_checks == 'Not Requested' %}
+                                                                <a href="/reference/request/jobid/{{ d.job_unique_id }}/id/{{ d.applicant_id }}" class="defaultActionButton">Request references</a>
+                                                            {% elseif d.reference_checks == 'Requested' %}
+                                                                <a href="/reference/view/jobid/{{ d.job_unique_id }}" class="defaultActionButton">Awaiting References</a>
+                                                            {% elseif d.reference_checks == 'Received' %}
+                                                                <a href="/reference/view/jobid/{{ d.job_unique_id }}" class="defaultActionButton">View References</a>
+                                                            {% elseif d.reference_checks == 'Part Received' %}
+                                                                <a href="/reference/view/jobid/{{ d.job_unique_id }}" class="defaultActionButton">Awaiting References</a>
+                                                            {% endif %}
+                                                        {%  elseif d.interview != 'Accepted' %}
+                                                            <a href="/interview/index/jobid/{{ d.job_unique_id }}/id/{{ d.applicant_id }}" class="defaultActionButton">View pending interview / status</a>
+                                                        {%  elseif d.interview == 'Rejected'%}
+                                                            <a href="/interview/index/jobid/{{ d.job_unique_id }}/id/{{ d.applicant_id }}" class="defaultActionButton">View rejected interview / status</a>
+                                                        {%  else %}
+                                                            <a href="/interview/index/jobid/{{ d.job_unique_id }}/id/{{ d.applicant_id }}" class="defaultActionButton">View details / interview status</a>
+                                                        {% endif %}
+                                                        {% if d.rejected == 0 %}
+                                                            <a href="/idchecks/extrachecks/{{ d.applicant_id }}/{{d.job_unique_id }}" class="extraChecksButton checkablActionButton">Extra Checks</a>
+                                                        {% endif %}
+                                                        <a href="#applicantModal" role="button" data-toggle="modal" data-id="{{ d.applicant_id }}" data-jobid="{{ d.job_unique_id }}" data-employeeid="{{ d.employer_id }}" class="shareApplicantButton defaultActionButton">Share Applicant</a>
+                                                        <!-- <a href="javascript:void(0);" onclick="shareApplicant()">Share Applicant</a> -->
+                                                        <!--<a href="javascript:shareApplicant2()" data-id="{{ d.applicant_id }}" data-jobid="{{ d.job_unique_id }}" data-employeeid="{{ d.employer_id }}">Share Applicant</a>-->
+                                                        {% if d.watched == 'Watched'%}
+                                                            <a href="#" class="removewatchlist defaultActionButton" data-id="{{ d.applicant_id }}" data-jobid="{{ d.job_unique_id }}" data-employeeid="{{ d.employer_id }}">Stop Watching</a>
+                                                        {% else %}
+                                                            <a href="#" class="watchlist defaultActionButton" data-id="{{ d.applicant_id }}" data-jobid="{{ d.job_unique_id }}" data-employeeid="{{ d.employer_id }}">Watch Applicant</a>
+                                                        {% endif %}
+                                                        {% if d.rejected == 0 and d.accepted == 0 %}
+                                                            <a href="javascript:void(0);" onclick="acceptApplicant({{d.applicant_id}},'{{d.job_unique_id}}')">Accept Applicant</a>
+                                                            <a href="javascript:void(0);" onclick="rejectApplicant({{d.applicant_id}},'{{d.job_unique_id}}')">Reject Applicant</a>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center" >
+                                                <input title="bulkActions" type="checkbox" data-userid="{{ d.applicant_id }}" data-jobid="{{ d.job_unique_id }}" data-employerid="{{ d.employer_id }}" class="bulkActionCheck" value ="{{ d.job_unique_id }}-{{ d.applicant_id }}" />
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    No results found.
+                                {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div id="applicantModal" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title"></h4>
+                                    </div>
+                                    <div class="modal-body ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <div id="bulkRejectApplicantModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header no-left">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="bulk-modal-title">Bulk Reject Applicants</h4>
+                </div>
+                <form method="post" id="bulkRejectApplicantForm" action="" >
+                    <div class="bulk-modal-body ">
+                        <div>
+                            <P>This will reject all the selected applicants.</P>
+                            <p>If you do not want to reject the applicant, please <a href="#" data-dismiss="modal" >CANCEL</a>.</P>
+                            <div class="form-group">
+                                <textarea title="message" name="message" id="bulkRejectMessage" data-validation="required" placeholder="Message for applicant" class="form-control form-control-small"></textarea>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" checked="checked" id="bulkRejectsendEmail" name="email" value="1"> Send applicant rejection email.</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="bulkRejectApplicantWithMessage text-center"><input type="submit" id="bulkRejectApplicantWithMessage" class="btn btn-black" /></div>
+                        <div class="bulkRejectModalSpinner text-center"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+						
+    <div id="singleRejectApplicantModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header no-left">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="single-modal-title">Reject Applicant</h4>
+                </div>
+
+				<div class="single-modal-body ">
+					<div>
+						<input type='hidden' id='singleRejectApplicant-id'/>
+						<input type='hidden' id='singleRejectApplicant-jobid'/>
+						<p>This will reject the selected applicant.</p>
+						<p>If you do not want to reject the applicant, please press <a href="#" data-dismiss="modal">CANCEL</a></p>
+						<div class="form-group">
+							<textarea title="message" name="message" id="singleRejectMessage"  data-validation="required" placeholder="Message for applicant" class="form-control form-control-small"></textarea>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" checked="checked" name="email" id="singleRejectsendEmail"  value="1"> Send applicant rejection email.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+
+					<div class="singleRejectApplicantWithMessage text-center"><input type="button" id="singleRejectApplicantWithMessage" class="btn btn-black" onclick="singleRejectApplicantForm()" value="Send"/></div>
+					<div class="singleRejectModalSpinner text-center" style="display:none"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
+				</div>
+
+            </div>
+        </div>
+    </div>
+
+						
+    <div id="singleAcceptApplicantModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header no-left">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="single-modal-title">Accept Applicant</h4>
+                </div>
+
+				<div class="single-modal-body ">
+					<div>
+						<input type='hidden' id='singleAcceptApplicant-id'/>
+						<input type='hidden' id='singleAcceptApplicant-jobid'/>
+						<p>This will accept the selected applicant.</p>
+						<p>If you do not want to accept the applicant, please press <a href="#" data-dismiss="modal" >CANCEL</a></p>
+						<div class="form-group">
+							<textarea title="message" name="message" id="singleAcceptMessage"  data-validation="required" placeholder="Message for applicant" class="form-control form-control-small"></textarea>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" checked="checked" name="email" id="singleAcceptsendEmail"  value="1"> Send applicant acceptance email.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+
+					<div class="singleAcceptApplicantWithMessage text-center"><input type="button" id="singleAcceptApplicantWithMessage" class="btn btn-black" onclick="singleAcceptApplicantForm()" value="Send"/></div>
+					<div class="singleAcceptModalSpinner text-center" style="display:none"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
+				</div>
+
+            </div>
+        </div>
+    </div>
+
+						
+	<div id="bulkAcceptApplicantModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header no-left">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="bulk-modal-title">Bulk Accept Applicants</h4>
+                </div>
+
+                <form method="post" id="bulkAcceptApplicantForm" action="" >
+                    <div class="bulk-modal-body ">
+                        <div>
+                            <P>This will accept all the selected applicants.</P>
+                            <p>If you do not want to accept the applicant, please <a href="#" data-dismiss="modal" >CANCEL</a>.</P>
+                            <div class="form-group">
+                                <textarea title="message" name="message"  id="bulkAcceptMessage"  data-validation="required" placeholder="Message for applicant" class="form-control form-control-small"></textarea>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" checked="checked" name="email" id="bulkAcceptsendEmail"  value="1"> Send applicant acceptance email.</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <div class="bulkAcceptApplicantWithMessage text-center"><input type="submit" id="bulkAcceptApplicantWithMessage" class="btn btn-black" /></div>
+                        <div class="bulkAcceptModalSpinner text-center"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+	<div id="bulkShareApplicantModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header no-left">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="bulk-modal-title">Bulk Share Applicants</h4>
+                </div>
+
+                <form method="post" id="bulkShareApplicantForm" action="" >
+                    <div class="bulk-modal-body ">
+                        <div>
+                            <P>This will share all the selected applicants.</P>
+                            <p>If you do not want to share the applicant, please <a href="#" data-dismiss="modal" >CANCEL</a>.</P>
+
+                            <p>Please enter the email address(es) of those you wish to share this applicant with – if you wish to send to multiple recipients, please separate them with a comma ("e.g jon.smith@abc.com, jane.jones@abc.com"),</p>
+                            <br />
+                            <div class="form-group">
+                                <input title="shared email addresses" type="text" value="" id="sharedEmails" class="form-control" name="sharedEmailAddresses" placeholder="jon.smith@abc.com, jane.jones@abc.com"/>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="shareButton text-center">
+                            <div class="bulkShareApplicantWithMessage text-center"> <input title="email address submit" id="bulkShareApplicantWithMessage" type="submit" name="emailSubmit" value="Send" class=" btn btn-default"/></div>
+                            <div class="bulkShareModalSpinner text-center"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+						
+						
+	<div id="shareApplicantModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header no-left">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Bulk Share Applicants</h4>
+                </div>
+
+				<form action="" method="post" id="shareApplicantForm">
+					<input type="hidden" value="" name="userId" id="sharedUserId"/>
+					<input type="hidden" value="" name="jobId" id="sharedJobId"/>
+					<input type="hidden" value="" name="employeeId" id="employeeId"/>
+					<p>Please enter the email address(es) of those you wish to share this applicant with – if you wish to send to multiple recipients, please separate them with a comma ("e.g jon.smith@abc.com, jane.jones@abc.com"),</p>
+					<br />
+					<div class="form-group"><input title="shared email addresses" type="text" value="" id="" class="form-control" name="sharedEmailAddresses" placeholder="jon.smith@abc.com, jane.jones@abc.com"/></div>
+					<div class=" text-center"><input title="email address submit" type="submit" name="emailSubmit" value="Send" class="shareButton btn btn-default"/></div>
+					<div class="shareModalSpinner text-center"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
+				</form>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{% block customJavascripts %}
+
+
+    <script src="/js/applicantActions.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.applicantsData').dataTable({
+                "pageLength": 50
+            });
+			$("#date_range_filter_fromDate").datepicker({dateFormat: "dd-mm-yy"});
+			$("#date_range_filter_toDate").datepicker({dateFormat: "dd-mm-yy"});
+        });
+        $(document).on('click', '.advancedFiltersOption', function(){
+            $('.advancedFilters').slideToggle();
+        });
+        $(document).on("change", ".bulkaction", function(){
+            var action = ($('.bulkaction option:selected').text());
+            if(action === 'Reject') {
+                if( $('.bulkActionCheck:checkbox:checked').length === 0){
+                    alert('You must select at least 1 applicant');
+                    $('.bulkaction').val("");
+                } else {
+                    $('#bulkRejectApplicantModal').modal('show');
+                }
+            }
+            if(action === 'Accept') {
+                if( $('.bulkActionCheck:checkbox:checked').length === 0){
+                    alert('You must select at least 1 applicant');
+                    $('.bulkaction').val("");
+                } else {
+                    $('#bulkAcceptApplicantModal').modal('show');
+                }
+            }
+            if(action === 'Share') {
+                if( $('.bulkActionCheck:checkbox:checked').length === 0){
+                    alert('You must select at least 1 applicant');
+                    $('.bulkaction').val("");
+                } else {
+                    $('#bulkShareApplicantModal').modal('show');
+                }
+            }
+        });
+		function singleRejectApplicantForm()
+		{
+            $('.singleRejectApplicantWithMessage').hide();
+            $('.singleRejectModalSpinner').show();
+
+            var message = $('#singleRejectMessage').val();
+            var toEmail = $('#singleRejectsendEmail').is(':checked');
+			var userId = $('#singleRejectApplicant-id').val();
+			var jobId = $('#singleRejectApplicant-jobid').val();
+            var ids = [];
+			ids.push({jobId:jobId, userId:userId, message:message, toEmail:toEmail});
+
+            var jsondata = JSON.stringify(ids);
+			var request = $.ajax({
+                url: '{{ path('reject_applicant_with_email') }}',
+                type: 'POST',
+                data: jsondata,
+                async: false
+            });
+            request.done(function (msg) {
+                if(msg === 'ok'){
+					$('#singleRejectApplicantModal').modal('hide');
+					setTimeout(function() {
+						alert('The applicant has been rejected and emailed if requested.');
+						location.reload(true);
+					}, 300);
+                }
+            });
+            return false;
+        };
+
+
+        $(document).on('submit', '#bulkRejectApplicantForm', function(){
+            $('.bulkRejectApplicantWithMessage').hide();
+            $('.bulkRejectModalSpinner').show();
+
+            var ids = [];
+
+            var message = $('#bulkRejectMessage').val();
+            var toEmail = $('#bulkRejectsendEmail').is(':checked');
+
+            $('.bulkActionCheck:checkbox:checked').each(function () {
+                ids.push({jobId:$(this).data('jobid'), userId:$(this).data('userid'), message:message, toEmail:toEmail});
+            });
+
+
+            var jsondata = JSON.stringify(ids);
+
+            var request = $.ajax({
+                url: '{{ path('reject_applicant_with_email') }}',
+                type: 'POST',
+                data: jsondata,
+                async: false
+            });
+            request.done(function (msg) {
+                if(msg === 'ok'){
+                    $('#bulkRejectApplicantModal').modal('hide');
+					setTimeout(function() {
+						alert('The applicant(s) have been rejected and emailed if requested.');
+						location.reload(true);
+					}, 300);
+                }
+            });
+
+            return false;
+
+        });
+
+
+		function singleAcceptApplicantForm()
+		{
+            $('.singleAcceptApplicantWithMessage').hide();
+            $('.singleAcceptModalSpinner').show();
+
+            var message = $('#singleAcceptMessage').val();
+            var toEmail = $('#singleAcceptsendEmail').is(':checked');
+			var userId = $('#singleAcceptApplicant-id').val();
+			var jobId = $('#singleAcceptApplicant-jobid').val();
+            var ids = [];
+			ids.push({jobId:jobId, userId:userId, message:message, toEmail:toEmail});
+
+            var jsondata = JSON.stringify(ids);
+			var request = $.ajax({
+                url: '{{ path('accept_applicant_with_email') }}',
+                type: 'POST',
+                data: jsondata,
+                async: false
+            });
+            request.done(function (msg) {
+                if(msg === 'ok'){
+					$('#singleAcceptApplicantModal').modal('hide');
+					setTimeout(function() {
+						alert('The applicant has been accepted and emailed if requested.');
+						location.reload(true);
+					}, 300);
+                }
+            });
+            return false;
+        };
+
+
+		$(document).on('submit', '#bulkAcceptApplicantForm', function(){
+            $('.bulkAcceptApplicantWithMessage').hide();
+            $('.bulkAcceptModalSpinner').show();
+
+
+            var ids = [];
+
+            var message = $('#bulkAcceptMessage').val();
+            var toEmail = $('#bulkAcceptsendEmail').is(':checked');
+
+            $('.bulkActionCheck:checkbox:checked').each(function () {
+                ids.push({jobId:$(this).data('jobid'), userId:$(this).data('userid'), message:message, toEmail:toEmail});
+            });
+
+
+            var jsondata = JSON.stringify(ids);
+
+            var request = $.ajax({
+                url: '{{ path('accept_applicant_with_email') }}',
+                type: 'POST',
+                data: jsondata,
+                async: false
+            });
+            request.done(function (msg) {
+                if(msg === 'ok'){
+					$('#bulkAcceptApplicantModal').modal('hide');
+					setTimeout(function() {
+						alert('The applicant(s) have been accepted and emailed if requested.');
+						location.reload(true);
+					}, 300);
+                }
+            });
+
+            return false;
+
+        });
+
+
+		$(document).on('submit', '#bulkShareApplicantForm', function(){
+            $('.bulkShareApplicantWithMessage').hide();
+            $('.bulkShareModalSpinner').show();
+
+            var ids = [];
+
+            var emails = $('#sharedEmails').val();
+
+            $('.bulkActionCheck:checkbox:checked').each(function () {
+                ids.push({jobId:$(this).data('jobid'), userId:$(this).data('userid'), employerId:$(this).data('employerid')});
+            });
+
+            $('#bulkShareApplicantModal').modal('hide');
+
+            var jsondata = JSON.stringify(ids);
+
+            var request = $.ajax({
+                url: '{{ path('applicant_share_bulk') }}',
+                type: 'POST',
+                data: {applicants:jsondata, emails:emails},
+                async: false
+            });
+            request.done(function (msg) {
+                console.log(msg);
+                if(msg === 'Emails Sent'){
+                    alert('The applicant(s) have been Shared.');
+                    location.reload(true);
+                }
+                console.log(msg);
+            });
+
+            return false;
+
+        });
+
+        $(document).on('click', '#cancelBulkReject', function(){
+            $('#bulkRejectApplicantModal').modal('hide');
+        });
+
+        $(document).on('change', '#bulktoggle', function() {
+            var toggle_value = $('#bulktoggle').is(':checked');
+            $('.bulkActionCheck:checkbox').each(function () {
+                //console.log($(this).is(':checked'));
+                console.log(toggle_value);
+                    if($(this).prop('checked', true)){
+                        if(toggle_value === false) {
+                            $(this).prop('checked', false);
+                        }
+                    } else {
+                        if(toggle_value === true ) {
+                            $(this).prop('checked', true);
+                        }
+                    }
+            });
+
+        });
+
+
+		function acceptApplicant(appId,jobId)
+		{
+			$('#singleAcceptApplicant-id').val(appId);
+			$('#singleAcceptApplicant-jobid').val(jobId);
+			$('#singleAcceptModalSpinner').css('display','hide');
+			$('#bulkRejectApplicantWithMessage').css('display','show');
+			$('#singleAcceptMessage').val('');
+			$('#singleAcceptApplicantModal').modal('show');
+		}
+
+
+		function rejectApplicant(appId,jobId)
+		{
+			$('#singleRejectApplicant-id').val(appId);
+			$('#singleRejectApplicant-jobid').val(jobId);
+			$('#singleRejectModalSpinner').css('display','hide');
+			$('#singleRejectApplicantWithMessage').css('display','show');
+			$('#singleRejectApplicantModal').modal('show');
+		}
+
+
+        window.onload = function () {
+            $.app.menu.expanded = true;
+            $.app.menu.collapsed = false;
+            $.app.menu.toggle();
+        }
+    </script>
+
+
+{% endblock %}

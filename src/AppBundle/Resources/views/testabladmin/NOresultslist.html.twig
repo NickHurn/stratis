@@ -1,0 +1,90 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-12">
+			
+		<div class="tab-content">
+			<div class="settings">
+				<article>
+					<div class="col-xs-12 margin-vertically no-left">
+						<div class="row col-xs-12">
+							<h4>Testabl Questionnaire Results</h4>
+						</div>
+					</div>
+				</article>
+				<article>
+
+				<div style='margin-bottom:30px'>
+					<select id="jobs_jobs" name="jobs[jobs]" required="required" class="form-control" style="width:400px;display:inline-block">
+						<option value="" selected="selected">Choose a job to filter the results</option>
+						<option value="6">Software Development Manager</option>
+						<option value="1">PPI Claims Advisor</option>
+						<option value="2">Remediation Project Manager</option>
+						<option value="3">Personal Lines Account Handler</option>
+						<option value="4">Graduate Sales Assistant</option>
+					</select>
+					<button type="submit" id="jobs_submit" name="jobs[submit]" style="margin-left:20px" class="btn btn-black btn" onclick="window.location.href='/testabladmin/results/2'">Select</button>
+				</div>
+					
+					{% if errorMessage %}
+						<div class="col-md-12 dangerBg bg-danger">
+							<strong>{{ errorMessage }}</strong>
+						</div>
+					{% endif %}
+					{% if appMessage %}
+						<div class="col-md-12 appMessage bg-success">
+							<strong>{{ appMessage }}</strong>
+						</div>
+					{% endif %}
+
+						<div class="col-md-12 no-left no-right" >
+							<table class="dataTable">
+								<thead>
+									<tr>
+										<th class='ui-corner-tl ui-state-default' title="Question">Question Pool Name</th>
+										<th class='ui-state-default' title="NumQuestions">Number of Questions</th>
+										<th class='ui-state-default' title="Options">Options</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% if jobs %}
+									{% for j in jobs %}
+										<tr>
+											<td>{{j.title}}</td>
+											{% if j.numQuestions == '' %}
+												<td>--</td>
+												<td>--</td>
+											{% else %}
+												<td>{{j.numQuestions}}</td>
+											{% endif %}
+											<td>
+												<a class='btn btn-black btn-small' href='/testabladmin/edittest/{{j.id}}'>Edit</a>
+											</td>
+										</tr>
+									{% endfor %}
+								{% else %}
+									<tr><td colspan="4" class='noresults'>No results found</td></tr>
+								{% endif %}
+								</tbody>
+							</table>
+						</div>
+						<div id="applicantModal" class="modal fade">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title"></h4>
+									</div>
+									<div class="modal-body ">
+									</div>
+								</div>
+							</div>
+						</div>
+
+				</article>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

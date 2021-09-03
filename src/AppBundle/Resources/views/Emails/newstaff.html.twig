@@ -1,0 +1,16 @@
+{% extends 'ud.email.html.twig' %}
+{% block body %}
+
+Hello {{ name }}
+<p>
+You have been set up on the koine job system. Your credentials are:
+<br/>User name: {{email}}
+<br/>Password: {{password}}
+<p>
+	
+You will be asked to change your password on first logon.
+<p>
+Many Thanks,<br/>
+{{ companyname }}
+
+{% endblock %}

@@ -1,0 +1,63 @@
+.defaultActionButton {
+    background-color: #3c8dbc;
+    color:#000;
+}
+.checkablActionButton{
+    background-color:#f3c412 ;
+    color:#000;
+}
+.testablActionButton {
+    background: #127cf3;
+    color:#000;
+}
+.personablActionButton {
+    background-color: #0bc002;
+    color:#000;
+}
+
+.defaultActionButton:hover {
+    background-color: #3c8dbc;
+    color:#FFF;
+}
+.checkablActionButton:hover{
+    background-color:#f3c412 ;
+    color:#FFF;
+}
+.testablActionButton:hover {
+    color:#FFF;
+    background: #127cf3;
+}
+.personablActionButton:hover {
+    background-color: #0bc002;
+    color:#000;
+}
+.defaultActionButton:focus {
+    background-color: #3c8dbc;
+    color:#000;
+}
+.checkablActionButton:focus{
+    background-color:#f3c412 ;
+    color:#000;
+}
+.testablActionButton:focus {
+    color:#000;
+    background: #127cf3;
+}
+.personablActionButton:focus {
+    background-color: #0bc002;
+    color:#000;
+}
+
+
+.dangerButton {
+    background-color: #ff0000;
+    color:#000;
+}
+.dangerButton:hover {
+    background-color: #ff0000;
+    color:#000;
+}
+.dangerButton:focus {
+    background-color: #3c8dbc;
+    color:#000;
+}

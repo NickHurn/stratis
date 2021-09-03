@@ -1,0 +1,87 @@
+{% extends 'base2.html.twig' %}
+{% block customStylesheets %}
+	 <style>
+	 	.announce { font-size: 18px; margin: 20px 0; }
+		table.gbgtable { width: 400px; text-align:left; margin: 30px 0; float: left; }
+		table.gbgtable td { padding: 4px 10px; border: border-collapse; border: 1px solid #ccc; text-align: left; }
+		div.formbreak { clear:both; margin: 10px 0 30px; font-style: italic; color: #aaa; }
+	 </style>
+{% endblock %}
+{% block body %}
+
+<div class="container ml-auto mr-auto mt-4 mb-4 ">
+	<div class="col-xl-12 mt-5 col-lg-12 col-md-12 ">
+		<div class="row ml-auto mr-auto">
+			<div class="jd col-sm-12">
+				<div class="col-md-8 offset-md-2">
+					<div class='title checkabl'>
+						<h2>Checkabl &raquo; AML</h2>
+					</div>
+					<br clear='all'/>
+					<div class="settings">
+						<form method="post" style='margin-top:40px'>
+							{{ form_row(form.Title) }}
+							{{ form_row(form.Forename) }}
+							{{ form_row(form.Surname) }}
+							{{ form_row(form.Gender) }}
+							{{ form_row(form.DOB) }}
+							{{ form_row(form.MothersMaidenName) }}
+							{{ form_row(form.SurnameAtBirth) }}
+							{{ form_row(form.TownAtBirth) }}
+							<div class='formbreak'>Current Address</div>
+							{{ form_row(form.AddressLine1) }}
+							{{ form_row(form.AddressLine2) }}
+							{{ form_row(form.AddressLine3) }}
+							{{ form_row(form.AddressLine4) }}
+							{{ form_row(form.AddressLine5) }}
+							{{ form_row(form.ResidentFrom) }}
+							{{ form_row(form.ResidentTo) }}
+							<div class='formbreak'>Telephone Numbers</div>
+							{{ form_row(form.Telephone) }}
+							{{ form_row(form.Mobile) }}
+							<div class='formbreak'>Previous Address</div>
+							{{ form_row(form.PrevAddressLine1) }}
+							{{ form_row(form.PrevAddressLine2) }}
+							{{ form_row(form.PrevAddressLine3) }}
+							{{ form_row(form.PrevAddressLine4) }}
+							{{ form_row(form.PrevAddressLine5) }}
+							{{ form_row(form.PrevResidentFrom) }}
+							{{ form_row(form.PrevResidentTo) }}
+							<div class='formbreak'>Passport Details</div>
+							{{ form_row(form.LongPassportNumber) }}
+							{{ form_row(form.ShortPassportNumber) }}
+							{{ form_row(form.PassportIssue) }}
+							{{ form_row(form.PassportExpiry) }}
+							{{ form_row(form.PassportIssueCountry) }}
+							<div class='formbreak'>Driving Licence Details</div>
+							{{ form_row(form.DLNumber) }}
+							{{ form_row(form.DLForename) }}
+							{{ form_row(form.DLSurname) }}
+							<div class='formbreak'>National Insurance Number</div>
+							{{ form_row(form.NINumber) }}
+							{{ form_row(form.save) }}
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+					
+{% endblock %}
+
+{% block customJavascripts %}
+<script>
+	$(document).ready(function() {
+		$('#aml_DOB').datepicker({ dateFormat:'dd/mm/yy', changeYear:true, minDate:'-80y', yearRange:'c-80:c-16' });
+		$('#aml_ResidentFrom').datepicker({ dateFormat:'mm/yy', changeYear:true, minDate:'-80y', yearRange:'c-80:c' });
+		$('#aml_ResidentTo').datepicker({ dateFormat:'mm/yy', changeYear:true, minDate:'-80y', yearRange:'c-80:c' });
+		$('#aml_PrevResidentFrom').datepicker({ dateFormat:'mm/yy', changeYear:true, minDate:'-80y', yearRange:'c-80:c+0' });
+		$('#aml_PrevResidentTo').datepicker({ dateFormat:'mm/yy', changeYear:true, minDate:'-80y', yearRange:'c-80:c+0' });
+		$('#aml_PassportIssue').datepicker({ dateFormat:'dd/mm/yy', changeYear:true, minDate:'-40y', yearRange:'c-40:c+0' });
+		$('#aml_PassportExpiry').datepicker({ dateFormat:'dd/mm/yy', changeYear:true, minDate:'1d', yearRange:'c:c+50' });
+	});
+</script>
+{% endblock %}

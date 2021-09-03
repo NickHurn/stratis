@@ -1,0 +1,69 @@
+/*================================================================================
+	Item Name: Robust - Responsive Admin Theme
+	Version: 1.0
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+.admin_main-width-wrap {
+    margin: 0;
+}
+
+.main-width-wrap {
+    width:100%;
+    min-height: 120px;
+}
+
+@media screen and (max-width: 600px) {
+    .nav > li {
+        width: 80px;
+    }
+
+    .navbar-nav > li > a {
+        color: white !important;
+    }
+
+    .main-width-wrap {
+        width:100%;
+        min-height: 120px;
+    }
+}
+
+@media screen and (max-width: 736px) {
+
+    .navbar-nav > li {
+        display: inherit;
+        border-bottom: none;
+    }
+    .navbar-nav > li > a {
+        color: white !important;
+    }
+}
+
+
+.navbar-nav > li > a:hover {
+     border: none;
+}
+
+@media screen and (max-width:1199px) {
+    .user-name{
+        display: inline;
+    }
+
+}
+
+.text-right {
+    line-height: 30px;
+}
+
+.navbar-nav .nav-link:hover{
+    padding-top: 0.425rem;
+}
+
+.dropdown-toggle::after {
+    line-height:1;
+}

@@ -1,0 +1,6 @@
+Postcode Lookup API
+-------------------
+
+The postcode lookup system uses the API provided by https://getaddress.io/
+It is currently using my API key which will expire soon, so you will need to register your own key and update this in the config parameter file. Postcode lookups are cached in the PostcodeCacheRepository for several months so the number of hits should be very low.
+

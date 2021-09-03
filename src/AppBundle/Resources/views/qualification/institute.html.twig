@@ -1,0 +1,71 @@
+{% extends 'base2.html.twig' %}
+{% block body %}
+
+
+
+        <div class="container-fluid">
+
+                <div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+                        <div class="page-title">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="title checkabl">
+                                            <h2>Qualification Check</h2>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+                </div>
+                <div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+                            <div class="row">
+                                <form action="" method="post" class="col-md-12">
+                                    <fieldset >
+                                        <legend>Find Your Institute:</legend>
+                                        {{ form_errors(form) }}
+                                        {{ form_row(form.name) }}
+                                        {{ form_widget(form._token) }}
+
+                                    </fieldset>
+
+                                    {{ form_row(form.submit, {attr:{class:'btn btn-black'}}) }}
+                                </form>
+                            </div>
+                        </div>
+
+                        {% if show == 1 %}
+                            <div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+
+                                <div class="row">
+                                   <div class="col-md-12">
+                                       <fieldset >
+                                           <legend>Select Your Institute</legend>
+                                       </fieldset>
+                                   </div>
+                                </div>
+                            </div>
+                            <div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+
+                                        {% for i in institutes %}
+                                           <div class="row mb-3">
+                                               <div class="col-sm-6">{{ i.name }}</div>
+                                               <div class="col-sm-6"><a class="btn btn-black" href="{{ path('set_institute', {instituteId: i.id, token: token}) }}">Select</a></div>
+
+                                           </div>
+                                            <div class="col-sm-12"> <hr></div>
+
+                                        {% else %}
+                                        <div class="row  margin-vertically">
+                                            <div class="col-sm-6">No institutes found</div>
+                                        </div>
+                                        {% endfor %}
+
+                            </div>
+                        {% endif %}
+
+
+        </div>
+
+
+{% endblock %}

@@ -1,0 +1,243 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+
+{% block body %}
+
+            <div class="col-lg-12">
+                <div class="tab-content">
+                    <div class="settings">
+                        <article>
+                            <div class="col-xs-12 margin-vertically">
+                                <div class="row col-xs-12">
+                                    <h4>Shared Applicants</h4>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <div class="col-md-12 ">
+                                {% if applicationSharesByEmployerId %}
+                                    {% for users in applicationSharesByEmployerId %}
+                                        {% for jobs in users %}
+                                            <div class="ratingContainer">
+                                                <div class="ratingHeader">
+                                                    <div class="row ">
+                                                        <div class="col-md-4">
+                                                            <div class="col-md-12 col-sm-6 col-xs-6"><strong>Applicant: </strong></div>
+                                                            <div class="col-md-12 col-sm-6 col-xs-6">{{ jobs.header.applicant }}</div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="col-md-12 col-sm-6 col-xs-6"><strong>Job Title: </strong></div>
+                                                            <div class="col-md-12 col-sm-6 col-xs-6">{{ jobs.header.title }}</div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="col-md-12 col-sm-6 col-xs-6"><strong>Average Rating: </strong></div>
+                                                            <div class="col-md-12 col-sm-6 col-xs-6">
+                                                                {% if jobs.header.avgRating is defined  %}
+                                                                    <div>{{ jobs.header.avgRating|round(1) }}</div>
+                                                                {% else %}
+                                                                    <div>Not rated</div>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-3" style="text-align: center">
+                                                            <a class="btn btn-black displayRatingDetails text-center" data-id="{{ jobs.header.id }}" onmouseover="" style="cursor: pointer;">Details </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="ratingDetails " id="ratingDetails{{ jobs.header.id }}">
+                                                    <div class="row">
+                                                    <div class="col-md-12 hidden-sm hidden-xs ">
+                                                        <table class="table table-responsive">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Sent Email Address</th>
+                                                                <th>Ratings</th>
+                                                                <th>Notes</th>
+                                                                <th>Change Rating</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for data in jobs.data %}
+                                                                    <tr>
+                                                                        <td>{{ data.email }}</td>
+                                                                        <td>
+                                                                            {% if  data.rating >= 1 and data.rating <2 %}
+                                                                                {{ data.rating }} -Unsatisfactory
+                                                                            {%  endif %}
+                                                                            {% if data.rating >=2 and data.rating <3 %}
+                                                                                {{ data.rating }} - Improvement Needed
+                                                                            {%  endif %}
+                                                                            {% if data.rating >=3 and data.rating <4 %}
+                                                                                {{ data.rating }} - Good
+                                                                            {%  endif %}
+                                                                            {% if data.rating >= 4 and data.rating <5 %}
+                                                                                {{ data.rating }} - Very Good
+                                                                            {%  endif %}
+                                                                            {% if data.rating >= 5 %}
+                                                                                {{ data.rating }} - Outstanding
+                                                                            {%  endif %}
+                                                                        </td>
+                                                                        <td>
+                                                                            {% if data.notes %}
+                                                                                <a href="#applicantModal" role="button" data-toggle="modal" data-email="{{ data.email }}" data-notes="{{ data.notes }}" class="shareApplicantNotes ">
+                                                                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                                                                </a>
+                                                                            {% endif %}
+                                                                        </td>
+                                                                        <td>
+                                                                            {% if is_granted('ROLE_ADMIN') %}
+                                                                                {% if data.rating %}
+                                                                                    <select class="updateRatingInput form-inline" id="updateRatingInput{{ data.ratingId }}">
+                                                                                        <option value="1" {% if data.rating == 1 %}selected{% endif %}>1</option>
+                                                                                        <option value="2"{% if data.rating == 2 %}selected{% endif %}>2</option>
+                                                                                        <option value="3"{% if data.rating == 3 %}selected{% endif %}>3</option>
+                                                                                        <option value="4"{% if data.rating == 4 %}selected{% endif %}>4</option>
+                                                                                        <option value="5"{% if data.rating == 5 %}selected{% endif %}>5</option>
+                                                                                    </select>
+                                                                                    <button class="btn btn-black updateRatingButton" style="line-height:8px;" data-ratingid="{{ data.ratingId }}" >Save</button>
+                                                                                {% else %}
+                                                                                    &nbsp;
+                                                                                {% endif %}
+                                                                            {% endif %}
+                                                                        </td>
+                                                                    </tr>
+                                                                    {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <div class="col-sm-12 hidden-md hidden-xs hidden-lg">
+                                                        <table class="table table-responsive ">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Sent Email Address</th>
+                                                                <th>Ratings</th>
+                                                                <th>Notes</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {% for data in jobs.data %}
+                                                                <tr>
+                                                                    <td>{{ data.email }}</td>
+                                                                    <td>
+                                                                        {% if  data.rating >= 1 and data.rating <2 %}
+                                                                            {{ data.rating }} -Unsatisfactory
+                                                                        {%  endif %}
+                                                                        {% if data.rating >=2 and data.rating <3 %}
+                                                                            {{ data.rating }} - Improvement Needed
+                                                                        {%  endif %}
+                                                                        {% if data.rating >=3 and data.rating <4 %}
+                                                                            {{ data.rating }} - Good
+                                                                        {%  endif %}
+                                                                        {% if data.rating >= 4 and data.rating <5 %}
+                                                                            {{ data.rating }} - Very Good
+                                                                        {%  endif %}
+                                                                        {% if data.rating >= 5 %}
+                                                                            {{ data.rating }} - Outstanding
+                                                                        {%  endif %}
+                                                                    </td>
+                                                                    <td>
+                                                                        {% if data.notes %}
+                                                                            <a href="#applicantModal" role="button" data-toggle="modal" data-email="{{ data.email }}" data-notes="{{ data.notes }}" class="shareApplicantNotes ">
+                                                                                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                                                            </a>
+                                                                        {% endif %}
+                                                                    </td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <div class="col-xs-12  hidden-sm hidden-md hidden-lg">
+                                                        <table class="table table-responsive ">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Sent Email Address</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {% for data in jobs.data %}
+                                                                <tr>
+                                                                    <td>{{ data.email }}</td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="ratingContainer">
+                                        No applicants have been shared yet.
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div id="applicantModal" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title"></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="col-md-12 notesEmail"></div>
+                                            <div class="col-md-12 notesNote"></div>
+                                        </div>
+                                        <br /><br />
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-black" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" charset="utf-8">
+
+        $( ".displayRatingDetails" ).click(function() {
+            var sharedId =$(this).data('id');
+            $('#ratingDetails'+sharedId).toggle();
+        });
+        $(document).on('click', '.shareApplicantNotes', function(){
+            var email =$(this).data('email');
+            var notes =$(this).data('notes');
+            $('.modal-title').html('Notes');
+            $('.notesEmail').html( email )
+            $('.notesNote').html( notes )
+        });
+
+
+        $(document).on('click', '.updateRatingButton', function(){
+
+            var ratingId = $(this).data('ratingid');
+
+            var request = $.ajax({
+                url: '/applicant/updateRating',
+                type: 'GET',
+                data: {ratingId: ratingId, newRating:$('#updateRatingInput'+ratingId).val()}
+            });
+            request.done(function (data) {
+                if (data.status == 'ok'){
+                    location.reload();
+                }
+            });
+        });
+
+
+    </script>
+{% endblock %}

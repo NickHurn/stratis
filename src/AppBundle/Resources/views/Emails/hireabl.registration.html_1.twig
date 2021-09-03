@@ -1,0 +1,23 @@
+{% extends 'ud.email.html.twig' %}
+
+{% block body %}
+
+<h5>Hello {{ name }}</h5>
+
+<p>{{ custom_css.whitelabel.companyName }} have now been setup on the Koine platform. </p>
+
+<p>We have set a temporary password of: </p>
+
+<p><strong>{{ password }}</strong></p>
+
+<p>Which you will be required to change on first login.</p>
+
+<p>If you have any questions or problems please give us a call on {{hireabl_phone}}</p>
+
+<p>Please login to start your setup at https://{{custom_css.whitelabel.domain}}</p>
+
+<p>Many Thanks</p>
+
+<p>Koine Team</p>
+
+{% endblock %}

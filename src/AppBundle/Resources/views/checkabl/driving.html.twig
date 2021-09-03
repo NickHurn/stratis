@@ -1,0 +1,142 @@
+{% extends 'base2.html.twig' %}
+{% block customStylesheets %}
+	<style>
+		.announce { font-size: 18px; margin: 20px 0; }
+		table.gbgtable { width: 400px; text-align:left; margin: 30px 0; float: left; }
+		table.gbgtable td { padding: 4px 10px; border: border-collapse; border: 1px solid #ccc; text-align: left; }
+	</style>
+{% endblock %}
+{% block body %}
+
+<div class="container ml-auto mr-auto mt-4 mb-4 ">
+	<div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+		<div class="row ml-auto mr-auto">
+			<div class="jd col-sm-12">
+				<div class='title checkabl'>
+					<h2>Checkabl &raquo; Upload Driving Licence</h2>
+				</div>
+				<br clear='all'/>
+				<div class="col-lg-12">
+					<div class="settings">
+						{% if message %}
+							<div class="row bg-warning rounded-8 pl-2 pt-2 pb-2">
+								<strong>{{ message }}</strong>
+							</div>
+						{% endif %}
+
+						<div class="row ">
+							{% if photo %}
+
+								<div class="col-12 note">
+									Your driving licence image has been uploaded.
+								</div>
+								<div class="col-12 ">
+									<img src='{{photo}}' width='320' style='display:inline-block;text-align:left'/><br/>
+								</div>
+								<div class="col-12 ">
+									<table class='gbgtable'>
+										<tr><td>Forename</td><td>{{pd.firstname}}</td></tr>
+										<tr><td>Surname</td><td>{{pd.surname}}</td></tr>
+										<tr><td>Document Number</td><td>{{pd.documentNumber}}</td></tr>
+										<tr><td>Authenticity</td><td>{{pd.authenticity}}</td></tr>
+									</table>
+								</div>
+								<br clear='all'/>
+								<div class="col-12">
+									<button type="button" class="btn btn-black "  onclick="location.href='/checkabl/{{jobcode}}'">Go Back</button>
+								</div>
+							{% endif %}
+							{% if not photo %}
+
+								<div class="note">
+									Please upload a photo of your driving licence. Files must be maximum of 3MB in size.
+								</div>
+
+								<div id="hideblock">
+									<form method="post" id="frm" name="frm" enctype="multipart/form-data">
+										<input type="file" name="img" class="btn btn-black">
+										<input type="hidden" name="jobid" value="{{jobcode}}"/>
+										<input type="hidden" name="raw" id="raw" value=""/>
+										<div style='margin-top:30px'>
+											<input type="submit" class="btn btn-black" id="sbm" value="Upload"/>
+										</div>
+									</form>
+
+									<!--<div class="note" style="margin-top:50px">
+										If you have a webcam you may also use that to take a photo of your id. The webcam image (if available) will be displayed below.
+									</div>
+
+
+									<div style="margin-bottom:30px">
+										<div id='take_btns' style='display:block'>
+											<button type="button" id="startbutton" class="btn btn-black " onclick="takepicture()">Take photo</button>
+										</div>
+										<div id='upl_btns' style='display:none'>
+											<button type="button" id="retake" class="btn btn-black ">Re-Take photo</button>
+											<button type="button" id="uploadimg" onclick="upload()" class="btn btn-black ">Upload Photo</button>
+										</div>
+
+										<div style='margin:10px 0 0; width:242px; height:180px'>
+											<div style='position:relative'>
+												<div id="camera" class="camera" >
+													<video id="video" style="border:1px solid black">Image stream not available.</video>
+												</div>
+												<canvas id="canvas" style="display:none">
+												</canvas>
+												<div id="output" class="output" style='display:none; width:auto !important'>
+													<img id="photo" style="width:480px; height:360px; border:1px solid black" alt="The screen capture will appear in this box.">
+												</div>
+												&nbsp;<br/>
+											</div>
+										</div>
+									</div>
+									-->
+								</div>
+							{% endif %}
+							<img src='/images/ajax-loader2.gif' style='margin-top:50px; display:none' id='ajaxspinner'/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block customJavascripts %}
+	<script src='/js/photo.js'></script>
+
+	<script>
+		function upload()
+		{
+			$('#uploadimg').click(function() {
+				$('#upl_btns').hide();
+				$(document.body).css({'cursor' : 'wait'});
+				setTimeout(function(){ upload2(); }, 200);
+			});
+		}
+
+		function upload2()
+		{
+			var dataUrl = canvas.toDataURL();
+			$('#raw').val(dataUrl);
+			$("#frm").submit();
+
+		}
+
+
+		$('#sbm').click(function() {
+			$('#hideblock').css('display','none');
+			$('#ajaxspinner').css('display','inline');
+			setTimeout(function(){ $('#frm').submit(); }, 300);
+			return false;
+		});
+
+
+		$( document ).ready(function() {
+			startup();
+		});
+
+
+	</script>
+{% endblock %}

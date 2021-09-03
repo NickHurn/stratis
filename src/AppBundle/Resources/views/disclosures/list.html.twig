@@ -1,0 +1,88 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-12">
+	<div class="settings">
+
+		<div class="col-xs-12 no-left">
+			<div class="row col-xs-12">
+				<h4>Checkabl &raquo; Disclosure Checks</h4>
+			</div>
+		</div>
+
+		<div class="row mt-2 mb-3">
+			<div class="col-sm-10" style='color:#888; font-style: italic; font-size:14px'>
+				To request an DBS check please go to the <a href='/applicant/view'>ATS applicants page</a> and search for the applicant. From there you can request extra checks
+			</div>
+			<div class="col-sm-2" >
+				<button class="btn btn-sm btn-black refreshDisclosures">Refresh Statuses</button>
+			</div>
+		</div>
+		<div class="row">
+			<table class="dataTable">
+				<thead>
+					<tr>
+						<th class='ui-state-default ui-corner-tl' title="Question">Job Title</th>
+						<th class='ui-state-default'>Candidate Name</th>
+						<th class='ui-state-default'>Applicant Status</th>
+						<th class='ui-state-default'>Employer Status</th>
+						<th class='ui-state-default'>Agency Status</th>
+						<th class='ui-state-default'>Date Updated</th>
+						<th class='ui-state-default ui-corner-tr'>Options</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if recs %}
+						{% for r in recs %}
+							<tr>
+								<td>{{r.title}}</td>
+								<td>{{r.firstname}} {{r.surname}}</td>
+								<td>{{r.applicant_status}}</td>
+								<td>{{r.hireabl_status}}</td>
+								<td>{{r.gbg_status}}</td>
+								<td>{{r.status_date|date('Y-m-d H:i')}}</td>
+								<td>
+									{% if r.hireabl_status == 'Started' %}
+										<a class='btn btn-black' href='/dbs/verify/{{r.code}}'>Verify</a>
+									{% else %}
+										--
+									{% endif %}
+									{% if r.gbg_status == 'Disclosure Complete' %}
+										{{r.gbg_outcome}}
+									{% endif %}
+								</td>
+							</tr>
+						{% endfor %}
+					{% else %}
+						<tr><td colspan="7" class='noresults'>No results found</td></tr>
+					{% endif %}
+				</tbody>
+			</table>
+		</div>
+
+				
+	</div>
+</div>
+	
+{% endblock %}
+{% block customJavascripts %}
+	<script>
+
+		$( ".refreshDisclosures" ).on( "click", function() {
+			var request = $.ajax({
+				url: '/applicantDisclosures/refreshStatus',
+				type: 'GET',
+			});
+			request.done(function (data) {
+
+				alert('Status updated.')
+				window.location.reload();
+
+			});
+		});
+
+
+
+	</script>
+{% endblock %}

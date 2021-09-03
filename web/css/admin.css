@@ -1,0 +1,146 @@
+
+@media screen and (max-width: 768px) {
+    ul.errors{
+        width:100%;
+        margin:3px;
+        padding: 5px;
+        background-color: #FFDEDE;
+        border:1px solid red;
+        list-style-type: none;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    ul.errors{
+        width:50%;
+        margin:3px;
+        padding: 5px;
+        background-color: #FFDEDE;
+        border:1px solid red;
+        list-style-type: none;
+    }
+}
+
+.btn, .btn:visited, .btn:focus {
+
+    background-image: -webkit-linear-gradient(top, #4d4d4d, #000000);
+    background-image: -moz-linear-gradient(top, #4d4d4d, #000000);
+    background-image: -ms-linear-gradient(top, #4d4d4d, #000000);
+    background-image: -o-linear-gradient(top, #4d4d4d, #000000);
+    background-image: linear-gradient(to bottom, #4d4d4d, #000000);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    border:0;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    margin:10px;
+}
+
+.btn:hover{
+    background: #ffffff !important;
+    text-decoration: none;
+    color: black;
+    box-shadow:inset 0px 0px 0px 1px #000;
+}
+.btn.focus{
+    color:#ffffff;
+}
+.btn-small{
+    padding: 5px;
+    font-size: 0.7em;
+}
+
+#sortable1, #sortable2, #sortable3 {
+border: 1px solid #333;
+width: 95%;
+min-height: 20px;
+list-style-type: none;
+margin: 0;
+padding: 5px 0 0 0;
+margin-right: 10px;
+    text-align:center;
+}
+
+ul#sortable1{
+    padding: 15px 0;
+
+}
+
+#sortable1 li, #sortable2 li, #sortable3 li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 1.2em;
+    width: 96%;
+}
+
+.bottom-border {
+    border-bottom: 1px solid black;
+}
+.top-border {
+    border-top: 1px solid black;
+}
+
+.heading{
+    color:darkblue;
+    font-weight:bold;
+}
+
+hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+
+.applicants {
+    display:none;
+}
+
+.interview {
+    max-width:200px;
+    margin-right:10px;
+}
+
+.form-control-small {
+    max-width:300px;
+}
+
+.person {
+    max-width:250px;
+}
+
+.scores {
+    text-align: center;
+    color:white;
+    width:100px;
+    float:left;
+    margin: 5px 5px 0 0 ;
+}
+
+.scores .heading {
+    font-size: 1.3em;
+    color:white;
+}
+
+.sc-testabl {
+     background-color: #5c9faf;
+     border-bottom: 3px solid #2D515A;
+ }
+.sc-checkabl {
+    background-color: #3b5b8e;
+    border-bottom: 3px solid #26375A;
+}
+.sc-personabl {
+    background-color: #b85b53;
+    border-bottom: 3px solid #713834;
+}
+
+
+.btn-black:hover{color:#2d2d2d; background:#3c8dbc;}
+

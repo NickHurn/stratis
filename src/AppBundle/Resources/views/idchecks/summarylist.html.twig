@@ -1,0 +1,88 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-12">
+	<div class="settings">
+
+	
+		<div class="col-xs-12 no-left">
+			<div class="row col-xs-12">
+				<h4>Checkabl &raquo; Extra Checks</h4>
+			</div>
+
+			<div class='note'>
+				To request an ID check please go to the <a href='/applicant/view'>ATS applicants page</a> and search for the applicant. From there you can request extra checks
+			</div>
+
+			
+			<div class="row" style='margin-bottom:30px'>
+				<div class="col-md-2">
+					Display Option<br/>
+					<select id='display_option' onchange='displayOption()' class="form-control"><option>Detail</option><option selected>Summary</option></select>
+				</div>
+				<div class="col-md-5">
+					Restrict to Candidate<br/>
+					<select class="form-control"><option>All</option></select>
+				</div>
+				<div class="col-md-5">
+					Restrict to Job<br/>
+					<select class="form-control"><option>All</option></select>
+				</div>
+				
+			</div>
+		</div>
+
+					
+
+				
+		<div class="row">
+			<table class="dataTable">
+				<thead>
+					<tr>
+						<th class='ui-state-default ui-corner-tl' title="Question">Candidate Name</th>
+						<th class='ui-state-default'>Job</th>						
+						<th class='ui-state-default'>#Checks Requested</th>
+						<th class='ui-state-default'>#Checks Completed</th>
+						<th class='ui-state-default ui-corner-tr'>Options</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if recs %}
+						{% for r in recs %}
+							<tr>
+								<td>{{r.firstname}} {{r.surname}}</td>
+								<td>{{r.title}}</td>
+								<td>3</td>
+								<td>2</td>
+								<td>
+								{% if r.status == 'Completed' %}
+									<a href='/idchecks/report/{{r.id}}/{{r.userId}}/{{r.jobCode}}' class='btn btn-black btn-xs'>View PDF</a>
+								{% else %}
+									--
+								{% endif %}
+								</td>
+								
+							</tr>
+						{% endfor %}
+					{% else %}
+						<tr><td colspan="7" class='noresults'>No results found</td></tr>
+					{% endif %}
+				</tbody>
+			</table>
+		</div>
+
+				
+	</div>
+</div>
+	
+					
+<script>
+function displayOption()
+{
+	var t = ($('#display_option').val();
+	
+}
+</script>
+						
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<style>
+table.gbgtable { width: 400px; text-align:left; margin: 30px 0; }
+table.gbgtable td { padding: 4px 10px; border: border-collapse; border: 1px solid #ccc; text-align: left; }
+h3.idreport { margin:50px 0 20px; }
+span.icon { display:inline-block; float:right; }
+span.icon img { width:20px; height:20px; margin-left:10px; }
+</style>
+
+
+<div class="col-lg-12">
+	<div class="settings">
+
+		<div class="col-xs-12 no-left">
+			<div class="col-xs-12 no-left">
+				<h4>IDCheck Report &raquo; {{reportType}}</h4>
+			</div>
+		</div>
+
+					
+		<div class="col-xs-12 no-left">
+
+			<h3>Candidate: {{candidate}}</h3>
+
+			<div style='width:400px; margin:20px 0 20px'>
+			<table class='gbgtable'>
+				<tr><td>Applying for job</td><td>{{jobtitle}}</td></tr>
+				<tr><td>Date processed</td><td>{% if reportType != 'Directorships' %}{%  if data %}{{data.dateScanned|date('d-M-y H:i') }} {% endif %}{% endif %}</td></tr>
+				<tr><td>Overall Status</td><td>{% if reportType != 'Directorships' %}{%  if data %} {{data.authenticity}} {% else %} Not yet Completed {% endif %} {% endif %}<img src='/pdf/{{flag}}.png' width='20' align='right'/></td></tr>
+			</table>
+			</div>
+			{% if photo %}
+				<div style="margin:20px 0">
+					<img src='{{photo}}' style="border:1px solid #888" width='320'>
+				</div>
+			{% endif %}
+			
+
+			{% if repTyp == 'ID' %}
+				<h3 class="idreport">Validation Checks</h3>
+				<table class='gbgtable'>
+				{{ testinfo_html|raw }}
+				</table>
+			{% endif %}
+
+
+			{% if repTyp == 'KYC' %}
+				{% for n,d in kycdata %}
+					<table class='gbgtable'>
+						<tr><td><b>{{n}}</b> <span class='icon'>
+							{% if d.RESULT == 'R' %} Refer <img src='/pdf/cross.png'/>{% endif %}
+							{% if d.RESULT == 'A' %} N/A <img src='/pdf/na.png'/>{% endif %}
+							{% if d.RESULT == 'G' %} PASS <img src='/pdf/tick.png'/>{% endif %}
+							</span>
+						</td></tr>
+					</table>
+					<div style='margin:5px 0 30px 30px; font-size:12px'>{{d.LINES|nl2br}}</div>
+						
+				{% endfor %}
+			{% endif %}
+
+			
+			{% if repTyp == 'DIRECTOR' %}
+				<pre>{{text}}</pre>
+			{% endif %}
+
+			
+			{% if repTyp == 'FACECOMPARE' %}
+				Match Confidence: {{result}}%<br/>
+				<br/>
+				<img src="{{leftphoto}}" width="240" height="180" style="margin-right:20px"/>
+				<img src="{{rightphoto}}" width="240" height="180" style="margin-right:20px"/>
+			{% endif %}
+
+			
+			
+		</div>
+			
+	</div>	
+</div>
+
+
+{% endblock %}

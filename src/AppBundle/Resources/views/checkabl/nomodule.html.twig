@@ -1,0 +1,55 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+{% block customStylesheets %}
+    <style>
+        .announce {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+        }
+    </style>
+	{% endblock %}
+    <div class="container ml-auto mr-auto mt-4 mb-4 ">
+        <div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+            <div class="row ml-auto mr-auto">
+                <div class="jd col-sm-12">
+                    <div class='title checkabl'>
+                        <h2>Checkabl Module</h2>
+                    </div>
+                    <br clear='all'/>
+                    <div class="col-lg-12">
+                        <div class="settings">
+                            <div class="row">
+
+                                <div class='announce'>
+                                    This module has not been installed.
+                                    <div class='genericmargin'>
+                                        <a href='/checkabl/{{ jobid }}' class='btn btn-black'>Return to Checkabl</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+	
+
+
+
+
+
+
+
+

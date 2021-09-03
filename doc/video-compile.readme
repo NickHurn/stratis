@@ -1,0 +1,24 @@
+Compiling FFMPEG
+----------------
+
+The video encoding logic in Hireabl needs a custom version of ffmpeg compiled from source, to include the various codecs that are not normally included.
+
+ffmpeg source can be downloaded from: https://www.ffmpeg.org/download.html
+The compiler dependencies and steps are well documented here: https://trac.ffmpeg.org/wiki/CompilationGuide
+This page also walks you through how to download the various packages for the video codecs needed.
+
+Codecs you need to install:
+
+libx264
+libvpx
+libfdk-aac
+libmp3lame
+libopus
+libvorbis
+
+So after installing all the packages for the above codes, you will end up with a configure command something like this:
+
+./configure --enable-gpl --enable-libx264 --enable-libvpx --enable-libfdk-aac --enable-nonfree --enable-libmp3lame --enable-libopus
+
+Instead of running make install at the end, I copied the ffmpeg binary to /usr/bin/ffmpeg2 (to not affect the standard package). Hireabl expects to find ffmpeg2 in its path.
+

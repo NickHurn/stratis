@@ -1,0 +1,101 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+
+<section>
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="title checkabl">
+                            <h2>Disclosure ID Verification</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 pull-right">
+            <div class="panel panel-default">
+                <div class="panel-heading">Document Verification Overview</div>
+                <div class="panel-body"><p>In order to progress with the application, the applicant must provide sufficient ID to validate their application.</p>
+                    <p>Guidance has been produced on the type and range of ID documents that must be seen to validate the identity of the applicant. For full guidance consult <a href="https://www.gov.uk/disclosure-barring-service-check/documents-the-applicant-must-provide-" target="_blank">DBS - Documents the applicant must provide</a></p>
+                    <ul>
+                        <li>A minimum of three documents must be witnessed. At least one document should be from Group 1. If the applicant cannot provide any ID from Group 1, five documents from Group 2 must be verified.</li>
+                        <li>At least one document must confirm the date of birth.</li>
+                        <li>At least one document must confirm the current address.</li>
+                        <li>All documents must be original. Photocopies and documents downloaded from the internet are not acceptable.<br/>All personal details provided by the applicant should ensure the full and correct name and address history has been validated.</li>
+                    </ul>
+                    <p>Failure to validate the information correctly may lead to the check being invalid.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            {% if errors is not empty %}
+				<div class="alert alert-danger">
+					<ul class="list-unstyled">
+						<li><span class="glyphicon glyphicon-exclamation-sign"></span> <b>Please correct the following error(s):</b><br/>&nbsp;</li>						{% for error in errors %}
+							<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+            {% endif %}
+
+            {{ form_start(form) }}
+            <fieldset>
+                <legend>Agreements</legend>
+                {{ form_row(form.agreeAddress) }}
+                {{ form_row(form.agreeDob) }}
+                {{ form_row(form.agreeName) }}
+            </fieldset>
+            <fieldset>
+                <legend>Driving Licence Details</legend>
+                {{ form_row(form.drivingLicenceNumber) }}
+                {{ form_row(form.drivingLicenceDob) }}
+                {{ form_row(form.drivingLicenceStart) }}
+                {{ form_row(form.drivingLicenceCountry) }}
+                {{ form_row(form.drivingLicenceIssue) }}
+            </fieldset>
+
+
+            <fieldset>
+                <legend>Passport Details</legend>
+                {{ form_row(form.passportNumber) }}
+                {{ form_row(form.passportDob) }}
+                {{ form_row(form.passportIssue) }}
+                {{ form_row(form.passportNationality) }}
+            </fieldset>
+
+            <fieldset>
+                <legend>Birth Certificate</legend>
+                {{ form_row(form.birthCertificateIssue) }}
+                {{ form_row(form.birthDob) }}
+            </fieldset>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $(document).ready(function() {
+        $('.datepickerdob').datepicker({
+            dateFormat: 'yy-mm-dd',
+			yearRange: "-80:+0",
+			changeMonth: true,
+            changeYear: true
+        });
+
+        $('.datepickerissue').datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-20:+0"
+        });
+    });
+</script>
+{% endblock %}
+

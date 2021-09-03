@@ -1,0 +1,308 @@
+{% extends 'base2.html.twig' %}
+
+
+{% block body %}
+
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="application-main-wrap col-md-10 offset-md-1">
+                    <div class="wrapper-innerbox">
+                        <div class="page-title">
+                            <div class="col-md-12">
+                                <div class="title checkabl">
+                                    <h2>{{ user.name }}</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 no-left">
+                            <div class="well">
+                                <legend>Role Applied For</legend>
+                                <div>
+                                    {{ job.title }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 no-left">
+                            <div class="well">
+                                <legend>Rating</legend>
+                                {{ include('@App/applicant/stars.html.twig') }}
+                                {{ form_start(form, { 'attr': {'class': ''} }) }}
+                                    {{ form_errors(form) }}
+
+                                    <div class="">
+                                        <div class="col-md-12  ">
+                                            <p class="">{{ form_label(form.notes) }}</p>
+                                        </div>
+                                        <div class="col-md-12  no-left">
+                                            <p>{{ form_widget(form.notes, { 'attr': {'class': 'form-control'} }) }}</p>
+                                        </div>
+                                    </div>
+
+                                    {{ form_widget(form.rating, { 'attr': {'class': 'rating form-control', 'value':''} }) }}
+                                    {%  if rating  %}
+                                        <div class="col-md-12 no-left hidden">
+                                            <p>{{ form_widget(form.save) }}</p>
+                                        </div>
+                                    {% else %}
+                                        <div class="col-md-12 no-left">
+                                            <p>{{ form_widget(form.save) }}</p>
+                                        </div>
+                                    {% endif %}
+                                {{ form_end(form) }}
+                                {% if message %}
+                                    <div class="col-md-12 bg-success appMessage p-2 rounded">
+                                        {{ message }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 no-left">
+                            <div class="well">
+                                <legend>Applicant Progress</legend>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <ul class="barprocess">
+                                            <li><div id="orangecircle" data-percent="{{ checkablProgress }}" class="yellow percircle animate"></div></li>
+                                            <li><div id="bluecircle" data-percent="{{ testablProgress }}" class="blue percircle animate"></div></li>
+                                            <li><div id="greencircle" data-percent="{{ personablProgress }}" class="green percircle animate"></div></li>
+                                        </ul>
+                                    </div>
+                                    <div class="statusShare col-md-4">
+                                        <ul>
+                                            <li>Checkabl</li>
+                                            <li>Testabl</li>
+                                            <li>Personabl</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 no-left">
+                            <div class="well checkWell">
+                                <legend>Checks</legend>
+                                <div class=""><p><strong>Pre-Screen Checks:</strong>
+                                        {% if preScreen is null %}
+                                        Not Completed</p>
+                                    {% else %}
+                                        {%  if userJob.preScreenPass == 1 %}
+                                            <span class="passText">Pass</span></p>
+                                        {% else %}
+                                            <span class="failText">Fail</span></p>
+                                        {% endif %}
+
+                                        {% for data in preScreenData %}
+                                            {% if data.filtered == 0 %}
+                                                <div><strong>{{ data.question }}:</strong> <span class="passText">{{ data.value }}</span></div>
+                                            {% else %}
+                                                <div><strong>{{ data.question }}:</strong> <span class="failText">{{ data.value }}</span></div>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    {% endif %}</div>
+                            </div>
+                            <div class="well checkWell">
+                                <legend>Employment History</legend>
+
+                                    {% if employmentHistory %}
+                                        {% for eh in employmentHistory %}
+                                            <div class="col-md-12 no-left">
+                                                <div class="col-md-12 no-left">
+                                                    <strong> Job Title:</strong> {{ eh.title }}
+                                                </div>
+                                                <div class="col-md-12no-left ">
+                                                    <strong> Dates:</strong> {{ eh.startdate|date('d-m-Y') }} - {{ eh.enddate|date('d-m-Y') }}
+                                                </div>
+                                                <div class="col-md-12 no-left employment-history">
+                                                    <strong> Job Title:</strong> {{ eh.description }}
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <hr />
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+
+                                    {%  endif %}
+
+                                <legend>Education History</legend>
+
+                                    {% if employmentHistory %}
+                                        {% for edh in educationHistory %}
+                                            <div class="col-md-12 no-left">
+                                                <div class="col-md-12 no-left">
+                                                    <strong> Establishment:</strong> {{ edh.establishment }}
+                                                </div>
+                                                <div class="col-md-12 no-left">
+                                                    <strong> Course:</strong> {{ edh.courseTitle }}
+
+                                                </div>
+                                                <div class="col-md-12 no-left employment-history">
+                                                    <strong> Dates:</strong> {{ edh.startdate|date('d-m-Y') }} - {{ edh.enddate|date('d-m-Y') }}
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <hr />
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+
+                                    {%  endif %}
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 no-left">
+                            <div class="well testWell">
+                                <legend>Test Results</legend>
+                                <div >
+                                    {% if classamrkercompleted %}
+                                        {% for cmc in classamrkercompleted %}
+                                            <div class="employment-history">
+                                                {% set percentage = (cmc.pointsScored / cmc.pointsAvailable) * 100 %}
+                                                <div class="col-md-6 no-left">
+                                                    <P><strong>Test Title:</strong> {{ cmc.linkName }}%</P>
+                                                </div>
+                                                <div class="col-md-6 no-left">
+                                                    <P><strong> Score:</strong> {{ percentage|number_format(2, '.', ',') }}%</P>
+                                                </div>
+                                                <div class="">
+                                                    <hr />
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 no-left">
+                            <div class="well persWell">
+                                <legend>Personabl Details</legend>
+                                <div >
+                                    {% for video in videos.questions %}
+                                        {% if video.completed == 1 %}
+                                            <div class="">
+                                                <div class="row ">
+                                                    <div class="col-xs-12 ">
+                                                        <div class="col-md-12">
+                                                            <p><strong>{{ video.question }}</strong></p>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            {% if video.qvideo_id %}
+                                                                <video id='MQyplayer{{ video.id }}' data-app-id='{{ camertagAppId }}' data-uuid='{{ video.qvideo_id }}' data-height="250" data-width="300"></video>
+                                                            {% endif %}
+                                                        </div>
+
+                                                        <div  id="window{{ video.id }}" >
+                                                            <div class="col-md-12  ">
+                                                                <p><strong  style="height:50px;">Video Response</strong></p>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <video  class="paly-video-btn" id='Myplayer{{ video.id }}' data-uuid='{{ video.video_id }}' data-height="250" data-width="300"></video>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block customJavascripts %}
+    <script src='//cameratag.com/v11/js/cameratag.min.js' type='text/javascript'></script>
+    <link rel='stylesheet' href='//cameratag.com/static/11/cameratag.css'>
+    <script type="text/javascript">
+        var currentRating = $('.ratingSelected').val();
+        if(currentRating >0) {
+            var stars = $(this).parent().children('li.star');
+
+            for (i = 1; i <= currentRating; i++) {
+                $('.star'+i).addClass('selected');
+            }
+        }
+
+        $(document).ready(function(){
+
+            /* 1. Visualizing things on Hover - See next part for action on click */
+            $('#stars li').on('mouseover', function(){
+                var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+
+
+
+                // Now highlight all the stars that's not after the current hovered star
+                $(this).parent().children('li.star').each(function(e){
+                    if (e < onStar) {
+                        $(this).addClass('hover');
+                    }
+                    else {
+                        $(this).removeClass('hover');
+                    }
+                });
+
+            }).on('mouseout', function(){
+                $(this).parent().children('li.star').each(function(e){
+                    $(this).removeClass('hover');
+                });
+            });
+
+            /* 2. Action to perform on click */
+            $('#stars li').on('click', function(){
+                var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+                var stars = $(this).parent().children('li.star');
+
+
+
+                for (i = 0; i < stars.length; i++) {
+                    $(stars[i]).removeClass('selected');
+                }
+
+                for (i = 0; i < onStar; i++) {
+                    $(stars[i]).addClass('selected');
+                }
+
+
+            });
+        });
+
+
+    </script>
+    <script type="text/javascript">
+        jQuery(function(){
+            jQuery("[id$='circle']").percircle();
+            jQuery("#clock").percircle({
+                perclock: true
+            });
+            jQuery("#custom").percircle({
+                text:"custom",
+                percent: 27
+            });
+        });
+        $('.star1').on('click', function() {
+            $('.rating').val(1);
+        });
+        $('.star2').on('click', function() {
+            $('.rating').val(2);
+        });
+        $('.star3').on('click', function() {
+            $('.rating').val(3);
+        });
+        $('.star4').on('click', function() {
+            $('.rating').val(4);
+        });
+        $('.star5').on('click', function() {
+            $('.rating').val(5);
+        });
+    </script>
+{%  endblock %}

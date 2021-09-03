@@ -1,0 +1,51 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-12">
+	<div class="settings">
+
+		<div class="col-xs-12 no-left">
+			<div class="row col-xs-12 margin-vertically no-left">
+				<h4>Testabl &raquo; Assign Tests</h4>
+			</div>
+		</div>
+
+		
+		<div class='note'>
+			Available tests are shown below. To assign these to one or more jobs, use the <b>Edit Assignments</b> button next to each test.
+		</div>
+		
+		
+		<div class="row">
+			<table class="dataTable">
+				<thead>
+					<tr>
+						<th class='ui-corner-tl ui-state-default'>Test Name</th>
+						<th class='ui-state-default'>Number of Jobs Assigned To</th>
+						<th class='ui-state-default ui-corner-tr' title="Options">Options</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% if jobs|length > 0 %}
+					{% for j in jobs %}
+						<tr>
+							<td>{{j.formName}}</td>
+							<td>{{j.c}}</td>
+							<td>
+								<a class='btn btn-black btn-small' href='/testabladmin/assign/{{j.id}}'><i class="fa fa-edit"></i> Edit Assignments</a>
+							</td>
+						</tr>
+					{% endfor %}
+				{% else %}
+					<tr><td colspan="3" class='noresults'>No jobs found</td></tr>
+				{% endif %}
+				</tbody>
+
+			</table>
+		</div>
+								
+	</div>
+</div>
+
+{% endblock %}

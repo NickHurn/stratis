@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $('.datepicker').datepicker({
+            dateFormat: 'yy-mm-dd',
+            yearRange: "-80:+0",
+            changeMonth: true,
+            changeYear: true
+        });
+    </script>
+{% endblock %}

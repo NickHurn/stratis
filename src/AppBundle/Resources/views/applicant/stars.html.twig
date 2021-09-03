@@ -1,0 +1,34 @@
+
+
+
+        <div class="">
+            <!-- Rating Stars Box -->
+            <div class='rating-stars no-left'>
+                <ul id='stars'>
+                    <li class='star star1' title='Unsatisfactory (1)' data-value='1'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star star2' title='Improvement Needed (2))' data-value='2'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star star3' title='Good (3)' data-value='3'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star star4' title='Very Good (4)' data-value='4'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star star5' title='Outstanding (5)' data-value='5'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                </ul>
+            </div>
+            {% if rating %}
+                <input type="hidden" name="ratingSelected" class="ratingSelected" value="{{ rating }}"/>
+            {% else %}
+                <input type="hidden" name="ratingSelected" class="ratingSelected" value=""/>
+            {% endif %}
+        </div>
+
+
+
+

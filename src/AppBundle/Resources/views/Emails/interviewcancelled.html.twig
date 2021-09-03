@@ -1,0 +1,13 @@
+{% extends 'ud.email.html.twig' %}
+{% block body %}
+
+Hello {{ name }}
+<p>
+Please note that your interview for the position of {{jobtitle}} on {{nicedate}} at {{time}} has been cancelled.
+<p>
+The reason is: {{reason}}
+<p>
+Many Thanks,
+<br/>{{ companyname }}
+
+{% endblock %}

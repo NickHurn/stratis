@@ -1,0 +1,68 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+{% block customStylesheets %}
+    <style>
+        .announce {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+    </style>
+
+{% endblock %}
+
+
+    <div class="container ml-auto mr-auto mt-4 mb-4 ">
+        <div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+            <div class="row ml-auto mr-auto">
+                <div class="jd col-sm-12">
+                    <div class='title checkabl'>
+                        <h2>Checkabl &raquo; Terms</h2>
+                    </div>
+                    <br clear='all'/>
+                    <div class="col-lg-12">
+                        <div class="settings">
+                            <div class="row">
+                                {% if agreed == true %}
+                                    You have already agreed to these terms and conditions
+                                {% else %}
+                                    Please agree to the following terms and conditions.
+                                {% endif %}
+                                <br/>&nbsp;
+                                {% for t in terms %}
+                                    <h4>{{ t.title }}</h4>
+                                    <div class='wysiwyg col-xs-12'
+                                         style='height:300px; margin:10px 0 30px; border:1px solid black; overflow:scroll'>
+                                        {{ t.terms|raw }}
+                                    </div>
+                                {% endfor %}
+
+                                {% if agreed == true %}
+                                    <button type='button' class='btn btn-black' onclick='history.back(-1)'>Go Back
+                                    </button>
+                                {% else %}
+                                    <form method='post'>
+                                        <input type='hidden' name='agree' value='1'/>
+                                        <input type='submit' class='btn btn-black' value='Agree to Terms'/>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+	
+
+
+
+
+
+
+
+

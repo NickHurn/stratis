@@ -1,0 +1,78 @@
+{% extends 'base2.html.twig' %}
+{% block customStylesheets %}
+	<style>
+		.announce { font-size: 18px; margin: 20px 0; }
+	</style>
+{% endblock %}
+{% block body %}
+
+
+
+
+<div class="container ml-auto mr-auto mt-4 mb-4 ">
+	<div class="mt-5 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+		<div class="row ml-auto mr-auto">
+			<div class="jd col-sm-12">
+
+				<div class='title checkabl'>
+					<h2>Checkabl &raquo; Mobile Verification</h2>
+				</div>
+				<br clear='all'/>
+				<div class="col-lg-12">
+					<div class="settings">
+						<div class="row">
+
+							<div class='announce'>
+								{% if verified %}
+									Your mobile number has been verified.
+									<div class='genericmargin mt-3'>
+									<a href='/checkabl/{{jobid}}' class='btn btn-sm btn-black p-1'>Previous Page</a>
+									</div>
+								{% endif %}
+
+								{% if sent == 1 and verified == 0 %}
+									A code has been sent to you by SMS. Please enter the code received in the box below.
+									<p>
+									If you have not received the code after 15 minutes, you may request a new code.
+									</p>
+									<form method='post'>
+									Enter Code: <input type='text' id='code' name='code' autocomplete="off"> <input type='submit' class='btn btn-black' id='codebtn' value='Verify'/>
+									{% if can_resend %} <a type='button' href='/checkabl/sendmobilecode/{{jobid}}' class='btn btn-black' id='codebtn'>Re-send Code</a>{% endif %}
+									</form>
+									{% if error %}
+										<div class="col-md-4 col-xs-8 alert alert-danger">Code incorrect</div>
+									{% endif %}
+								{% endif %}
+
+								{% if not sent %}
+									<p>
+									A code will be sent to your mobile number <b>{{mobile}}</b>.
+									</p>
+									<p>If this number is incorrect, you may change
+									it on your <a href='/candidate/profile'>profile page</a>.
+									</p>
+									<a href='/checkabl/sendmobilecode/{{jobid}}' class='btn btn-black appBtn-black appBtn' id='codebtn'>Send Code</a>
+								{% endif %}
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	
+		
+{% endblock %}
+	
+
+
+
+
+
+
+
+

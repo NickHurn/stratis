@@ -1,0 +1,120 @@
+{% extends 'base2.admin.html.twig' %}
+
+{% block body %}
+<div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 application-breadcrumbs">
+                    <ul class="nav nav-tabs">
+                        <li><a href="#menu-toggle" class="" id="menu-toggle"><i class="fa fa-bars fa-1x" aria-hidden="true"></i></a></li>
+
+                        <li class="active"><a href="{{ path('home_change_password') }}">New Password</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="tab-content">
+                    <div class="settings">
+                        <article>
+                            <div class="col-xs-12 margin-vertically">
+                                <div class="row">
+                                    <h4>Set Password for - {{ name }}</h4>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <div class="col-md-12 margin-vertically">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <form method="post" action="">
+                                                <div class="row justify-content-end">
+                                                    <div class="col-8">
+                                                        <div class="row margin-bottom">
+                                                            <div class="col-md-8">
+                                                                <p>Please enter and confirm a new password below.</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row margin-bottom">
+                                                            <div class="col-md-4 divlabel">Password:</div>
+                                                            <div class="col-md-8">{{ form_widget(form.password.first) }}</div>
+                                                        </div>
+                                                        {% if form_errors(form.password.first) %}
+                                                            <div class="row justify-content-end">
+                                                                <div class="col-8 custom-error" role="alert">
+                                                                    {{  form_errors(form.password.first) }}
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+                                                        <div class="row justify-content-end passwordMessage">
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-4 divlabel">Confirm Password:</div>
+                                                            <div class="col-md-8">{{ form_widget(form.password.second) }}</div>
+                                                        </div>
+                                                        {% if form_errors(form.password.second) %}
+                                                            <div class="row justify-content-end">
+                                                                <div class="col-8 custom-error" role="alert">
+                                                                    {{  form_errors(form.password.second) }}
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="col-md-4 divlabel"></div>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form._token) }}
+                                                            {{ form_widget(form.save) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/zxcvbn.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/pwstrength-bootstrap.min.js') }}"></script>
+    <script>
+
+        $(document).ready(function () {
+            var options = {};
+            options.common = {
+                zxcvbn:true,
+                onLoad: function () {
+                    $('.passwordMessage').hide();
+                },
+                onKeyUp: function (evt, data) {
+
+                    if(data.score >= 26 ){
+                        $('#new_password_save').removeAttr("disabled");
+                        $('.passwordMessage').hide();
+                    }
+                    if(data.score < 26 ){
+                        $('#new_password_save').attr("disabled", "disabled");
+                        $('.passwordMessage').show().html('<div class="col-10 custom-error" role="alert">Your password must be of at least medium strength. Using uppercase, lowercase and special characters will help.  Avoid common words such as password</div>');
+                    }
+                    console.log(data.score);
+                    $("#length-help-text").html("Current length: " + $(evt.target).val().length + " and score: " + data.score);
+                }
+            };
+            options.ui = {
+                bootstrap4:true
+            };
+            $('#new_password_password_first').pwstrength(options);
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,469 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+    <style type='text/css'>
+        .form-group input[type="checkbox"] {
+            display: none;
+        }
+
+        .form-group input[type="checkbox"] + .btn-group > label span {
+            width: 20px;
+        }
+
+        .form-group input[type="checkbox"] + .btn-group > label span:first-child {
+            display: none;
+        }
+
+        .form-group input[type="checkbox"] + .btn-group > label span:last-child {
+            display: inline-block;
+        }
+
+        .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+            display: inline-block;
+        }
+
+        .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+            display: none;
+        }
+
+        .btn-group {
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            background-color: #eee;
+            box-shadow: inset 2px 0px 12px 2px rgba(0, 0, 0, 0.3);
+        }
+
+    </style>
+    <div class="container ml-auto mr-auto">
+        <form method="post">
+            <input type='hidden' name='aid' value='{{ user_id }}'/>
+            <input type='hidden' name='jid' value='{{ job_code }}'/>
+            <input type='hidden' name='url' id='url' value=''/>
+
+
+            <style type='text/css'>
+                fieldset {
+                    background-color: #e4e4e4;
+                    border-radius: 6px;
+                    width: auto;
+                    border: 1px solid #ccc;
+                    padding: 10px;
+                    font-size: 14px;
+                    line-height: 1.2em;
+                    margin-bottom: 20px;
+                }
+
+                legend {
+                    border: 1px solid black;
+                    background-color: #aaa;
+                    padding: 5px;
+                }
+
+                fieldset h6 {
+                    font-size: 17px;
+                    font-weight: bold;
+                }
+
+                fieldset div {
+                    margin: 10px 0;
+                }
+
+                button.checksmall {
+                    border-radius: 5px;
+                    border: 1px solid #aaa;
+                    font-size: 13px;
+                    padding: 8px 14px;
+                    margin-right: 10px;
+                    background-color: #ccc;
+                }
+
+                table.idchecklist td {
+                    font-size: 12px;
+                    line-height: 1.2em;
+                    margin-right: 20px;
+                }
+            </style>
+
+
+            <fieldset>
+
+                <h6>DBS Checks</h6>
+                {% if errors %}
+                    {% if errors.dbs %}
+                        <div class="col-sm-12 bg-warning p-1 rounded white">{{ errors.dbs }} </div>
+                    {% endif %}
+                {% endif %}
+                The Disclosure and Barring Service (DBS) helps employers make safer recruitment decisions and prevent
+                unsuitable people from working with vulnerable groups, including children.
+                <div>
+                    <span class="button-checkbox">
+                        <button type="button"  id="dbs1c" class="btn checksmall" data-color="warning">None</button>
+                        <input type="checkbox" name="dbs1" id="dbs1" class="hidden" {% if previousEC.DBS is empty %}  checked  {% endif %} />
+                    </span>
+
+
+                    <span class="button-checkbox">
+                        <button type="button"  id="dbs2c" class="btn checksmall" data-color="success">Basic</button>
+                        <input type="checkbox" name="dbs2" id="dbs2" class="hidden" {% if previousEC.DBS %}{% if previousEC.DBS.checkType == 'DBS/Basic' %} checked {% endif %}{% endif %}/>
+                    </span>
+
+                    <span class="button-checkbox">
+                        <button type="button" id="dbs3c" class="btn checksmall" data-color="success" disabled="disabled">Standard</button>
+                        <input type="checkbox" name="dbs3" id="dbs3" class="hidden" {% if previousEC.DBS %}{% if previousEC.DBS.checkType == 'DBS/Standard' %} checked {% endif %}{% endif %} />
+                    </span>
+
+                    <span class="button-checkbox">
+                        <button type="button" id="dbs4c" class="btn checksmall" data-color="success" disabled="disabled">Enhanced</button>
+                        <input type="checkbox" name="dbs4" id="dbs4" class="hidden" {% if previousEC.DBS %}{% if previousEC.DBS.checkType == 'DBS/Enhanced' %} checked {% endif %}{% endif %} />
+                    </span>
+
+                    <span class="button-checkbox">
+                        <button type="button" id="dbs5c" class="btn checksmall" data-color="success" disabled="disabled">Enhanced + Barred</button>
+                        <input type="checkbox" name="dbs5" id="dbs5" class="hidden" {% if previousEC.DBS %}{% if previousEC.DBS.checkType == 'DBS/EnhancedBarred' %} checked {% endif %}{% endif %} />
+                    </span>
+                </div>
+            </fieldset>
+
+
+
+            <fieldset>
+                <h6>Government Photo Identity</h6>
+                Validate someone's passport and/or driving licence.
+                <div>
+            <span class="button-checkbox">
+                <button type="button" class="btn checksmall" data-color="success">Passport</button>
+                <input type="checkbox" name="ph1" class="hidden" {% if previousEC.IDENTITY.passport %} checked {% endif %}/>
+            </span>
+
+                    <span class="button-checkbox">
+                <button type="button" class="btn checksmall" data-color="success">Driving Licence</button>
+                <input type="checkbox" name="ph2" class="hidden" {% if previousEC.IDENTITY.driving %} checked {% endif %}/>
+            </span>
+                </div>
+            </fieldset>
+            <!--
+            <fieldset>
+                <h6>Automated Facial Comparison</h6>
+                Compare someone's live webcam image against their government photo ID (requires a passport or driving licence ID check from the photo identity checks above).
+                <div>
+                    <span class="button-checkbox">
+                        <button type="button" class="btn checksmall" data-color="success">Check webcam during ID data entry</button>
+                        <input type="checkbox" name="pid1" class="hidden" />
+                    </span>
+
+                    <span class="button-checkbox">
+                        <button type="button" class="btn checksmall" id="pid2c" data-color="success">Check webcam during video tests</button>
+                        <input type="checkbox" name="pid2" class="hidden" />
+                    </span>
+                </div>
+            </fieldset>
+            -->
+            <fieldset>
+                <h6>Identity / KYC / AML</h6>
+                {% if errors %}
+                    {% if errors.kyc %}
+                        <div class="col-sm-12 bg-warning p-1 rounded white">{{ errors.kyc }} </div>
+                    {% endif %}
+                {% endif %}
+                Verify someone's identity via several government/identity databases.
+                <div>
+                    <table class="idchecklist" width="100%">
+                        <tr valign="top">
+                            <td>
+                        <span class="button-checkbox">
+                            <button type="button" id="id1c" class="btn checksmall" data-color="success">None</button>
+                            <input type="checkbox" name="id1" id="id1"
+                                   class="hidden" {% if previousEC.KYC is empty %} checked{% endif %}/>
+                        </span>
+                            </td>
+                            <td>
+                        <span class="button-checkbox">
+                            <button type="button" id="id2c" class="btn checksmall" data-color="success">Pack 1</button>
+                            <input type="checkbox" name="id2" id="id2"
+                                   class="hidden" {% if previousEC.KYC %}{% if previousEC.KYC.checkType == 'KYC/Pack1' %} checked {% endif %}{% endif %}/>
+                        </span>
+                                <br/>&nbsp;
+                                <br/>UK Credit Header (AML)
+                                <br/>UK National ID Register
+                                <br/>Int'l Passport
+                                <br/>Int'l Sanctions (Enhanced)
+                                <br/>Int'l PEP (Enhanced)
+                            </td>
+                            <td>
+                        <span class="button-checkbox">
+                            <button type="button" id="id3c" class="btn checksmall" data-color="success">Pack 2</button>
+                            <input type="checkbox" name="id3" id="id3"
+                                   class="hidden" {% if previousEC.KYC %}{% if previousEC.KYC.checkType == 'KYC/Pack2' %} checked {% endif %}{% endif %}/>
+                        </span>
+                                <br/>&nbsp;
+                                <br/>UK Credit Header (AML)
+                                <br/>UK National ID Register
+                                <br/>UK Driving Licence (Full)
+                                <br/>Int'l Passport
+                            </td>
+                            <td>
+                        <span class="button-checkbox">
+                            <button type="button" id="id4c" class="btn checksmall" data-color="success">Pack 3</button>
+                            <input type="checkbox" name="id4" id="id4"
+                                   class="hidden" {% if previousEC.KYC %}{% if previousEC.KYC.checkType == 'KYC/Pack3' %} checked {% endif %}{% endif %}/>
+                        </span>
+                                <br/>&nbsp;
+                                <br/>UK Credit Header (AML)
+                                <br/>UK National ID Register
+                                <br/>UK Driving Licence (Full)
+                                <br/>Int'l Passport
+                                <br/>UK National Insurance Nbr
+                            </td>
+                            <td>
+                        <span class="button-checkbox">
+                            <button type="button" id="id5c" class="btn checksmall" data-color="success">Pack 4</button>
+                            <input type="checkbox" name="id5" id="id5"
+                                   class="hidden" {% if previousEC.KYC %}{% if previousEC.KYC.checkType == 'KYC/Pack4' %} checked {% endif %}{% endif %}/>
+                        </span>
+                                <br/>&nbsp;
+                                <br/>UK Credit Header (AML)
+                                <br/>UK Landline (Append)
+                                <br/>UK Driving Licence (Full)
+                                <br/>Int'l Passport
+                                <br/>Int'l Sanctions (Enhanced)
+                                <br/>Int'l PEP (Enhanced)
+                                <br/>UK Mortality
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <h6>Financial</h6>
+                Verify someone's identity through personal or company-based credit lines
+                <div>
+            <span class="button-checkbox">
+                <button type="button" class="btn checksmall" data-color="success">Personal Credit</button>
+                <input type="checkbox" name="fin1" class="hidden" {% if previousEC.Finance.personal %} checked {% endif %}/>
+            </span>
+
+                    <span class="button-checkbox">
+                <button type="button" class="btn checksmall" data-color="success">Company Credit Status</button>
+                <input type="checkbox" name="fin2" class="hidden" {% if previousEC.Finance.credit %} checked {% endif %}/>
+            </span>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <h6>Qualifications</h6>
+                Validate someone's further education and professional qualifications
+                <div>
+            <span class="button-checkbox">
+                <button type="button" class="btn checksmall" data-color="success">Degree and Higher Education</button>
+                <input type="checkbox" name="qu1"
+                       class="hidden" {% if previousEC.Qualifications.qualifications %} checked {% endif %}/>
+            </span>
+<!--
+            <span class="button-checkbox">
+                <button type="button" class="btn checksmall" data-color="success">Professional Memberships</button>
+                <input type="checkbox" name="qu2"
+                       class="hidden" {% if previousEC.Qualifications.membership %} checked {% endif %}/>
+            </span>
+-->
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <h6>Directorships</h6>
+                Verify someone's involvement in companies as a director or company secretary
+                <div>
+            <span class="button-checkbox">
+                <button type="button" class="btn checksmall" data-color="success">Companies House Checks</button>
+                <input type="checkbox" name="dir1" class="hidden" {% if previousEC.Director %} checked {% endif %}/>
+            </span>
+                </div>
+            </fieldset>
+
+            <input type='submit' class='btn btn-black btn-xs' value="Request Checks">
+
+            <button type='button' class='btn btn-black btn-xs' style='margin-left:50px; padding:6px 14px'
+                    onclick='history.back(-1)'>Cancel
+            </button>
+        </form>
+    </div>
+    </div>
+    </div>
+
+
+
+{% endblock %}
+{% block customJavascripts %}
+    <script>
+        $(document).ready(function () {
+            $('#url').attr('value', document.referrer);
+
+            $('#dbs1c').click(function (event) {
+                event.preventDefault();
+                dbsclick(this);
+            });
+            $('#dbs2c').click(function (event) {
+                event.preventDefault();
+                dbsclick(this);
+            });
+            $('#dbs3c').click(function (event) {
+                event.preventDefault();
+                dbsclick(this);
+            });
+            $('#dbs4c').click(function (event) {
+                event.preventDefault();
+                dbsclick(this);
+            });
+            $('#dbs5c').click(function (event) {
+                event.preventDefault();
+                dbsclick(this);
+            });
+            $('#id1c').click(function (event) {
+                event.preventDefault();
+                idclick(this);
+            });
+            $('#id2c').click(function (event) {
+                event.preventDefault();
+                idclick(this);
+            });
+            $('#id3c').click(function (event) {
+                event.preventDefault();
+                idclick(this);
+            });
+            $('#id4c').click(function (event) {
+                event.preventDefault();
+                idclick(this);
+            });
+            $('#id5c').click(function (event) {
+                event.preventDefault();
+                idclick(this);
+            });
+
+            $(function () {
+                $('.button-checkbox').each(function () {
+
+                    // Settings
+                    var $widget = $(this),
+                        $button = $widget.find('button'),
+                        $checkbox = $widget.find('input:checkbox'),
+                        color = $button.data('color'),
+                        settings = {
+                            on: {
+                                icon: 'glyphicon glyphicon-check'
+                            },
+                            off: {
+                                icon: 'glyphicon glyphicon-unchecked'
+                            }
+                        };
+
+                    // Event Handlers
+                    $button.on('click', function () {
+                        //if(propogate==false) return;
+                        console.log("click()");
+                        $checkbox.prop('checked', !$checkbox.is(':checked'));
+                        $checkbox.triggerHandler('change');
+                        updateDisplay();
+                    });
+                    $checkbox.on('change', function () {
+                        //if(propogate==false) return;
+                        console.log("change()");
+                        updateDisplay();
+                    });
+
+                    // Actions
+                    function updateDisplay() {
+                        console.log("updateDisplay()");
+                        var isChecked = $checkbox.is(':checked');
+
+                        // Set the button's state
+                        $button.data('state', (isChecked) ? "on" : "off");
+
+                        // Set the button's icon
+                        $button.find('.state-icon')
+                            .removeClass()
+                            .addClass('state-icon ' + settings[$button.data('state')].icon);
+
+                        // Update the button's color
+                        if (isChecked) {
+                            $button
+                                .removeClass('btn-default')
+                                .addClass('btn-' + color + ' active');
+                        } else {
+                            $button
+                                .removeClass('btn-' + color + ' active')
+                                .addClass('btn-default');
+                        }
+                    }
+
+                    // Initialization
+                    function init() {
+
+                        updateDisplay();
+
+                        // Inject the icon if applicable
+                        if ($button.find('.state-icon').length == 0) {
+                            $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+                        }
+                    }
+
+                    init();
+                });
+            });
+
+        });
+
+
+        var propogate = true;
+
+        function dbsclick(obj) {
+            if (propogate == false) return;
+            propogate = false;
+
+            var n = obj.id.substr(3, 1);
+            for (var i = 1; i <= 5; i++) {
+                if (n == i) continue;
+                var objid = '#dbs' + i + 'c';
+                var chkid = '#dbs' + i;
+                var x = $(chkid).is(":checked");
+                if (x == true) {
+                    $(objid).click();
+                }
+            }
+
+            objid = '#dbs' + n;
+            x = $(objid).is(":checked");
+            if (x) {
+                $(objid).click();
+            }
+            propogate = true;
+        }
+
+
+        function idclick(obj) {
+            if (propogate == false) return;
+            propogate = false;
+
+            var n = obj.id.substr(2, 1);
+            for (var i = 1; i <= 5; i++) {
+                if (n == i) continue;
+                var objid = '#id' + i + 'c';
+                var chkid = '#id' + i;
+                var x = $(chkid).is(":checked");
+                if (x == true) {
+                    $(objid).click();
+                }
+            }
+
+            objid = '#id' + n;
+            x = $(objid).is(":checked");
+            if (x) {
+                $(objid).click();
+            }
+            propogate = true;
+        }
+
+
+    </script>
+{% endblock %}

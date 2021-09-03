@@ -1,0 +1,138 @@
+{% extends 'base2.html.twig' %}
+ {% block customStylesheets %}
+	 <style>
+		 .jobblock { color: #888; margin-bottom: 20px; }
+		 .jobblock h4 { color: #222; margin:5px 0 15px; }
+	 </style>
+ {% endblock %}
+{% block body %}
+
+<div class="container ml-auto mr-auto mt-4 mb-4 ">
+	<div class="col-xl-12 mt-5 col-lg-12 col-md-12 ">
+		<div class="row ml-auto mr-auto">
+			<div class="jd col-sm-12">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+						<div class="title job">
+							<h2 style='font-size:28px'>Job Applications</h2>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-8 col-md-6 col-lg-7 pragraph">
+						<p>The job(s) you have applied for are listed below. For each job, complete each section by clicking on the percentage wheels, or click the 'Continue Application' button.
+					</div>
+					<div class="col-md-2 hidden-sm hidden-xs">
+						<div class="status" style="margin-top:0">
+							<ul>
+								<li>Checkabl</li>
+								<li>Testabl</li>
+								<li>Personabl</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+
+				{% for j in jobs %}
+					<div class="row" style="margin-top:15px; margin-bottom:5px; padding:15px 0; background-color:#f4f4f4; border:1px solid #e3e3e3; border-radius:4px">
+						<div class="col-xs-12 col-sm-6 col-lg-2">
+							Position Title:
+							<h4 style="overflow-wrap: break-word">{{j.title}}</h4>
+							Location:
+							<h4>{{j.county}}</h4>
+						</div>
+						<div class="jobblock col-xs-12 col-sm-6 col-lg-2">
+							Salary:
+							<h4>{{j.salary}}</h4>
+							Start Date:
+							<h4>{{j.startDate|date('jS F Y')}}</h4>
+						</div>
+
+						<div class="jobblock col-xs-12 col-sm-6 col-lg-5">
+								{% if j.status == 'Active' %} {% set ptr = 'clickable' %} {% else %} {% set ptr = 'unclickable' %} {% endif %}
+								{% if j.cpcnt is null %}
+									<div data-percent="0" data-text="n/a" class="yellow percircle {{ptr}}"></div><!-- <span>{{j.cpcnt}}% -->
+								{% else %}
+									<div {% if j.status == 'Active' %} onclick='go("/checkabl/{{j.jobId}}")' {% endif %} data-text="{{j.cpcnt}}%" data-percent="{{j.cpcnt}}" class="yellow percircle animate {{ptr}}"><span></span>
+										<div class="slice"><div class="bar"></div><div class="fill"></div></div>
+									</div>
+								{% endif %}
+
+								{% if j.tpcnt is null %}
+									<div data-percent="0" data-text="n/a" class="blue percircle {{ptr}}"></div>
+								{% else %}
+									<div {% if j.status == 'Active' %} onclick='go("/testabl/{{j.jobId}}")' {% endif %} data-text='{{j.tpcnt}}%' data-percent="{{j.tpcnt}}" class="blue percircle animate {{ptr}}"><span></span>
+										<div class="slice"><div class="bar"></div><div class="fill"></div></div>
+									</div>
+								{% endif %}
+
+								{% if j.ppcnt is null %}
+									<div data-percent="0" data-text="n/a" class="green percircle {{ptr}}"></div>
+								{% else %}
+									<div {% if j.status == 'Active' %} onclick='go("/personabl/{{j.jobId}}")' {% endif %} data-text='{{j.ppcnt}}%' data-percent="{{j.ppcnt}}" class="green percircle animate {{ptr}}"><span></span>
+										<div class="slice"><div class="bar"></div><div class="fill"></div></div>
+									</div>
+								{% endif %}
+
+						</div>
+						<div class="jobblock col-xs-12 col-sm-6 col-lg-3">
+							Application Status:
+							{% if j.status == 'Active' %}
+								<h4>{{j.status}}</h4>
+								{% if j.section %}
+									<button type="button" class="btn btn-black appBtn appBtn-black" onclick="go('/{{j.section}}/{{j.jobId}}')">Continue Application</button>
+								{% else %}
+									Please wait while your application is considered.
+								{% endif %}
+							{% endif %}
+
+							{% if j.status == 'Interview-a' or j.status == 'Interview-r' or j.status == 'Interview-o' %}
+								{% if j.status == 'Interview-a' %}<h4>Interview Accepted</h4>{% endif %}
+								{% if j.status == 'Interview-r' %}<h4>Interview Rejected</h4>{% endif %}
+								{% if j.status == 'Interview-o' %}<h4>Interview Offered</h4>{% endif %}
+								<button type="button" class="btn btn-black" onclick="go('/interview/candidate/{{j.jobId}}')">View Details</button>
+							{% endif %}
+
+							{% if j.status == 'Inactive' %}
+								<h4 style="font-weight:bold; color:red">{{j.status}}</h4>
+								You cannot continue this application unless the job becomes active again.
+							{% endif %}
+							{% if j.status == 'Accepted' %}
+								<h4 style="font-weight:bold; color:green">{{j.status}}</h4>
+								Congratulations! You will be contacted shortly to finalise your acceptance.
+							{% endif %}
+							{% if j.status == 'Offered' %}
+								<h4 style="font-weight:bold; color:green">{{j.status}}</h4>
+								You have been offered this position.
+								<p>
+								<button type="button" class="btn btn-black" onclick="go('/offered/{{j.jobId}}')">View Job Offer</button>
+							{% endif %}
+							{% if j.status == 'Rejected' %}
+								<h4 style="font-weight:bold; color:red">{{j.status}}</h4>
+								Your application to this job has been rejected.
+							{% endif %}
+
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
+								
+
+
+
+{% endblock %}
+    {% block customJavascripts %}
+		<script type="text/javascript">
+			$(function(){
+				$(".percircle").percircle();
+			});
+
+			function go(url)
+			{
+				this.window.location.href = url;
+			}
+		</script>
+	{% endblock %}

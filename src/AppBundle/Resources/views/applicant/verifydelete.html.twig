@@ -1,0 +1,36 @@
+
+{% extends 'base.admin.menu.html.twig' %}
+
+
+{% block body %}
+
+    <div class="col-lg-12">
+        <div class="tab-content">
+            <div class="settings">
+                <article>
+                    <div class="col-xs-12 margin-vertically">
+                        <div class="row col-xs-12">
+                            <h4>Delete Applicants</h4>
+                        </div>
+                    </div>
+                </article>
+                <article>
+                    {% set closedCount = applicantJojbs|length - openJobs|length %}
+                    <div class="col-md-6 ">
+                        Applicant Name: <b>{{applicant.firstname}} {{ applicant.surname }}</b><br/>
+                        Open Job Applications: <b>{{openJobs|length}}</b><br/>
+                        Closed Job Applications: <b>{{ closedCount }}</b><br/>
+                        <br/>
+                        Please type <b>YES</b> in the box below to confirm deletion of this applicant.
+                        <form action="" method="post">
+                            {{ form_widget(form) }}
+                        </form>
+
+                        <b>NOTE: THIS ACTION CANNOT BE UNDONE</b>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<style>
+	div.nicEdit-main div.grid div.grid-item{ width:97%; }
+</style>
+
+<div id="dialog" title="Basic dialog">
+  <p id='dialogpara'></p>
+</div>
+
+<div class="col-lg-12">
+			
+		<div class="tab-content">
+			<div class="settings">
+				<article>
+					<div class="col-xs-12 margin-vertically no-left">
+						<div class="row col-xs-12">
+							<h4>View Jobs</h4>
+						</div>
+					</div>
+				</article>
+
+
+				<div class="col-md-12">
+					<div class="row ">
+						<div class="col-md-12 no-left genericmargin">
+							<a href='{{ path('jobs_add') }}' class=" btn btn-black btn-sm"><i class="fa fa-plus-square"></i> Add New Job</a>
+						</div>
+					</div>
+				</div>
+				
+
+				<article>
+
+					{% if errorMessage is defined and errorMessage is not null %}
+						<div class="col-md-12 dangerBg bg-danger">
+							<strong>{{ errorMessage }}</strong>
+						</div>
+					{% endif %}
+					{% if appMessage is defined and appMessage is not null %}
+						<div class="col-md-12 appMessage bg-success">
+							<strong>{{ appMessage }}</strong>
+						</div>
+					{% endif %}
+					<div class="col-md-12 no-left no-right" >
+						<table class="dataTable" style="margin-left:0px !important">
+							<thead>
+								<tr>
+									<th class='ui-corner-tl ui-state-default' title="">Job Title</th>
+									<th class='ui-state-default' title="">Start Date</th>
+									<th class='ui-state-default' title="">Active</th>
+									<th class='ui-state-default' title="">Salary</th>
+									<th class='ui-state-default' title="">URLs</th>
+									<th class='ui-state-default' title="">Applicants</th>
+									<th class='ui-corner-tr  ui-state-default' title="">Options</th>
+								</tr>
+							</thead>
+							<tbody>
+							{% if jobs %}
+								{% for j in jobs %}
+									<tr>
+										<td>{{j.title}}</td>
+										<td>{{j.startDate|date("d M Y")}}</td>
+										<td {% if j.active == 0 %} class="text-danger" {% endif %}>{% if j.active == 1 %} Yes {% else %} No {% endif %}</td>
+										<td>{{j.salary}}</td>
+										<td><div class='joblink' onclick='showurl(this)' data-title='Short' data-url="{{j.shortUrl}}">Short</div> <div class='joblink' onclick='showurl(this)' data-title='Long' data-url="https://{{domain}}/jobs/apply/id/{{j.uniqueid}}">Long</div></td>
+										<td>{{j.c}}</td>
+										<td>
+											<a href="/jobs/edit/{{j.uniqueid}}" title='Edit Job' class="btn btn-black btn-xs"><i class="fa fa-edit"></i></a>
+											{% if j.active %}
+												<a href="#" title='Delete Job' class="btn btn-black btn-xs removeJob" data-uid="{{j.uniqueid}}"><i class="fa fa-trash"></i></a>
+											{% endif %}
+											<!-- <a href="/testabladmin/assigned/{{j.uniqueid}}" title='Testabl' class="btn btn-black btn-xs"><i class="icon-checkbox-checked"></i></a>
+											<a href="/personabladmin/manage/{{j.id}}" title='Personabl' class="btn btn-black btn-xs"><i class="icon-film2"></i></a>
+											<a href="/applicant/view?{{applicantSearch}}{{j.id}}" title='Applicants' class="btn btn-black btn-xs"> <i class="fa fa-user"></i> </a> -->
+										</td>
+									</tr>
+								{% endfor %}
+							{% else %}
+								<tr><td colspan="7" class='noresults'>No results found</td></tr>
+							{% endif %}
+							</tbody>
+						</table>
+					</div>
+				</article>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		function showurl(obj)
+		{
+		//	$('button.ui-dialog-titlebar-close').html('<i class="fa fa-times"></i>');
+			var title = $(obj).attr("data-title")+' URL';
+			var url = $(obj).attr("data-url");
+			var w = '350px';
+
+			if(title=='Long URL') {
+				w = '700px'
+			}
+
+			var el = document.createElement('textarea');
+			el.value = url;
+			document.body.appendChild(el);
+			el.select();
+			document.execCommand('copy');
+			document.body.removeChild(el);
+
+			var html = url + "<br/><br/><small>This URL has been copied to your clipboard</small>";
+			$('#dialogpara').html(html);
+			//$('button.ui-dialog-titlebar-close').html('<i class="fa fa-times" style="vertical-align:top;margin-top:-1px"></i>');
+			$('#dialog').dialog({modal:true, width:w, title:title});
+		}
+	</script>
+	<script>
+		$('.removeJob').click(function () {
+			var request = $.ajax({
+				url: '/jobs/remove',
+				type: 'get',
+				data: {uid:$(this).data('uid') }
+			});
+			request.done(function (data) {
+				if (data.status == 'ok'){
+					location.reload()
+				}
+
+			});
+			return false;
+		});
+
+	</script>
+
+{% endblock %}
+
+

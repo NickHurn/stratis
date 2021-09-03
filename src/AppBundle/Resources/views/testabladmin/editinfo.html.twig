@@ -1,0 +1,40 @@
+{% extends 'base.admin.menu.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-12">
+	<div class="settings">
+
+		<div class="col-xs-12 no-left">
+			<div class="row col-xs-12">
+				<h4>Edit Test Info &raquo; {% if test.formName %} {{test.formName}} {% else %} Unknown {% endif %}</h4>
+			</div>
+		</div>
+
+		<div class="col-xs-12 no-left margin-top">
+			<div class="row col-lg-6">
+				{% if test.Id %}
+					{{ form_start(form) }}
+					{{ form_widget(form) }}
+					{{ form_end(form) }}
+				{% else %}
+					Sorry, this test is not found. Please try again.
+				{% endif %}
+			</div>
+		</div>
+				
+	</div>
+</div>
+
+			
+<script>
+$(function() {
+	$('button#info_edit_delete').click(function() {
+		return confirm('Are you sure you wish to delete this Test?');
+	})
+});
+</script>
+
+
+{% endblock %}

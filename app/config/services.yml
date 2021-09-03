@@ -1,0 +1,80 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+
+services:
+    app.loginsuccess_subscriber:
+        class:  AppBundle\EventSubscriber\LoginsuccessSubscriber
+        arguments:  ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.twig_extension:
+        class: AppBundle\Twig\TwigExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+
+    app.user_check_validator:
+        class: AppBundle\Validator\Constraints\UserCheckValidator
+        arguments:    ['@doctrine.orm.entity_manager', '@security.token_storage']
+        tags:
+            - { name: validator.constraint_validator }
+
+    app.cameratag:
+          class:        AppBundle\Model\Cameratag
+          arguments:    ['%restapikey%','%formatids%', '%cacert%', '%base_app%']
+
+    app.disclosures:
+          class:        AppBundle\Model\Disclosures
+          arguments:    ['%disclosure_domain%','%disclosure_pin%', '%disclosure_sharedkey%', '@doctrine.orm.entity_manager']
+
+    app.qualification_check:
+          class:        AppBundle\Model\QualificationCheck
+          arguments:    ['%qual_url%','%qual_username%', '%qual:password%', '@doctrine.orm.entity_manager', '@session']
+
+    app.request_listener:
+            class: AppBundle\EventListener\RequestListener
+            arguments:  ['@doctrine.orm.entity_manager', '@security.token_storage', '@router', '@service_container']
+            tags:
+                - { name: kernel.event_listener, event: kernel.request }
+
+    app.whitelabel:
+        class:        AppBundle\Model\Whitelabel
+        arguments:    ['@doctrine.orm.entity_manager', '@request_stack', '%kernel.root_dir%', '%custom_logo_path%']
+
+    app.logout_success_handler:
+        class: AppBundle\Handler\LogoutSuccessHandler
+        arguments:  ['@app.whitelabel']
+
+    app.progress:
+        class:        AppBundle\Model\Progress
+        arguments:    ['@doctrine.orm.entity_manager', '@app.form_factory']
+
+    app.filter_factory:
+        class:        AppBundle\Model\FilterFactory
+        arguments:    ['@doctrine.orm.entity_manager', '@security.token_storage', '@app.progress', '@form.factory', '@service_container']
+
+    app.search:
+        class:        AppBundle\Model\Search
+        arguments:    ['@doctrine.orm.entity_manager', '%search_api_key%', '%search_admin_key%', '%search_index%', '%search_env%']
+
+    app.client_admin:
+        class:        AppBundle\Model\ClientAdmin
+        arguments:    ['@doctrine.orm.entity_manager', '%custom_logo_path%', '@app.whitelabel']
+
+    app.model_excel:
+        class:       AppBundle\Model\Excel
+        arguments:    ['@doctrine.orm.entity_manager']
+
+    app.check_cookies:
+        class:        AppBundle\Model\cookie
+        arguments:    [ '@request_stack']
+
+    app.template_home:
+        class:        AppBundle\Model\TemplateHome
+        arguments:    [ '@doctrine.orm.entity_manager']
+        calls:
+            - [setContainer, ["@service_container"]]
+

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-textdirection="ltr" class="loading">
+<head>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Koine</title>
+
+    <link rel="icon" type="image/png" href="/images/logo-inner-white.png">
+    <link href="/css/responsive.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="/fonts/embed/stylesheet.css"/>
+    <link rel="stylesheet" href="/css/percircle.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/theme-default.min.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href = "/css/custom.css" >
+   	<link rel="stylesheet" href="/css/gridstack.css">
+	
+    <link rel="stylesheet" type="text/css" href="/menu/app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/menu/app-assets/fonts/icomoon.css">
+    <link rel="stylesheet" type="text/css" href="/menu/app-assets/fonts/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" type="text/css" href="/menu/app-assets/vendors/css/extensions/pace.css">
+    <link rel="stylesheet" type="text/css" href="/menu/app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="/menu/app-assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/menu/app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="/menu/app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="/menu/app-assets/css/core/menu/menu-types/vertical-overlay-menu.css">
+    <link rel="stylesheet" type="text/css" href="/menu/app-assets/css/core/colors/palette-gradient.css">
+	<link rel="stylesheet" type="text/css" href="/menu/assets/css/style.css">
+
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!--<link rel="stylesheet" href="https://jqueryui.com/jquery-wp-content/themes/jquery/css/base.css?v=1">-->
+  <link rel="stylesheet" href="/css/jquery-theme-base.css">
+
+<!--
+	<link rel="stylesheet" type="text/css" href="/css/datatables.min.css" />
+	<link href="/css/styles.css?v=v3.0.0" rel="stylesheet">
+-->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>	
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   
+<!--	<script type="text/javascript" src="/js/datatables.min.js"></script> -->
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
+	<script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/gridstack.js/0.2.6/gridstack.min.js'></script>
+
+</head>
+<body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns">
+
+	
+<style type='text/css'>
+	
+@font-face{
+    font-family:'FontAwesome';
+    src:url('/fonts/fontawesome-webfont.eot?v=4.2.0');
+    src:url('/fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'),url('/fonts/fontawesome-webfont.woff?v=4.2.0') format('woff'),url('/fonts/fontawesome-webfont.ttf?v=4.2.0') format('truetype'),url('/fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');
+    font-weight:normal;
+    font-style:normal
+}
+	
+	
+	.form-group input[type="checkbox"] {
+    display: none;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span {
+    width: 20px;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span:first-child {
+    display: none;
+}
+.form-group input[type="checkbox"] + .btn-group > label span:last-child {
+    display: inline-block;   
+}
+
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+    display: inline-block;
+}
+.form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+    display: none;   
+}
+</style>
+
+<script>
+function showurl(obj)
+{
+//	$('button.ui-dialog-titlebar-close').html('<i class="fa fa-times"></i>');
+	var title = $(obj).attr("data-title")+' URL';
+	var url = $(obj).attr("data-url");
+	var w = '350px';
+
+	if(title=='Long URL') {
+		w = '700px'
+	}
+
+
+	var html = url + "<br/><br/><small>This URL has been copied to your clipboard</small>";
+	$('#dialogpara').html(html);
+	//$('button.ui-dialog-titlebar-close').html('<i class="fa fa-times" style="vertical-align:top;margin-top:-1px"></i>');
+	$('#dialog').dialog({modal:true, width:w, title:title});
+}
+</script>
+
+<script>
+  $( function() {
+    $( "#dialog" ).dialog();
+  } );
+  </script>
+  
+
+<div id="dialog" title="Basic dialog">
+  <p id='dialogpara'></p>
+</div>
+  
+  
+ <div class="container">
+	<div style='margin:20px; border:1px solid red; padding:10px;' data-title='Short' data-url="short-url.com" onclick='showurl(this)'>click the link to see</div>
+	 
+    <h3>jQuery Checkbox Buttons<br />
+        <small>Buttons that change the state of their own hidden checkboxes, and vice-versa!</small>
+    </h3>
+    <br />
+
+    <span class="button-checkbox">
+        <button type="button" class="btn" data-color="primary">Unchecked</button>
+        <input type="checkbox" class="hidden" />
+    </span>
+    <span class="button-checkbox">
+        <button type="button" class="btn" data-color="primary">Checked</button>
+        <input type="checkbox" class="hidden" checked />
+    </span>
+    
+    <hr />
+    
+    <!-- All colors -->
+    <span class="button-checkbox">
+        <button type="button" class="btn" data-color="default">Default</button>
+        <input type="checkbox" class="hidden" checked />
+    </span>
+    <span class="button-checkbox">
+        <button type="button" class="btn" data-color="primary">Primary</button>
+        <input type="checkbox" class="hidden" checked />
+    </span>
+    <span class="button-checkbox">
+        <button type="button" class="btn" data-color="success">Success</button>
+        <input type="checkbox" class="hidden" checked />
+    </span>
+    <span class="button-checkbox">
+        <button type="button" class="btn" data-color="info">Info</button>
+        <input type="checkbox" class="hidden" checked />
+    </span>
+    <span class="button-checkbox">
+        <button type="button" class="btn" data-color="warning">Warning</button>
+        <input type="checkbox" class="hidden" checked />
+    </span>
+    <span class="button-checkbox">
+        <button type="button" class="btn" data-color="danger">Danger</button>
+        <input type="checkbox" class="hidden" checked />
+    </span>
+    <span class="button-checkbox">
+        <button type="button" class="btn" data-color="link">Link</button>
+        <input type="checkbox" class="hidden" checked />
+    </span>
+    
+    <hr />
+    
+    <!-- All sizes -->
+    <span class="button-checkbox">
+        <button type="button" class="btn btn-xs" data-color="primary">Primary</button>
+        <input type="checkbox" class="hidden" checked />
+    </span>
+    <span class="button-checkbox">
+        <button type="button" class="btn btn-sm" data-color="primary">Primary</button>
+        <input type="checkbox" class="hidden" checked />
+    </span>
+    <span class="button-checkbox">
+        <button type="button" class="btn" data-color="primary">Primary</button>
+        <input type="checkbox" class="hidden" checked />
+    </span>
+    <span class="button-checkbox">
+        <button type="button" class="btn btn-lg" data-color="primary">Primary</button>
+        <input type="checkbox" class="hidden" checked />
+    </span>
+    
+    <hr />
+	
+
+
+	
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+
+
+<script src="https://use.fontawesome.com/e5d0111f84.js"></script>
+<script type="text/javascript" src="/js/percircle.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/jquery.form-validator.min.js"></script>
+
+<script src="/menu/app-assets/vendors/js/ui/tether.min.js" type="text/javascript"></script>
+<script src="/menu/app-assets/js/core/libraries/bootstrap.min.js" type="text/javascript"></script>
+<script src="/js/knockout-3.4.0.js"></script>
+<script src="/js/checkbox.js"></script>
+<script src="/menu/app-assets/vendors/js/ui/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+<script src="/menu/app-assets/vendors/js/ui/unison.min.js" type="text/javascript"></script>
+<script src="/menu/app-assets/vendors/js/ui/blockUI.min.js" type="text/javascript"></script>
+<script src="/menu/app-assets/vendors/js/ui/jquery.matchHeight-min.js" type="text/javascript"></script>
+<script src="/menu/app-assets/vendors/js/ui/screenfull.min.js" type="text/javascript"></script>
+<script src="/menu/app-assets/vendors/js/extensions/pace.min.js" type="text/javascript"></script>
+<script src="/menu/app-assets/vendors/js/charts/chart.min.js" type="text/javascript"></script>
+<script src="/menu/app-assets/js/core/app-menu.js" type="text/javascript"></script>
+<script src="/menu/app-assets/js/core/app.js" type="text/javascript"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+</script>
+
+</body>
+</html>

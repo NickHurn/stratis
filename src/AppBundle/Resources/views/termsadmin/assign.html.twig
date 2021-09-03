@@ -1,0 +1,32 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+
+<div class="col-lg-12">
+	<div class="settings">
+
+		<div class="col-xs-12 margin-vertically">
+			<div class="row">
+				<h4>Assign Terms &raquo; {{title}}</h4>
+			</div>
+		</div>
+		
+		<div class="col-xs-12">
+			<div class="row checklist">
+
+				<form method='post'>
+				{% for r in recs %}
+					<input type='checkbox' name='op{{r.id}}' id='op{{r.id}}' {% if r.jobId == r.id %} checked {% endif %} value="1"/><label for="op{{r.id}}">{{r.title}}</label> <br/>
+				{% endfor %}
+				<br/>
+				<input type="submit" class="btn btn-black btn-small" value="Save"/>
+				</form>
+			</div>
+		</div>	
+
+	</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'base.admin.menu.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-12">
+			
+		<div class="tab-content">
+			<div class="settings">
+				<article>
+					<div class="col-xs-12 margin-vertically no-left">
+						<div class="row col-xs-12">
+							<h4>Testabl Forms List</h4>
+						</div>
+					</div>
+				</article>
+				<article>
+						<div class='note'><b>Note:</b> Adding a time limit here (at the form level) will override time limits for individual questions.</div>
+													
+						<div class="col-md-12 no-left no-right" >
+							<div class="col-md-12 genericmargin no-left">
+								<form method="POST">
+									<label for="formname">Add New Form: </label>
+									<input type='text' name='formname' id="formname"/>
+									<button class="btn btn-black btn-sm" id="formbtn" disabled="disabled">Add</button>
+								</form>
+							</div>
+
+							
+							<table class="dataTable noleft">
+								<thead>
+									<tr>
+										<th class='ui-corner-tl ui-state-default' title="Question">Form Name</th>
+										<th class='ui-state-default' title="NumQuestions">#Questions</th>
+										<th class='ui-state-default' title="PassScore">Pass Score</th>
+										<th class='ui-state-default' title="PassScore">Time Limit</th>
+										<th class='ui-state-default ui-corner-tr' title="Options">Options</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% if forms|length > 0 %}
+									{% for f in forms %}
+										<tr>
+											<td>{{f.formName}}</td>
+											{% if f.numQuestions == '' %}
+												<td>--</td>
+												<td>--</td>
+												<td>--</td>
+											{% else %}
+												<td>{{f.numQuestions}}</td>
+												<td>{{f.passScore}}</td>
+												<td>{{f.timeLimit}}</td>
+											{% endif %}
+											<td>
+												<a class='btn btn-black btn-small' href='/testabladmin/editinfo/{{f.id}}'><i class='fa fa-edit'></i> Edit Test Info</a>
+												<a class='btn btn-black btn-small' href='/testabladmin/edittest/{{f.id}}'><i class='fa fa-edit'></i> Edit Questions</a>
+												<!-- <a class='btn btn-black btn-small' href='/testabladmin/practicetest/{{f.id}}'><i class='fa fa-check'></i> Practise Test</a> -->
+											</td>
+										</tr>
+									{% endfor %}
+								{% else %}
+									<tr><td colspan="5" class='noresults'>No results found</td></tr>
+								{% endif %}
+								</tbody>
+
+							</table>
+						</div>
+						<div id="applicantModal" class="modal fade">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title"></h4>
+									</div>
+									<div class="modal-body ">
+									</div>
+								</div>
+							</div>
+						</div>
+
+				</article>
+			</div>
+		</div>
+	</div>
+
+<script>
+$(function() {
+	$('#formname').change(function() { chk(); })
+	$('#formname').keyup (function() { chk(); })
+});
+
+function chk()
+{
+	var d = 'disabled';
+	var t = $('#formname').val().trim();
+	if(t.length > 0) d='';
+	$('#formbtn').prop('disabled', d);
+	console.log(">>" + d + "<<");
+	console.log("[[" + $('#formname').val() + "]]");
+}
+</script>
+
+{% endblock %}
