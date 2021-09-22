@@ -330,7 +330,8 @@ class ApplicantController extends Controller
         if (!is_null($jobId)){
             $show=TRUE;
         }
-        if ($request->query->get('choices_filter')['jobList'] !=''){
+
+        if ($request->query->get('choices_filter') && $request->query->get('choices_filter')['jobList'] !=''){
             $joblistData = $request->query->get('choices_filter');
             $filterFactory->setJobId($joblistData['jobList']);
         }else{

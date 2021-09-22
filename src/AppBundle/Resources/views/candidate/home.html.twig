@@ -52,7 +52,7 @@
 								{% if j.cpcnt is null %}
 									<div data-percent="0" data-text="n/a" class="yellow percircle {{ptr}}"></div><!-- <span>{{j.cpcnt}}% -->
 								{% else %}
-									<div {% if j.status == 'Active' %} onclick='go("/checkabl/{{j.jobId}}")' {% endif %} data-text="{{j.cpcnt}}%" data-percent="{{j.cpcnt}}" class="yellow percircle animate {{ptr}}"><span></span>
+									<div onclick='go("/checkabl/{{j.jobId}}")'  data-text="{{j.cpcnt}}%" data-percent="{{j.cpcnt}}" class="yellow percircle animate {{ptr}}"><span></span>
 										<div class="slice"><div class="bar"></div><div class="fill"></div></div>
 									</div>
 								{% endif %}
@@ -60,7 +60,7 @@
 								{% if j.tpcnt is null %}
 									<div data-percent="0" data-text="n/a" class="blue percircle {{ptr}}"></div>
 								{% else %}
-									<div {% if j.status == 'Active' %} onclick='go("/testabl/{{j.jobId}}")' {% endif %} data-text='{{j.tpcnt}}%' data-percent="{{j.tpcnt}}" class="blue percircle animate {{ptr}}"><span></span>
+									<div onclick='go("/testabl/{{j.jobId}}")'  data-text='{{j.tpcnt}}%' data-percent="{{j.tpcnt}}" class="blue percircle animate {{ptr}}"><span></span>
 										<div class="slice"><div class="bar"></div><div class="fill"></div></div>
 									</div>
 								{% endif %}
@@ -68,7 +68,7 @@
 								{% if j.ppcnt is null %}
 									<div data-percent="0" data-text="n/a" class="green percircle {{ptr}}"></div>
 								{% else %}
-									<div {% if j.status == 'Active' %} onclick='go("/personabl/{{j.jobId}}")' {% endif %} data-text='{{j.ppcnt}}%' data-percent="{{j.ppcnt}}" class="green percircle animate {{ptr}}"><span></span>
+									<div onclick='go("/personabl/{{j.jobId}}")'  data-text='{{j.ppcnt}}%' data-percent="{{j.ppcnt}}" class="green percircle animate {{ptr}}"><span></span>
 										<div class="slice"><div class="bar"></div><div class="fill"></div></div>
 									</div>
 								{% endif %}
@@ -125,7 +125,7 @@
 
 {% endblock %}
     {% block customJavascripts %}
-		<script type="text/javascript">
+		<script>
 			$(function(){
 				$(".percircle").percircle();
 			});

@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <meta name="generator" content="Jekyll v3.8.5">
         <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
-        <title>{% block title %}Koine Money Ltd{% endblock %}</title>
+        <title>{% block title %}Stratis Digital Limited{% endblock %}</title>
 
         <link rel="icon" type="image/x-icon" href="{{ asset('images/faviconblue.png') }}" />
         <!-- Bootstrap core CSS -->
@@ -34,25 +34,25 @@
                 <div class="container-fluid">
                     <div class="navbar-header logo">
                         <a href="/" class="navbar-brand pl-3 " ><img src="{{ asset('images/web_logo_white_retina.png') }}" alt="Koine Finance Ltd"></a>
-                        <div class="col-md-12 white">{{  custom_css.whitelabel.companyName }}</div>
+
                     </div>
                     <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav nav">
-                            <li><a class="nav-link navText" href="{{ webPath }}">Home</a></li>
-                            <li><a class="nav-link navText" href="{{ webPath }}/whatwedo">What we do</a></li>
-                            <li><a class="nav-link navText" href="{{ webPath }}/whoweserve">Who we serve</a></li>
-                            <li><a class="nav-link navText" href="{{ webPath }}/whykoine">Why koine</a></li>
+{#                        <ul class="navbar-nav nav">#}
+{#                            <li><a class="nav-link navText" href="{{ webPath }}">Home</a></li>#}
+{#                            <li><a class="nav-link navText" href="{{ webPath }}/whatwedo">What we do</a></li>#}
+{#                            <li><a class="nav-link navText" href="{{ webPath }}/whoweserve">Who we serve</a></li>#}
+{#                            <li><a class="nav-link navText" href="{{ webPath }}/whykoine">Why koine</a></li>#}
 {#                            <li><a class="nav-link navText" href="{{ domain }}/partnerships">Partnerships</a></li>#}
-                            <li><a class="nav-link navText" href="{{ webPath }}/team">Team</a></li>
-                            <li><a class="nav-link navText" href="{{ webPath }}/news">News</a></li>
-                            <li><a class="nav-link navText" href="{{ webPath }}/contact">Contact</a></li>
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                <li><a class="nav-link navText"  href="{{ path('logout') }}">Logout</a></li>
-                            {% endif %}
-                        </ul>
+{#                            <li><a class="nav-link navText" href="{{ webPath }}/team">Team</a></li>#}
+{#                            <li><a class="nav-link navText" href="{{ webPath }}/news">News</a></li>#}
+{#                            <li><a class="nav-link navText" href="{{ webPath }}/contact">Contact</a></li>#}
+{#                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+{#                                <li><a class="nav-link navText"  href="{{ path('logout') }}">Logout</a></li>#}
+{#                            {% endif %}#}
+{#                        </ul>#}
                     </div>
                 </div>
             </div>
@@ -62,58 +62,58 @@
 
         <footer class="footer mt-auto py-3 border-top border-light border-2">
             <div class="container">
-                <div class="row font-08">
-                    <div class="col-sm-8 col-6">
-                        <div class="row ">
-                            <div class="col-sm-6 col-12">
-                                <div class="col-12 pb-2 ">
-                                    <a href="#" class="footerLink">
-                                        <span class=""><img src="{{ asset('images/web_business_sales_footer.png') }}" alt="Contact"></span>
-                                        <span class=""> Business & Sales</span>
-                                    </a>
-                                </div>
-                                <div class="col-12 pb-2">
-                                    <a href="#" class="footerLink">
-                                        <span class=""><img src="{{ asset('images/pressicon.png') }}" alt="Contact"></span>
-                                        <span class="">Press & Media</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-12">
-                                <div class="col-12 pb-2">
-                                    <a href="#" class="footerLink">
-                                        <span class=""><img src="{{ asset('images/web_footer_linkedin.png') }}" alt="Contact"> </span>
-                                        <span class="">follow us on Linkedin</span>
-                                    </a>
-                                </div>
-                                <div class="col-12 pb-2">
-                                    <a href="#" class="footerLink">
-                                        <span class=""><img src="{{ asset('images/messageicon.png') }}" alt="Contact"> </span>
-                                        <span class="">Opt in for Email</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-6">
-                        <div class="row ">
-                            <div class="col-12 text-right">
-                                <div class="col-12 pb-2">
-                                    <span class="">&#169; Koine Money Ltd</span>
-                                </div>
-                                <div class="col-12 pb-2">
-                                    <span class=""><a href="{{ asset('policies/cookie/Koine Cookie Policy v3 12042019.pdf') }}" target="_blank" class="text-decoration-none text-white">Cookie Policy</a> </span>
-                                </div>
-                                <div class="col-12 pb-2">
-                                    <span class=""><a href="{{ asset('policies/privacy/Koine Privacy Policy v4 24042019.pdf') }}" target="_blank" class="text-decoration-none text-white">Privacy Policy</a></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{#                <div class="row font-08">#}
+{#                    <div class="col-sm-8 col-6">#}
+{#                        <div class="row ">#}
+{#                            <div class="col-sm-6 col-12">#}
+{#                                <div class="col-12 pb-2 ">#}
+{#                                    <a href="#" class="footerLink">#}
+{#                                        <span class=""><img src="{{ asset('images/web_business_sales_footer.png') }}" alt="Contact"></span>#}
+{#                                        <span class=""> Business & Sales</span>#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                                <div class="col-12 pb-2">#}
+{#                                    <a href="#" class="footerLink">#}
+{#                                        <span class=""><img src="{{ asset('images/pressicon.png') }}" alt="Contact"></span>#}
+{#                                        <span class="">Press & Media</span>#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-sm-6 col-12">#}
+{#                                <div class="col-12 pb-2">#}
+{#                                    <a href="#" class="footerLink">#}
+{#                                        <span class=""><img src="{{ asset('images/web_footer_linkedin.png') }}" alt="Contact"> </span>#}
+{#                                        <span class="">follow us on Linkedin</span>#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                                <div class="col-12 pb-2">#}
+{#                                    <a href="#" class="footerLink">#}
+{#                                        <span class=""><img src="{{ asset('images/messageicon.png') }}" alt="Contact"> </span>#}
+{#                                        <span class="">Opt in for Email</span>#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-sm-4 col-6">#}
+{#                        <div class="row ">#}
+{#                            <div class="col-12 text-right">#}
+{#                                <div class="col-12 pb-2">#}
+{#                                    <span class="">&#169; Stratis Digital Limited</span>#}
+{#                                </div>#}
+{#                                <div class="col-12 pb-2">#}
+{#                                    <span class=""><a href="{{ asset('policies/cookie/Koine Cookie Policy v3 12042019.pdf') }}" target="_blank" class="text-decoration-none text-white">Cookie Policy</a> </span>#}
+{#                                </div>#}
+{#                                <div class="col-12 pb-2">#}
+{#                                    <span class=""><a href="{{ asset('policies/privacy/Koine Privacy Policy v4 24042019.pdf') }}" target="_blank" class="text-decoration-none text-white">Privacy Policy</a></span>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
                 <div class="row mt-2">
                     <div class="col-12 font-06 text-center">
-                        <p>Koine Money Ltd is an EMD Agent of PayrNet Limited, an Electronic Money Institution authorised by the Financial Conduct Authority under the Electronic Money Regulations 2011 (FCA reference number: 900594).  Koine's FCA reference number is: 902023.  Registered UK Office: 27 Old Gloucester Street, London, United Kingdom, WC1N 3AX. Company Registration Number: 10962352.</p>
+                        <p>STRATIS DIGITAL LIMITED. Company Registration Number: 13241615.</p>
                     </div>
 
                 </div>

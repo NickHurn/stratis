@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="generator" content="Jekyll v3.8.5">
     <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
-    <title>{% block title %}Koine Money Ltd{% endblock %}</title>
+    <title>{% block title %}Stratis Digital Limited{% endblock %}</title>
 
     <link rel="icon" type="image/x-icon" href="{{ asset('images/faviconblue.png') }}"/>
     <!-- Bootstrap core CSS -->
@@ -41,21 +41,21 @@
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav nav">
-                    <li><a class="nav-link navText" href="/">Home</a></li>
-                    <li><a class="nav-link navText" href="{{ domain }}/whatwedo">What we do</a></li>
-                    <li><a class="nav-link navText" href="{{ domain }}/whoweserve">Who we serve</a></li>
-                    <li><a class="nav-link navText" href="{{ domain }}/whykoine">Why koine</a></li>
-                    <li><a class="nav-link navText" href="{{ domain }}/partnerships">Partnerships</a></li>
-                    <li><a class="nav-link navText" href="{{ domain }}/team">Team</a></li>
-                    <li><a class="nav-link navText" href="{{ domain }}/news">News</a></li>
-                    <li><a class="nav-link navText" href="{{ domain }}/contact">Contact</a></li>
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <li><a class="nav-link navText" href="{{ path('logout') }}">Logout</a></li>
-                    {% endif %}
-                </ul>
-            </div>
+{#            <div class="collapse navbar-collapse" id="navbarNav">#}
+{#                <ul class="navbar-nav nav">#}
+{#                    <li><a class="nav-link navText" href="/">Home</a></li>#}
+{#                    <li><a class="nav-link navText" href="{{ domain }}/whatwedo">What we do</a></li>#}
+{#                    <li><a class="nav-link navText" href="{{ domain }}/whoweserve">Who we serve</a></li>#}
+{#                    <li><a class="nav-link navText" href="{{ domain }}/whykoine">Why koine</a></li>#}
+{#                    <li><a class="nav-link navText" href="{{ domain }}/partnerships">Partnerships</a></li>#}
+{#                    <li><a class="nav-link navText" href="{{ domain }}/team">Team</a></li>#}
+{#                    <li><a class="nav-link navText" href="{{ domain }}/news">News</a></li>#}
+{#                    <li><a class="nav-link navText" href="{{ domain }}/contact">Contact</a></li>#}
+{#                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+{#                        <li><a class="nav-link navText" href="{{ path('logout') }}">Logout</a></li>#}
+{#                    {% endif %}#}
+{#                </ul>#}
+{#            </div>#}
         </div>
     </div>
 
@@ -159,29 +159,24 @@
                 <div class="row ">
                     <div class="col-12 text-right">
                         <div class="col-12 pb-2">
-                            <span class="">&#169; Koine Money Ltd</span>
+                            <span class="">&#169; Stratis Digital Limited</span>
                         </div>
                         <div class="col-12 pb-2">
                             <span class=""><a href="{{ asset('policies/cookie/Koine Cookie Policy v3 12042019.pdf') }}"
                                               target="_blank" class="text-decoration-none text-white">Cookie Policy</a> </span>
                         </div>
-                        <div class="col-12 pb-2">
-                            <span class=""><a
-                                        href="{{ asset('policies/privacy/Koine Privacy Policy v4 24042019.pdf') }}"
-                                        target="_blank"
-                                        class="text-decoration-none text-white">Privacy Policy</a></span>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
         <div class="row mt-2">
-            <div class="col-12 font-06 text-center">
-                <p>Koine Money Ltd is an EMD Agent of PayrNet Limited, an Electronic Money Institution authorised by the
-                    Financial Conduct Authority under the Electronic Money Regulations 2011 (FCA reference number:
-                    900594). Koine's FCA reference number is: 902023. Registered UK Office: 27 Old Gloucester Street,
-                    London, United Kingdom, WC1N 3AX. Company Registration Number: 10962352.</p>
-            </div>
+{#            <div class="col-12 font-06 text-center">#}
+{#                <p>Stratis Digital Limited is an EMD Agent of PayrNet Limited, an Electronic Money Institution authorised by the#}
+{#                    Financial Conduct Authority under the Electronic Money Regulations 2011 (FCA reference number:#}
+{#                    900594). Koine's FCA reference number is: 902023. Registered UK Office: 27 Old Gloucester Street,#}
+{#                    London, United Kingdom, WC1N 3AX. Company Registration Number: 10962352.</p>#}
+{#            </div>#}
 
         </div>
     </div>

@@ -39,16 +39,16 @@ body.modal-open {
     width:90%
 }
 .bg-blue{
-    background-color:#211747;
+    background-color:#094166;
 }
 .btn-coBlue{
-    background-color:#211747;
+    background-color:#094166;
 }
 .font-blue{
-    color:#211747;
+    color:#094166;
 }
 .navText {
-    color:#211747;
+    color:#094166;
     font-weight: bold;
 }
 .navStrap{
@@ -63,7 +63,7 @@ body.modal-open {
 @media screen and  (min-width: 1801px) {
     .footer{
         color: #fff;
-        background-color:#211747 ;
+        background-color:#094166 ;
         padding:5px 0 5px 0;
 
     }
@@ -105,7 +105,7 @@ body.modal-open {
 @media screen and  (max-width: 1800px) {
     .footer{
         color: #fff;
-        background-color:#211747 ;
+        background-color:#094166 ;
         padding:5px 0 5px 0;
 
     }
@@ -147,7 +147,7 @@ body.modal-open {
 @media screen and  (max-width: 1600px) {
     .footer{
         color: #fff;
-        background-color:#211747 ;
+        background-color:#094166 ;
 
 
     }
@@ -196,7 +196,7 @@ body.modal-open {
 
     .footer{
         color: #fff;
-        background-color:#211747 ;
+        background-color:#094166 ;
         padding:20px 0 10px 0;
 
     }
@@ -240,7 +240,7 @@ body.modal-open {
 @media screen and  (max-width: 768px) {
     .footer{
         color: #fff;
-        background-color:#211747 ;
+        background-color:#094166 ;
         padding:20px 0 10px 0;
 
     }
@@ -282,7 +282,7 @@ body.modal-open {
 @media (max-width: 575px) {
     .footer{
         color: #fff;
-        background-color:#211747 ;
+        background-color:#094166 ;
         padding:20px 0 10px 0;
 
     }
@@ -415,7 +415,7 @@ body.modal-open {
     line-height: 1.5em;
 }
 .base2Nav a:hover {
-    background-color: #211747;
+    background-color: #094166;
 }
 .nav li {
     height: 100px;

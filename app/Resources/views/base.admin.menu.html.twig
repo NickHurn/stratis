@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Koine</title>
+    <title>STratis Digital</title>
 
     <link rel="icon" type="image/png" href="{{ asset('images/faviconblue.png') }}">
     <link href="/css/responsive.css" rel="stylesheet">
@@ -49,7 +49,7 @@
             <div class="col-lg-5 col-md-5 col-sm-4 no-left" >
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-brand logo">
-                    <img src='{{ asset('images/web_logo_white_retina.png') }}' class="img-fluid" style="margin:15px 0 0 10px; height:40px" alt="">
+                    <img src='{{ asset('images/web_logo_white_retina.png') }}' class="img-fluid" style="margin:15px 0 0 10px; height:70px" alt="">
                     <div class="col-md-12 white">{{  custom_css.whitelabel.companyName }}</div>
                 </div>
             </div>
@@ -146,7 +146,7 @@
                 </ul>
             </li>
             {% if is_granted('ROLE_ADMIN') %}
-                <li class=" navigation-header"><span data-i18n="nav.category.support">Koine Admin</span><i data-toggle="tooltip" data-placement="right" data-original-title="" class="icon-ellipsis icon-ellipsis"></i>
+                <li class=" navigation-header"><span data-i18n="nav.category.support">Admin</span><i data-toggle="tooltip" data-placement="right" data-original-title="" class="icon-ellipsis icon-ellipsis"></i>
                 </li>
                 <li class="nav-item {% if app.request.get('_route') starts with 'admin_client' %}open{% endif %}"><a href="#"><i class="icon-users2"></i><span class="menu-title">Clients</span></a>
                     <ul class="menu-content">

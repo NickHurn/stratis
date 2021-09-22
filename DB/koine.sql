@@ -103,7 +103,7 @@ CREATE TABLE `footer` (
 
 LOCK TABLES `footer` WRITE;
 /*!40000 ALTER TABLE `footer` DISABLE KEYS */;
-INSERT INTO `footer` VALUES (1,'<p>Koine Money Ltd is an Electronic Money Institution authorised by the UK Financial Conduct Authority under the Electronic Money Regulations 2011 (FCA reference number: 900934). Registered UK Office: 27 Old Gloucester Street, London, United Kingdom, WC1N 3AX. Company Registration Number: 11265844.</p>','KoineCookiePolicyheaded-v3.pdf','KoinePrivacyPolicyheaded-v3.pdf');
+INSERT INTO `footer` VALUES (1,'<p>Stratis Digital Limited is an Electronic Money Institution authorised by the UK Financial Conduct Authority under the Electronic Money Regulations 2011 (FCA reference number: 900934). Registered UK Office: 27 Old Gloucester Street, London, United Kingdom, WC1N 3AX. Company Registration Number: 11265844.</p>','KoineCookiePolicyheaded-v3.pdf','KoinePrivacyPolicyheaded-v3.pdf');
 /*!40000 ALTER TABLE `footer` ENABLE KEYS */;
 UNLOCK TABLES;
 

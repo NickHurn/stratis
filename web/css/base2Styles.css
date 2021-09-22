@@ -1,6 +1,6 @@
 
 .base2Nav{
-    background-color: #211747;
+    background-color: #094166;
     color: #FFF;
 }
 .base2Nav a {
@@ -263,7 +263,7 @@
         width: 100%;
         transition: all 0.1s ease;
         display: block;
-        background-color:#211747 ;
+        background-color:#094166 ;
     }
     .navbar-collapse.collapsing {
         height: auto !important;
@@ -299,7 +299,7 @@
         width: 100%;
         transition: all 0.1s ease;
         display: block;
-        background-color:#211747 ;
+        background-color:#094166 ;
     }
     .navbar-collapse.collapsing {
         height: auto !important;
