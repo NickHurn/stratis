@@ -35,6 +35,7 @@ class CandidateController extends Controller
 		$recs = $uj->getJobList($user_id);
 		foreach($recs as $idx=>$r)
 		{
+
 			$iv_jobid = $recs[$idx]['jobId'];
 			$int = $em->getRepository('AppBundle:Interviews')->findOneBy(['userId' => $user_id, 'jobId'=>$iv_jobid]);
 			if($r['checkablCount']==null) {
@@ -43,14 +44,12 @@ class CandidateController extends Controller
 				$recs[$idx]['cpcnt'] = round($r['checkablCompleted']/$r['checkablCount']*100);
 				//$recs[$idx]['cpcnt'] = $r['checkablCompleted'] . '/' . $r['checkablCount'];
 			}
-
 			if($r['testablCount']==null) {
 				$recs[$idx]['tpcnt'] = null;
 			} else {
 				$recs[$idx]['tpcnt'] = round($r['testablCompleted']/$r['testablCount']*100);
 				//$recs[$idx]['tpcnt'] = $r['testablCompleted'] . '/' . $r['testablCount'];
 			}
-
 			if($r['personablCount']==null) {
 				$recs[$idx]['ppcnt'] = null;
 			} else {
@@ -88,9 +87,9 @@ class CandidateController extends Controller
 				}
 				break;
 			}
-			
-			$recs[$idx]['status'] = ucwords(strtolower($status)); 
+			$recs[$idx]['status'] = ucwords(strtolower($status));
 		}
+
 		return $this->render('@App/candidate/home.html.twig', [
             'jobs' => $recs
         ]);

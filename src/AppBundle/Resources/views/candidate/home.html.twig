@@ -57,21 +57,24 @@
 									</div>
 								{% endif %}
 
-								{% if j.tpcnt is null %}
-									<div data-percent="0" data-text="n/a" class="blue percircle {{ptr}}"></div>
-								{% else %}
-									<div onclick='go("/testabl/{{j.jobId}}")'  data-text='{{j.tpcnt}}%' data-percent="{{j.tpcnt}}" class="blue percircle animate {{ptr}}"><span></span>
+{#								{% if j.tpcnt is null %}#}
+{#									<div data-percent="0" data-text="n/a" class="blue percircle {{ptr}}"></div>#}
+{#								{% else %}#}
+									<div onclick='go("/testabl/{{j.jobId}}")'  data-text='0%' data-percent="{{j.tpcnt}}" class="blue percircle animate {{ptr}}"><span></span>
 										<div class="slice"><div class="bar"></div><div class="fill"></div></div>
 									</div>
-								{% endif %}
+{#								{% endif %}#}
 
-								{% if j.ppcnt is null %}
-									<div data-percent="0" data-text="n/a" class="green percircle {{ptr}}"></div>
-								{% else %}
-									<div onclick='go("/personabl/{{j.jobId}}")'  data-text='{{j.ppcnt}}%' data-percent="{{j.ppcnt}}" class="green percircle animate {{ptr}}"><span></span>
-										<div class="slice"><div class="bar"></div><div class="fill"></div></div>
+{#								{% if j.ppcnt is null %}#}
+{#									<div data-percent="0" data-text="n/a" class="green percircle {{ptr}}"></div>#}
+{#								{% else %}#}
+									<div onclick='go("/personabl/{{j.jobId}}")'  data-text='0%' data-percent="{{j.ppcnt}}" class="green percircle animate {{ptr}}"><span></span>
+										<div class="slice">
+											<div class="bar"></div>
+											<div class="fill"></div>
+										</div>
 									</div>
-								{% endif %}
+{#								{% endif %}#}
 
 						</div>
 						<div class="jobblock col-xs-12 col-sm-6 col-lg-3">

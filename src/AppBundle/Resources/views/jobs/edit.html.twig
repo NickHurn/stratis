@@ -97,7 +97,7 @@ form.find(':input').on('invalid', function (event)
 
 	$('#job_Functionality_0').change(function() { chkoptions();});
 
-	$('#job_description').parent().addClass('col-sm-9');
+	$('#job_description').parent().addClass('col-sm-12');
 	$('#job_description').parent().removeClass('col-sm-5');
 	$('#job_description').css('height','300px');
 
@@ -110,7 +110,7 @@ form.find(':input').on('invalid', function (event)
 		tinymce.init({
 			selector: '#job_description',
 			height: 130,
-			width:420,
+
 			menubar: false,
 			plugins: [
 				'autolink lists textcolor',
