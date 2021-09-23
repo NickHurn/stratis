@@ -343,10 +343,11 @@ class TestablAdminController extends Controller
 				$em->persist($data);
 				$em->flush();
 			}
-			if($_POST['info_edit']['delete']==1)
-			{
-				$em->getRepository('AppBundle:Forms')->remove($testid, $employer_id);
-			}
+			if (isset($_POST['info_edit']['delete'])) {
+                if ($_POST['info_edit']['delete'] == 1) {
+                    $em->getRepository('AppBundle:Forms')->remove($testid, $employer_id);
+                }
+            }
 			return $this->redirect("/testabladmin/tests");
 		}
 
